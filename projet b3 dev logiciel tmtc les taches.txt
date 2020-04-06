@@ -1,0 +1,61 @@
+Liste des taches à faire :
+
+
+Créer le mongo db
+
+3 Models à faire:
+	- un client :
+		* un nom -> String
+		* Un prenom -> String
+		* Mail -> String
+		* date de création -> Date
+	- une facture :
+		* IdClient -> Client
+		* Une date d'émission -> Date
+		* Une donnée indiquant si elle est payé ou non -> Booléan
+		* Une date de paiement -> Date
+		* un prix -> Float
+		* plusieurs produits -> List or Dict with JSON ( à verifier)
+	- des produits :
+		* un nom -> STR
+		* un stock/ quantité -> STR
+		* une photo -> String (path) et l'image dans un dossier 'img' du back
+		* un prix -> float
+		* des références à des factures -> List STR
+
+
+back:
+	Routes adaptatif
+	
+CRUD CLIENT:
+	* add, update and delete.
+	* connection
+	* générer token
+	
+
+CRUD FACTURE:
+	* add, update and delete.
+	* générer pdf
+	* select produits from facturs
+
+CRUD PRODUIT:
+	* add, update and delete.
+	* augmenter ou dimunuer le stock
+	* select factures from produits
+
+Ajouter des produits dans la bdd
+
+
+FRONT:
+	HEADER
+	FOOTER
+	panier
+	blabla discute avec le back
+	
+
+
+README
+
+
+
+
