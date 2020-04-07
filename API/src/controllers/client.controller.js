@@ -1,26 +1,28 @@
-const Account = require('../models/account.model');
+const Client = require('../models/client.model');
 const jwt = require('jsonwebtoken');
 const jwtPwd = require('../configs/jwt.config');
 const bcrypt = require('bcrypt');
 
 exports.create = (req, res) => {
+    
     let hashpassword = bcrypt.hashSync(req.body.password, 8);
-
-    const account = new Account ({
+    const start = Date.now();
+    const client = new Client ({
         firstname: req.body.firstname,
-        lastname: req.body.lastname,
+        name: req.body.name,
         role: req.body.role,
         email: req.body.email,
         password: hashpassword,
-        admin: req.body.admin
+        admin: req.body.admin,
+        create_date: start
     });
 
-    account.save()
+    client.save()
         .then(data => {
-            let account_token = jwt.sign (
+            let client_token = jwt.sign (
                 {
-                    id: account.email,
-                    admin: account.admin
+                    id: client.email,
+                    admin: client.admin
                 },
                 "supersecret",
                 {
@@ -29,8 +31,8 @@ exports.create = (req, res) => {
             );
 
             res.send({
-                auth: true,
-                token: account_token,
+                client: true,
+                token: client_token,
                 body: data
             });
 
@@ -46,21 +48,21 @@ exports.login = (req, res) => {
     // step 2: check password
     // step 3: generate new token
 
-    Account.findOne({ email: req.body.email })
-        .then(account => {
-            if(!account) return res.status(404).send('No account found');
+    Client.findOne({ email: req.body.email })
+        .then(client => {
+            if(!client) return res.status(404).send('No client found');
 
-            if (!bcrypt.compareSync(req.body.password, account.password)) {
+            if (!bcrypt.compareSync(req.body.password, client.password)) {
                 return res.status(401).send({
                     message: "Wrong password",
                     auth: false,
                     token: null
                 })
             }
-            let account_token = jwt.sign (
+            let client_token = jwt.sign (
                 {
-                    id: account._id,
-                    admin: account.admin
+                    id: client._id,
+                    admin: client.admin
                 },
                 jwtPwd.secret,
                 {
@@ -69,26 +71,26 @@ exports.login = (req, res) => {
             );
             res.send({
                 auth: true,
-                token: account_token,
-                data: account
+                token: client_token,
+                data: client
             });
 
         }).catch(err => {
         return res.status(500).send({
-            message: err || "Error : account not found"
+            message: err || "Error : client not found"
         });
     });
 };
 
-exports.getAccount = (req, res) => {
+exports.getClient = (req, res) => {
     if(!res.headersSent) {
-        Account.findById(_id = req.params.id)
-            .then(account => {
-                res.send(account);
+        Client.findById(_id = req.params.id)
+            .then(client => {
+                res.send(client);
             })
             .catch(err => {
                 res.status(500).send({
-                    message: err.message || "Some error occurred when finding the account."
+                    message: err.message || "Some error occurred when finding the client."
                 })
             })
     }
