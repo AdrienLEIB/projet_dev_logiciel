@@ -5,41 +5,28 @@ const bcrypt = require('bcrypt');
 
 exports.create = (req, res) => {
     if(!res._headerSent) {
-        Invoice.findOne({name: req.body.name})
-            .select("products.name")
-            .lean()
-            .then(result => {
-                const startDate = Date.now();
-                const productCreate = new Product(
-                    {
-                        name: req.body.name,
-                        stock: req.body.stock,
-                        path: req.body.path,
-                        price: req.body.price,
-                        create_date: startDate,
-                        invoices: {}
-                    });
+        const startDate = Date.now();
+        const productCreate = new Product(
+            {
+                name: req.body.name,
+                stock: req.body.stock,
+                path: req.body.path,
+                price: req.body.price,
+                create_date: req.body.startDate,
+                invoices: req.body.invoices
+            });
 
-                productCreate.save()
-                    .then(data => {
-                        res.send(data);
-                    })
-                    .catch(err => {
-                        res.status(500).send(
-                            {
-                                message: err.message,
-                            }
-                        )
-                    });
-
+            productCreate.save()
+            .then(data => {
+                res.send(data);
             })
             .catch(err => {
                 res.status(500).send(
                     {
-                        message: "Manager doesn't exist."
+                        message: err.message,
                     }
-                )}
-            )
+                )
+            });
     }
 };
 
