@@ -15,9 +15,6 @@ const InvoiceSchema = new Schema (
         pay_date:{
             type: Date
         },
-        create_date:{
-            type:Date
-        },
         price:{
             type: Number
         },
