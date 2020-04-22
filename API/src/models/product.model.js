@@ -4,22 +4,19 @@ const Schema = mongoose.Schema;
 const ProductSchema = new Schema (
     {
         name: {
-            type: String,
+            type: String
         },
         stock: {
-            type: Number,
+            type: Number
         },
         path: {
             type: String
         },
         price:{
-            type: Date
+            type: Number
         },
         create_date:{
             type:Date
-        },
-        price:{
-            type: Number
         },
         invoices:{
             type:[String]

@@ -1,25 +1,26 @@
 const mongoose = require('mongoose');
-const Golf = require('../models/golf.model');
-const Manager = require('../models/manager.model');
+const Product = require('../models/product.model');
+const Invoice = require('../models/invoice.model');
 const bcrypt = require('bcrypt');
 
 exports.create = (req, res) => {
     if(!res._headerSent) {
-        Manager.findOne({_id: req.body.id_manager})
-            .select("_id")
+        Invoice.findOne({name: req.body.name})
+            .select("products.name")
             .lean()
             .then(result => {
-                const golfCreate = new Golf(
+                const startDate = Date.now();
+                const productCreate = new Product(
                     {
-                        title: req.body.title,
-                        latitude: req.body.latitude,
-                        longitude: req.body.longitude,
-                        description: req.body.description,
-                        id_manager: req.body.id_manager
-                    }
-                );
+                        name: req.body.name,
+                        stock: req.body.stock,
+                        path: req.body.path,
+                        price: req.body.price,
+                        create_date: startDate,
+                        invoices: {}
+                    });
 
-                golfCreate.save()
+                productCreate.save()
                     .then(data => {
                         res.send(data);
                     })
@@ -45,14 +46,14 @@ exports.create = (req, res) => {
 // get all users
 exports.findAll = (req, res) => {
     if(!res.headersSent) {
-        Golf.find()
-            .then(golfs => {
-                res.send(golfs);
+        Product.find()
+            .then(products => {
+                res.send(products);
             })
             .catch(err => {
                 console.log("res", res);
                 res.status(500).send({
-                    message: err.message || "Some error occurred when finding golfs."
+                    message: err.message || "Some error occurred when finding products."
                 });
             })
     }
@@ -61,13 +62,13 @@ exports.findAll = (req, res) => {
 // Get User by Id
 exports.findById = (req, res) => {
     if(!res.headersSent) {
-        Golf.findById(_id = req.params.id)
-            .then(golf => {
-                res.send(golf);
+        Product.findById(_id = req.params.id)
+            .then(product => {
+                res.send(product);
             })
             .catch(err => {
                 res.status(500).send({
-                    message: err.message || "Some error occurred when finding golfs."
+                    message: err.message || "Some error occurred when finding products."
                 })
             })
     }
@@ -76,43 +77,43 @@ exports.findById = (req, res) => {
 // Update User by Id
 exports.updateById = (req, res) => {
     if(!res.headersSent) {
-        Golf.findByIdAndUpdate(req.params.id, req.body)
-            .then(golfs => {
-                res.send(golfs);
+        Product.findByIdAndUpdate(req.params.id, req.body)
+            .then(products => {
+                res.send(products);
             })
             .catch(err => {
                 res.status(500).send({
-                    message: err.message || "Some error occurred when finding and updating golf."
+                    message: err.message || "Some error occurred when finding and updating product."
                 })
             })
     }
 };
 
-// Delete User by Id
+// Delete product by Id
 exports.deleteByID = (req, res) => {
     if(!res.headersSent) {
-        Golf.findByIdAndDelete(req.params.id)
-            .then(golfs => {
-                res.send(golfs);
+        Product.findByIdAndDelete(req.params.id)
+            .then(products => {
+                res.send(products);
             })
             .catch(err => {
                 res.status(500).send({
-                    message: err.message || "Some error occurred when finding and deleting golf."
+                    message: err.message || "Some error occurred when finding and deleting product."
                 })
             })
     }
 };
 
-// Delete All User
-exports.deleteAllGolfs = (req, res) => {
+// Delete All products
+exports.deleteAllproducts = (req, res) => {
     if(!res.headersSent) {
-        Golf.remove()
-            .then(golfs => {
-                res.send(golfs);
+        Product.remove()
+            .then(products => {
+                res.send(products);
             })
             .catch(err => {
                 res.status(500).send({
-                    message: err.message || "Some error occurred when finding and deleting all golfs."
+                    message: err.message || "Some error occurred when finding and deleting all products."
                 })
             })
     }
