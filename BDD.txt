@@ -1,0 +1,27 @@
+Client
+{
+  "name":"Leib",
+  "firstname":"Adrien",
+  "email":"Adrien3@test.fr",
+  "password":"hugoleplusbo",
+  "admin":true
+}
+
+Product
+{
+  "name":"Pomme",
+  "stock": 50,
+  "path":"c://image.png",
+  "price": 199,
+  "invoices":[]
+}
+
+Invoice
+{
+  "client":"Adien",
+  "stock": 50,
+  "paid":true,
+  "pay_date": "1999-01-31",
+  "products":["5ea717038619413034de250f"],
+  "price":199
+}

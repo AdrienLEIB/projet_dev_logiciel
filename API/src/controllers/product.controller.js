@@ -12,7 +12,7 @@ exports.create = (req, res) => {
                 stock: req.body.stock,
                 path: req.body.path,
                 price: req.body.price,
-                create_date: req.body.startDate,
+                create_date: startDate,
                 invoices: req.body.invoices
             });
 

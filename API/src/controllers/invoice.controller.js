@@ -6,18 +6,26 @@ exports.create = (req, res) => {
     if(!res._headerSent) {
         var l = []
         const start = Date.now();
+        console.log(req.body);
         for(var p in req.body.products){
-            Product.findById(_id=p)
+            console.log(req.body.products[p]);
+            Product.findById(_id=req.body.products[p])
                 .then(products => {
-                    res.send(products);
-                    l.push(p);
+                    //res.send(products);
+                   
+                    l.push(req.body.products[p]);
+                    console.log(l + "1");
                 })
                 .catch(err => {
+                    delete req.body.products[p];
+                    /*
                     res.status(500).send({
                         message: err.message || "Some error occurred when finding products."
-                    })
+                    }) */
                 })
+            console.log(l + "2");
         };
+        console.log(l + "3");
         const invoiceCreate = new Invoice(
             {
                 client: req.body.client,
@@ -29,9 +37,33 @@ exports.create = (req, res) => {
             }
         );
 
+        //console.log(invoiceCreate.client);
+
         invoiceCreate.save()
             .then(data => {
-                res.send(data);
+                //res.send(data);
+                console.log(l + " 4");
+                for(var p in l){
+                    console.log(l[p]);
+                    Product.findById(_id=l[p]).then(products => {
+                        products.invoices.push(invoiceCreate._id);
+
+                        Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices})
+                            .then(product =>{
+                                // res.send(data);
+                            })
+                            .catch(err =>{
+                                res.status(500).send({
+                                    message:err.message || "Some error occured when finding manager."
+                            })
+                        })
+                    }).catch(err => {
+                        res.status(500).send({
+                            message: err.message || "Some error occurred when finding products."
+                        })
+                    })
+                };
+                res.send(data)     
             })
             .catch(err => {
                 res.status(500).send(
