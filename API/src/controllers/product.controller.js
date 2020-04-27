@@ -30,7 +30,7 @@ exports.create = (req, res) => {
     }
 };
 
-// get all users
+// get all products
 exports.findAll = (req, res) => {
     if(!res.headersSent) {
         Product.find()
@@ -46,7 +46,7 @@ exports.findAll = (req, res) => {
     }
 };
 
-// Get User by Id
+// Get product by Id
 exports.findById = (req, res) => {
     if(!res.headersSent) {
         Product.findById(_id = req.params.id)
@@ -61,7 +61,7 @@ exports.findById = (req, res) => {
     }
 };
 
-// Update User by Id
+// Update product by Id
 exports.updateById = (req, res) => {
     if(!res.headersSent) {
         Product.findByIdAndUpdate(req.params.id, req.body)
