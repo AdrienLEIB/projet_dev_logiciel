@@ -132,11 +132,17 @@ exports.findById = (req, res) => {
 // Update product by Id
 exports.updateById = (req, res) => {
     if(!res.headersSent) {
-        for(idinvoice in req.body.removeInvoices){
-            removeInvoiceToProduct(req.body.removeInvoices[idinvoice], req.params.id)
+        for(idremove in req.body.removeInvoices){
+            removeInvoiceToProduct(req.body.removeInvoices[idremove], req.params.id)
+            for(idinv in req.body.invoices){
+                if(req.body.invoices[idinv]==req.body.removeInvoices[idremove]){
+                    delete req.body.invoices[idinvd];
+                }
+            }
         }
         for(idadd in req.body.addInvoices){
             addInvoiceToProducts(req.body.addInvoices[idadd], req.params.id)
+            req.body.invoices.push(req.body.addInvoices[idadd])
         }
         Product.findByIdAndUpdate(req.params.id, req.body)
             .then(products => {

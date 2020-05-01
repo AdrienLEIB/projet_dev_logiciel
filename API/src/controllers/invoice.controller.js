@@ -125,9 +125,15 @@ exports.updateById = (req, res) => {
 
         for(idremove in req.body.removeProducts){
             removeInvoiceToProduct(req.body.removeProducts[idremove], req.params.id)
+            for(idproduct in req.body.products){
+                if(req.body.products[idproduct]==req.body.removeProducts[idremove]){
+                    delete req.body.products[idproduct];
+                }
+            }
         }
         for(idadd in req.body.addProducts){
             addInvoiceToProducts(req.body.addProducts[idadd], req.params.id)
+            req.body.products.push(req.body.addProducts[idadd])
         }
         //req.body.removeProducts
         //req.body.addProducts
