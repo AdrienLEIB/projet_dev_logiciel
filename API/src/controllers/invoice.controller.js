@@ -128,6 +128,7 @@ exports.updateById = (req, res) => {
             for(idproduct in req.body.products){
                 if(req.body.products[idproduct]==req.body.removeProducts[idremove]){
                     delete req.body.products[idproduct];
+                    break
                 }
             }
         }

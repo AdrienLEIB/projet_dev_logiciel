@@ -137,6 +137,7 @@ exports.updateById = (req, res) => {
             for(idinv in req.body.invoices){
                 if(req.body.invoices[idinv]==req.body.removeInvoices[idremove]){
                     delete req.body.invoices[idinvd];
+                    break
                 }
             }
         }
