@@ -2,30 +2,59 @@ const Invoice = require('../models/invoice.model');
 const Product = require('../models/product.model');
 const bcrypt = require('bcrypt');
 
+
+
+function addInvoiceToProducts(idproduct, idinvoice){
+    Product.findById(_id=idproduct).then(products => {
+        products.invoices.push(idinvoice);
+
+        Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices})
+            .then(product =>{
+                // res.send(data);
+            })
+            .catch(err =>{
+                res.status(500).send({
+                    message:err.message || "Some error occured when finding manager."
+            })
+        })
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred when finding products."
+        })
+    })   
+}
+
+function removeInvoiceToProduct(idproduct, idinvoice){
+    Product.findById(_id=idproduct).then(products => {
+        for(var invoice in products.invoices){
+
+            if(idinvoice == products.invoices[invoice]){
+                delete products.invoices[invoice]
+            }
+        }
+        //products.invoices.push(idinvoice);
+
+        Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices})
+            .then(product =>{
+                // res.send(data);
+            })
+            .catch(err =>{
+                res.status(500).send({
+                    message:err.message || "Some error occured when finding manager."
+            })
+        })
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred when finding products."
+        })
+    }) 
+}
+
 exports.create = (req, res) => {
     if(!res._headerSent) {
         var l = []
         const start = Date.now();
         console.log(req.body);
-        for(var p in req.body.products){
-            console.log(req.body.products[p]);
-            Product.findById(_id=req.body.products[p])
-                .then(products => {
-                    //res.send(products);
-                   
-                    l.push(req.body.products[p]);
-                    console.log(l + "1");
-                })
-                .catch(err => {
-                    delete req.body.products[p];
-                    /*
-                    res.status(500).send({
-                        message: err.message || "Some error occurred when finding products."
-                    }) */
-                })
-            console.log(l + "2");
-        };
-        console.log(l + "3");
         const invoiceCreate = new Invoice(
             {
                 client: req.body.client,
@@ -33,7 +62,7 @@ exports.create = (req, res) => {
                 paid: req.body.paid,
                 pay_date: req.body.pay_date,
                 price: req.body.price,
-                products: l
+                products:  req.body.products
             }
         );
 
@@ -41,27 +70,10 @@ exports.create = (req, res) => {
 
         invoiceCreate.save()
             .then(data => {
-                //res.send(data);
-                console.log(l + " 4");
-                for(var p in l){
-                    console.log(l[p]);
-                    Product.findById(_id=l[p]).then(products => {
-                        products.invoices.push(invoiceCreate._id);
+                for(var idproduct in req.body.products){
+                    console.log(req.body.products[idproduct]);
+                    addInvoiceToProducts(req.body.products[idproduct], invoiceCreate._id);
 
-                        Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices})
-                            .then(product =>{
-                                // res.send(data);
-                            })
-                            .catch(err =>{
-                                res.status(500).send({
-                                    message:err.message || "Some error occured when finding manager."
-                            })
-                        })
-                    }).catch(err => {
-                        res.status(500).send({
-                            message: err.message || "Some error occurred when finding products."
-                        })
-                    })
                 };
                 res.send(data)     
             })
@@ -105,24 +117,23 @@ exports.findById = (req, res) => {
     }
 };
 
+
+
 // Update User by Id
 exports.updateById = (req, res) => {
-    if(!res._headerSent) {
-        pp = req.body.products;
-        for(var p in pp){
-            Product.findById(_id=p)
-                .then(products => {
-                    res.send(products);
-                })
-                .catch(err => {
-                    pp.remove(p);
-                    res.status(500).send({
-                        message: err.message || "Some error occurred when finding products."
-                    })
-                    //req.body.products[p].remove();
-                })
-        };
-        req.body.products = pp; 
+    if(!res._headerSent) { 
+
+        for(idremove in req.body.removeProducts){
+            removeInvoiceToProduct(req.body.removeProducts[idremove], req.params.id)
+        }
+        for(idadd in req.body.addProducts){
+            addInvoiceToProducts(req.body.addProducts[idadd], req.params.id)
+        }
+        //req.body.removeProducts
+        //req.body.addProducts
+
+        //(verif quantity)
+
         Invoice.findByIdAndUpdate(req.params.id, req.body)
             .then(invoice => {
                 res.send(invoice);

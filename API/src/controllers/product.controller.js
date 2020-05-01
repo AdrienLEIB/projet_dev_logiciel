@@ -2,6 +2,53 @@ const mongoose = require('mongoose');
 const Product = require('../models/product.model');
 const Invoice = require('../models/invoice.model');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+
+function addProductToInvoice( idinvoice, idproduct){
+    Invoice.findById(_id=idinvoice).then(invoice => {
+        invoice.products.push(idproduct);
+
+        Invoice.findByIdAndUpdate( {_id:invoice._id}, {products:invoice.products})
+            .then(product =>{
+                // res.send(data);
+            })
+            .catch(err =>{
+                res.status(500).send({
+                    message:err.message || "Some error occured when finding manager."
+            })
+        })
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred when finding products."
+        })
+    })   
+}
+
+function removeProductToInvoice( idinvoice, idproduct){
+    Invoice.findById(_id=idinvoice).then(invoice => {
+        for(var product in invoice.products){
+
+            if(idproduct == invoice.products[product]){
+                delete invoice.products[product]
+            }
+        }
+        //products.invoices.push(idinvoice);
+
+        Invoice.findByIdAndUpdate( {_id:invoice._id}, {products:invoice.products})
+            .then(product =>{
+                // res.send(data);
+            })
+            .catch(err =>{
+                res.status(500).send({
+                    message:err.message || "Some error occured when finding manager."
+            })
+        })
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred when finding products."
+        })
+    }) 
+}
 
 exports.create = (req, res) => {
     if(!res._headerSent) {
@@ -18,7 +65,28 @@ exports.create = (req, res) => {
 
             productCreate.save()
             .then(data => {
+                var img = productCreate._id + ".png";
+                var destination = '..\\IHM\\public\\IMG\\products' + img;
+
+                //var path_acces = req.body.path;
+
+                fs.copyFile(req.body.path, destination, (error) =>{
+                    if(error){
+
+                       console.log(error); 
+                    }
+                    });
+
+                req.body.path = "\\IMG\\products" + img;
+                productCreate.image =  req.body.path;
+                req.params.id = productCreate._id ;
+                this.updateById(req, res);
                 res.send(data);
+                for(var idinvoice in req.body.invoices){
+                   // console.log(req.body.products[idproduct]);
+                    addProductToInvoice(req.body.invoices[idinvoice], productCreate._id);
+
+                };
             })
             .catch(err => {
                 res.status(500).send(
@@ -64,6 +132,12 @@ exports.findById = (req, res) => {
 // Update product by Id
 exports.updateById = (req, res) => {
     if(!res.headersSent) {
+        for(idinvoice in req.body.removeInvoices){
+            removeInvoiceToProduct(req.body.removeInvoices[idinvoice], req.params.id)
+        }
+        for(idadd in req.body.addInvoices){
+            addInvoiceToProducts(req.body.addInvoices[idadd], req.params.id)
+        }
         Product.findByIdAndUpdate(req.params.id, req.body)
             .then(products => {
                 res.send(products);

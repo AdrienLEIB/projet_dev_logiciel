@@ -10,7 +10,7 @@ router.post('/product', verifications, product.create);
 router.get('/product', verifications, product.findAll);
 router.get('/product/:id', verifications, product.findById);
 router.patch('/product/:id', verifications, product.updateById);
-router.delete('/product/:id', verifications, product.deleteByID);
+router.delete('/product/delete/:id', verifications, product.deleteByID);
 router.delete('/product/delete', verifications, product.deleteAllproducts);
 
 module.exports = router;
