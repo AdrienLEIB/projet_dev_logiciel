@@ -11,8 +11,7 @@ export class SignUpForm extends Component {
             password: '',
             firstname: '',
             lastname: '',
-            admin: false,
-            role: ''
+            admin: false
         }
 
         
@@ -62,11 +61,6 @@ export class SignUpForm extends Component {
                     <div className="form-group">
                         <label htmlFor="">lastname</label>
                         <input type="test" name="lastname" onChange={this.handleChange} className="form-control" placeholder="lastname" />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="">role</label>
-                        <input type="text" name="role" onChange={this.handleChange} className="form-control" placeholder="role" />
                     </div>
 
                     <div className="form-group">

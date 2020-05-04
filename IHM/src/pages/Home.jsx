@@ -6,7 +6,7 @@ export class Home extends Component {
         super();
         this.state = {
             title: 'Home',
-            subtitle: 'Welcome on Golf Manager 3000',
+            subtitle: 'Welcome on Fnook',
             text: 'Log In or Sign up for more'
         }
     }

@@ -9,7 +9,7 @@ exports.create = (req, res) => {
     const start = Date.now();
     const client = new Client ({
         firstname: req.body.firstname,
-        name: req.body.name,
+        lastname: req.body.lastname,
         role: req.body.role,
         email: req.body.email,
         password: hashpassword,
