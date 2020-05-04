@@ -5,9 +5,9 @@ export class Home extends Component {
     constructor() {
         super();
         this.state = {
-            title: 'Home',
-            subtitle: 'Welcome on Fnook',
-            text: 'Log In or Sign up for more'
+            title: 'Fnook',
+            subtitle: 'Bienvenue sur Fnook',
+            text: 'Liste des produits'
         }
     }
 

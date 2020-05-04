@@ -29,7 +29,7 @@ export class LoginForm extends Component {
         if(data.token !== null) {
           localStorage.setItem('token', data.token);
           localStorage.setItem('admin', data.admin);
-          window.location = "account"
+          window.location = "/"
         } else {
           window.location.reload();
         }

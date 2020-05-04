@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AuthService from '../services/auth.service';
-import Client from '../services/client.service';
-import clientService from '../services/client.service';
+import ClientService from '../services/client.service';
 
 export class Home extends Component {
 
@@ -15,7 +14,7 @@ export class Home extends Component {
         }
 
         this.Auth = new AuthService();
-        this.Client = new clientService();
+        this.Client = new ClientService();
 
         const profil = this.Auth.getUserProfil();
         //console.log(profil);
