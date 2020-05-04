@@ -9,9 +9,11 @@ function addProductToInvoice( idinvoice, idproduct){
         invoice.products.push(idproduct);
 
         Invoice.findByIdAndUpdate( {_id:invoice._id}, {products:invoice.products})
-            .then(product =>{
-                // res.send(data);
-            })
+            .then(
+                Product.update().then(product => {
+                    res.send(product);
+                })
+                )
             .catch(err =>{
                 res.status(500).send({
                     message:err.message || "Some error occured when finding manager."
@@ -36,7 +38,7 @@ function removeProductToInvoice( idinvoice, idproduct){
 
         Invoice.findByIdAndUpdate( {_id:invoice._id}, {products:invoice.products})
             .then(product =>{
-                // res.send(data);
+                //res.send(data);
             })
             .catch(err =>{
                 res.status(500).send({
