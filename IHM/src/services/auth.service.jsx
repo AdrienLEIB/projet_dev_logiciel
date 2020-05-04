@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 export default class AuthService {
     login(body) {
         return fetch(
-            'http://localhost:3030/api/v1/auth/login', {
+            'http://localhost:3030/api/v1/client/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ export default class AuthService {
 
     SignUp(body) {
         return fetch(
-            'http://localhost:3030/api/v1/auth/register', {
+            'http://localhost:3030/api/v1/client/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export default class AuthService {
     }
 
     getUserDetail(id) {
-        return fetch(`http://localhost:3030/api/v1/user/${id}`, {
+        return fetch(`http://localhost:3030/api/v1/client/${id}`, {
                 method: 'GET', 
                 headers: {'x-access-token': this.getToken()}
             })
