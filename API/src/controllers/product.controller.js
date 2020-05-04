@@ -78,7 +78,7 @@ exports.create = (req, res) => {
                     });
 
                 req.body.path = "\\IMG\\products\\" + img;
-                productCreate.image =  req.body.path;
+                productCreate.path =  req.body.path;
                 req.params.id = productCreate._id ;
                 this.updateById(req, res);
                 res.send(data);
