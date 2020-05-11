@@ -21,11 +21,17 @@ const ClientSchema = new Schema (
             minlength: 4,
             maxlength: 128
         },
+        friendcode:{
+            type:String
+        },
         admin: {
             type: Boolean
         },
         create_date:{
             type:Date
+        },
+        products:{
+            type:[String]
         }
     },
 

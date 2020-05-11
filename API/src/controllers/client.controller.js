@@ -13,6 +13,7 @@ exports.create = (req, res) => {
         role: req.body.role,
         email: req.body.email,
         password: hashpassword,
+        friendcode: req.body.friendcode,
         admin: req.body.admin,
         create_date: start
     });

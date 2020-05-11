@@ -32,3 +32,10 @@ Invoice
   "products":["5eaae05b8a465626409884af", "5eaae0708a465626409884b0"],
   "price":199
 }
+
+MotherProduct
+{
+  "name":"poire",
+  "path":"c://Users//terra//Desktop//ProjetIng//Poire.png",
+  "type":"fruit"
+}

@@ -16,10 +16,16 @@ const ProductSchema = new Schema (
             type: Number
         },
         create_date:{
-            type:Date
+            type: Date
         },
         invoices:{
             type:[String]
+        },
+        idmotherproduct:{
+            type: String
+        },
+        idclient:{
+            type: String
         }
     },
 );
