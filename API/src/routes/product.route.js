@@ -7,7 +7,7 @@ const verifications = [ verifyToken, verifyAdmin ];
 
 // Create a new post
 router.post('/product', verifications, product.create);
-router.get('/product', verifications, product.findAll);
+router.get('/product', product.findAll);
 router.get('/product/:id', verifications, product.findById);
 router.patch('/product/:id', verifications, product.updateById);
 router.delete('/product/delete/:id', verifications, product.deleteByID);

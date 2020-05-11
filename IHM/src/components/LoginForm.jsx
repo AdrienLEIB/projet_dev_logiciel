@@ -45,14 +45,14 @@ export class LoginForm extends Component {
       <div className="d-flex justify-content-center mt-5">
         <form onSubmit={this.handleForm}>
           <div className="form-group">
-            <label htmlFor="">Email address</label>
+            <label htmlFor="">Adresse email</label>
             <input type="email" name="email" value={this.state.email} onChange={this.handleChange} className="form-control" placeholder="Enter email" />
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone
                 else.
                         </small>
           </div>
           <div className="form-group">
-            <label htmlFor="">Password</label>
+            <label htmlFor="">Mot de passe</label>
             <input type="password" name="password" value={this.state.password} onChange={this.handleChange} className="form-control" placeholder="Password" />
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>

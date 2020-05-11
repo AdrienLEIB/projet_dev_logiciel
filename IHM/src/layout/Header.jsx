@@ -32,12 +32,6 @@ export default class Header extends Component {
                                 <a className="nav-link" href="/account">Account <span className="sr-only">(current)</span></a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/golf">Product</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/manager">Invoice</a>
-                            </li>
-                            <li className="nav-item">
                                 {/* eslint-disable-next-line */}
                                 <a className="nav-link" onClick={this.disconnect}>Log Out</a>
                             </li>
@@ -48,6 +42,7 @@ export default class Header extends Component {
         } else {
             return (
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                    <img src="img/logo.png" alt="logo" width="100" height="50" style={{marginRight: 1 + 'em'}}/>
                     <a className="navbar-brand" href="/">Fnook</a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
