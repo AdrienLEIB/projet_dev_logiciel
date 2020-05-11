@@ -20,8 +20,8 @@ export class Home extends Component {
         //console.log(profil);
         this.state.admin = profil.admin;
 
-        // const token = this.Auth.getToken();
-        // console.log(token.toString);
+        const token = this.Auth.getToken();
+        console.log(token);
 
         this.Client.GetClientDetail(profil.id)
         .then(data => {
