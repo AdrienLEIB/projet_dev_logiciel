@@ -7,8 +7,9 @@ const bcrypt = require('bcrypt');
 function addInvoiceToProducts(idproduct, idinvoice){
     Product.findById(_id=idproduct).then(products => {
         products.invoices.push(idinvoice);
+        products.stock = products.stock -1;
 
-        Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices})
+        Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices, stock:products.stock})
             .then(product =>{
                 // res.send(data);
             })
