@@ -18,6 +18,7 @@ function verifyToken(req, res, next) {
                 message: 'invalid token'
             })
         }
+        req.userId = decoded.id;
     });
     // Third step: next step --------> WASS LA MENACE
     next();

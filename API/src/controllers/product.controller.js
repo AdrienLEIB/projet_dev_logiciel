@@ -7,8 +7,8 @@ const fs = require('fs');
 
 function addProductToMother( idmotherproduct, idproduct){
     MotherProduct.findById(_id=idmotherproduct).then(motherproduct => {
-        idmotherproduct.products.push(idproduct);
 
+        motherproduct.products.push(idproduct);
         MotherProduct.findByIdAndUpdate( {_id:motherproduct._id}, {products:motherproduct.products})
             .then(product =>{
                 // res.send(data);
@@ -27,9 +27,10 @@ function addProductToMother( idmotherproduct, idproduct){
 
 
 function addProductToClient(idclient, idproduct){
+
     ClientProduct.findById(_id=idclient).then(client=>{
-        idclient.products.push(idproduct);
-        ClientProduct.findByIdAndUpdate({_id:idclient._id}, {products:client.products})
+        client.products.push(idproduct);
+        ClientProduct.findByIdAndUpdate({_id:client._id}, {products:client.products})
         .then(clients=>{
 
         })
@@ -100,6 +101,8 @@ function removeProductToMotherProduct( idmotherproduct, idproduct){
 
 exports.create = (req, res) => {
     if(!res._headerSent) {
+        //res.send(req.userId);
+
         const startDate = Date.now();
         const productCreate = new Product(
             {
@@ -108,20 +111,21 @@ exports.create = (req, res) => {
                 price: req.body.price,
                 create_date: startDate,
                 idmotherproduct: req.body.idmotherproduct,
-                idclient: req.body.idclient
+                idclient: req.userId      
             });
-
+        //res.send(productCreate)
+        
             productCreate.save()
             .then(data => {
-
                 MotherProduct.findById(_id = req.body.idmotherproduct)
                     .then(motherproducts => {
                         productCreate.path =  motherproducts.path;
-                        req.params.id = productCreate._id ;
-                        this.updateById(req, res);
+                        req.body.path =  motherproducts.path;
+                        req.params.id = productCreate._id;
+                        this.updatePath(req, res);
                         addProductToMother(req.body.idmotherproduct, productCreate._id);
-                        addProductToClient(req.body.idclient, productCreate._id);
-                        //res.send(data);
+                        addProductToClient(req.userId, productCreate._id);
+                        res.send(data);
 
                     })
                     .catch(err => {
@@ -129,8 +133,6 @@ exports.create = (req, res) => {
                             message: err.message || "Some error occurred when finding motherproducts."
                         })
                     })
-
-                //addProductToClient(req.body.idclient, productCreate._id);
                 res.send(data);
 
             })
@@ -141,6 +143,7 @@ exports.create = (req, res) => {
                     }
                 )
             });
+            
     }
 };
 
@@ -177,7 +180,8 @@ exports.findById = (req, res) => {
 
 // Update product by Id
 exports.updateById = (req, res) => {
-    if(!res.headersSent) {
+    console.log(res._headerSent)
+    if(!res._headerSent) {
         Product.findByIdAndUpdate(req.params.id, req.body)
             .then(products => {
                 res.send(products);
@@ -189,6 +193,20 @@ exports.updateById = (req, res) => {
             })
     }
 };
+
+// Update product by Id
+exports.updatePath = (req, res) => {
+    Product.findByIdAndUpdate(req.params.id, req.body)
+        .then(products => {
+            res.send(products);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred when finding and updating product."
+            })
+        })
+}
+;
 
 // Delete product by Id
 exports.deleteByID = (req, res) => {
