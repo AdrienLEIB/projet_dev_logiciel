@@ -48,16 +48,17 @@ function addProductToClient(idclient, idproduct){
 
 
 function removeProductToClient( idclient, idproduct){
-    Client.findById(_id=idclient).then(client => {
+    ClientProduct.findById(_id=idclient).then(client => {
         for(var product in client.products){
 
             if(idproduct == client.products[product]){
                 delete client.products[product]
+                break
             }
         }
         //products.invoices.push(idinvoice);
 
-        Client.findByIdAndUpdate( {_id:client._id}, {products:client.products})
+        ClientProduct.findByIdAndUpdate( {_id:client._id}, {products:client.products})
             .then(client =>{
                 // res.send(data);
             })
@@ -79,6 +80,7 @@ function removeProductToMotherProduct( idmotherproduct, idproduct){
 
             if(idproduct == motherproduct.products[product]){
                 delete motherproduct.products[product]
+                break
             }
         }
         //products.invoices.push(idinvoice);
@@ -228,12 +230,13 @@ exports.deleteByID = (req, res) => {
     if(!res.headersSent) {
         Product.findById(req.params.id)
             .then(products => {
-
+           
                if(products.idclient == req.userId){
-                removeProductToClient(products.client, req.params.id)
+                removeProductToClient(req.userId, req.params.id)
+                removeProductToMotherProduct(products.idmotherproduct, req.params.id)
                 Product.findByIdAndDelete(req.params.id)
                 .then(products => {
-                    res.send(products);
+                    res.send("Product Delete");
                    
 
                 })
@@ -243,6 +246,12 @@ exports.deleteByID = (req, res) => {
                     })
                 })
 
+            }
+            else{
+                res.status(400).send({
+                    auth: false,
+                    message: 'Invalid User'
+                })
             }
             })
             .catch(err => {
