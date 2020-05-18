@@ -34,7 +34,7 @@ export class Product extends Component {
                     <Card.Text>
                         Prix : {data.price} €
                     </Card.Text>
-                    <Link to={"/product/" + data._id}><Button className="btn btn-info">Voir plus en détail</Button></Link>
+                    <Link to={"/productDetail/" + data._id}><Button className="btn btn-info">Voir plus en détail</Button></Link>
                     </Card.Body>
                     <Card.Footer>
                     <small className="text-muted">Stock disponible : {data.stock}</small>

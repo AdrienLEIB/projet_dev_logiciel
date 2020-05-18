@@ -5,6 +5,7 @@ import Account from './pages/Account';
 import {Route, withRouter} from 'react-router-dom';
 import SignUp from './pages/SignUp';
 import Product from './pages/Product';
+import ProductDetail from './pages/ProductDetail';
 // import Manager from './pages/Manager';
 // import CreateManager from './pages/CreateManager';
 // import Golf from './pages/Golf';
@@ -21,6 +22,7 @@ export class Routes extends Component {
                 <Route exact path="/account" component={Account}/>
                 <Route exact path='/signup' component={SignUp}/>
                 <Route exact path='/product/:id' component={Product}/>
+                <Route exact path='/productDetail/:id' component={ProductDetail}/>
                 {/* <Route exact path='/manager' component={Manager}/>
                 <Route exact path='/createmanager' component={CreateManager}/>
                 <Route exact path='/editmanager/:id' component={EditManager}/>

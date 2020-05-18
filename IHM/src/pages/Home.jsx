@@ -26,6 +26,7 @@ export class Home extends Component {
     }
 
     render() {
+        
             const prod = this.state.products.map((data, key) => (
                 <Col key={key}>
                     <Card style={{ width: 25 + 'em' ,margin: 1 + 'em'}}>
@@ -35,10 +36,10 @@ export class Home extends Component {
                     <Card.Text>
                         Description : {data.type}
                     </Card.Text>
-                    <Link to={"/product/" + data._id}><Button className="btn btn-info">Voir plus en détail</Button></Link>
+                    <Link to={"/product/" + data._id}><Button className="btn btn-info">Voir les différentes offres</Button></Link>
                     </Card.Body>
                     <Card.Footer>
-                    <small className="text-muted">Stock disponible : {data.products.length}</small>
+                    <small className="text-muted">Vendeur disponible : {data.products.length}</small>
                     </Card.Footer>
                     </Card>
                 </Col>
@@ -46,7 +47,7 @@ export class Home extends Component {
             return (
                 <div>
 
-                    <Container fluid>
+                    <Container fluid style={{backgroundColor: `#83caa3` }}>
                         <Row>
                             {prod}
                         </Row>
