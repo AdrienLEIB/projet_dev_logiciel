@@ -32,6 +32,9 @@ const ClientSchema = new Schema (
         },
         products:{
             type:[String]
+        },
+        invoices:{
+            type:[String]
         }
     },
 
