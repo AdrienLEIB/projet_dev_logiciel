@@ -1,13 +1,37 @@
 import React, { Component } from 'react'
 import AuthService from '../services/auth.service'
+import { Badge, Col, Nav, Navbar, Form, FormControl, Button} from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
 
     constructor(props) {
         super(props);
 
+        this.state = {
+            title: 'Fnook',
+            clientData : [],
+            numberOfProduct : 0
+        }
+
         this.disconnect = this.disconnect.bind(this);
         this.Auth = new AuthService();
+
+        if (this.Auth.getToken() !== null) {
+            const profil = this.Auth.getUserProfil();
+            //console.log(profil);
+            this.state.admin = profil.admin;
+    
+            this.Auth.getUserDetail(profil.id)
+            .then(data => {
+                this.setState({
+                    clientData: data
+                })
+            })
+        
+        }
+
+        
     }
 
     disconnect() {
@@ -15,53 +39,103 @@ export default class Header extends Component {
         window.location = "/login"
     }
 
-
     render() {
         if (this.Auth.getToken() !== null) {
             return (
                 <div>
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <img src="img/logo.png" alt="logo" width="100" height="50" style={{marginRight: 1 + 'em'}}/>
-                        <a className="navbar-brand" href="/">Fnook</a>
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
+                    <Navbar sticky="top" bg='' style={{backgroundColor: `#fbe882` }}>
+                        <Navbar.Brand href="/">
+                            <img
+                            alt="logo"
+                            src="/img/icon.png"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"/>{this.state.title}
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                        <Navbar.Collapse className="justify-content-end">
+                        
 
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className="navbar-nav mr-auto">
-                                <li className="nav-item">
-                                    <a className="nav-link" href="/account">Account <span className="sr-only">(current)</span></a>
-                                </li>
-                                <li className="nav-item">
-                                    {/* eslint-disable-next-line */}
-                                    <a className="nav-link" onClick={this.disconnect}>Log Out</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+                        <Nav>
+                        <Form inline>
+                            <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" />
+                            <Button variant="outline-dark"><img src="img/search.png" width="20" height="20"></img></Button>
+                        </Form>
+                        <Col >    
+                        <Link to={"/account"}>                  
+                                <img
+                                src="/img/shop.png"
+                                width="30"
+                                height="30"
+                                className="d-inline-block align-top"
+                                alt="logo"
+                                />
+                                <Badge variant="secondary">{this.state.numberOfProduct}</Badge>
+                            </Link>  
+                        </Col>
+                        <Navbar.Text>
+                        Signed in as: <a href="/account">{this.state.clientData.firstname}</a>
+                        </Navbar.Text>
+                        <Col>
+                        <Button 
+                            size="sm"
+                            variant="outline-dark"
+                            onClick={this.disconnect}>
+                                Deconnecter
+                            </Button>
+                        </Col>
+                        </Nav>
+                        </Navbar.Collapse>
+                    </Navbar>
                     <br/>
                     <br/>
                 </div>
             );
         } else {
             return (
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <img src="img/logo.png" alt="logo" width="100" height="50" style={{marginRight: 1 + 'em'}}/>
-                    <a className="navbar-brand" href="/">Fnook</a>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item">
-                                <a className="nav-link" href="/login">Log In <span className="sr-only">(current)</span></a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/signup">Sign In</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                <div>
+                <Navbar sticky="top" bg='' style={{backgroundColor: `#fbe882` }}>
+                    <Navbar.Brand href="/">
+                        <img
+                        alt="logo"
+                        src="/img/icon.png"
+                        width="30"
+                        height="30"
+                        className="d-inline-block align-top"/>{this.state.title}
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                    <Navbar.Collapse className="justify-content-end">
+                    
+
+                    <Nav>
+                    <Form inline>
+                        <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" />
+                        <Button variant="outline-dark"><img src="img/search.png" width="20" height="20"></img></Button>
+                    </Form>
+                    <Col >    
+                    <Link to={"/account"}>                  
+                            <img
+                            src="/img/shop.png"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                            alt="logo"
+                            />
+                            <Badge variant="secondary">{this.state.numberOfProduct}</Badge>
+                        </Link>  
+                    </Col>
+                    <Navbar.Text>
+                        <a href="/login">Se Connecter</a>
+                    </Navbar.Text>
+                    <Col>
+                        <Navbar.Text>
+                        <a href="/signup">S'inscrire</a>
+                        </Navbar.Text>
+                    </Col>
+                    </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div>
             );
         }
 
