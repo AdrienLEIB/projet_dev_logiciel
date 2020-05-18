@@ -36,7 +36,7 @@ export default class ProductService {
                 'x-access-token': this.getToken()
             }
         }).then(res => {
-            console.log(res);
+            //console.log(res);
             return res.json();
         })
     }
@@ -51,13 +51,27 @@ export default class ProductService {
             })
     }
 
+    GetProductMotherDetail(id) {
+        return fetch(url + `productOfMother/${id}`, {
+                method: 'GET', 
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                    "Access-Control-Allow-Origin" : "*", 
+                    "Access-Control-Allow-Credentials" : true 
+                }
+            })
+            .then(res => {
+                return res.json();
+            })
+    }
+
     UpdateProduct(id, body) {
         return fetch(url + `product/${id}`, {
             method: "PATCH",
             headers: { "x-access-token": this.getToken(),"Content-Type":"application/json" },
             body: JSON.stringify(body),
           }).then(function(res) {
-            console.log(res);
+            //console.log(res);
             return res.json();
           });
     }

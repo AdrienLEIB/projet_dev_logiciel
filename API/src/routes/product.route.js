@@ -8,9 +8,10 @@ const verifications = [ verifyToken, verifyAdmin ];
 // Create a new post
 router.post('/product', verifications, product.create);
 router.get('/product', product.findAll);
+router.get('/productOfMother/:id', product.findByIdMother);
 router.get('/product/:id', verifications, product.findById);
 router.patch('/product/:id', verifications, product.updateById);
-router.delete('/product/delete/:id', verifications, product.deleteByID);
+router.delete('/product/:id', verifications, product.deleteByID);
 router.delete('/product/delete', verifications, product.deleteAllproducts);
 
 module.exports = router;

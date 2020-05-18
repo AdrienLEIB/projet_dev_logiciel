@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
-//import ProductService from '../services/product.service';
-import MotherProductService from '../services/motherProduct.service';
+import ProductService from '../services/product.service';
 import { Button, Card, Container, Row, Col} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
-export class Home extends Component {
+export class Product extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            title: 'Fnook',
-            subtitle: 'Bienvenue sur Fnook',
-            text: 'Liste des produits',
+            id: props.match.params.id,
             products: []
         }
 
-        this.MotherProductService = new MotherProductService();
+        this.ProductService = new ProductService();
 
-        this.MotherProductService.ReadProduct()
-            .then(data => {
-                this.setState({
-                    products: data
-                })
+        this.ProductService.GetProductMotherDetail(this.state.id)
+        .then(data => {
+            console.log(data);
+            this.setState({
+                products: data
             })
+        })
+        
     }
 
     render() {
@@ -33,12 +32,12 @@ export class Home extends Component {
                     <Card.Body>
                     <Card.Title>{data.name}</Card.Title>
                     <Card.Text>
-                        Description : {data.type}
+                        Prix : {data.price} €
                     </Card.Text>
                     <Link to={"/product/" + data._id}><Button className="btn btn-info">Voir plus en détail</Button></Link>
                     </Card.Body>
                     <Card.Footer>
-                    <small className="text-muted">Stock disponible : {data.products.length}</small>
+                    <small className="text-muted">Stock disponible : {data.stock}</small>
                     </Card.Footer>
                     </Card>
                 </Col>
@@ -56,4 +55,4 @@ export class Home extends Component {
     }
 }
 
-export default Home;
+export default Product;

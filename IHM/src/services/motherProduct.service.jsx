@@ -1,20 +1,20 @@
 import jwtDecode from 'jwt-decode';
 
-const url = 'http://localhost:3030/api/v1/';
+const url = 'http://localhost:3030/api/v1/'
 
-export default class GolfService {
+export default class MotherProductService {
 
     getToken() {
         return localStorage.getItem('token');
     }
 
-    getGolfProfil() {
+    getProductProfil() {
         return jwtDecode(this.getToken());
     }
 
-    CreateGolf(body) {
+    CreateProduct(body) {
         return fetch(
-            url + 'golf', {
+            url + 'motherproduct', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
@@ -27,9 +27,9 @@ export default class GolfService {
         })
     }
 
-    ReadGolf() {
+    ReadProduct() {
         return fetch(
-            url + 'golf', {
+            url + 'motherproduct', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
@@ -41,8 +41,8 @@ export default class GolfService {
         })
     }
 
-    GetGolfDetail(id) {
-        return fetch(url + `golf/${id}`, {
+    GetProductDetail(id) {
+        return fetch(url + `motherproduct/${id}`, {
                 method: 'GET', 
                 headers: {'x-access-token': this.getToken()}
             })
@@ -51,8 +51,8 @@ export default class GolfService {
             })
     }
 
-    UpdateGolf(id, body) {
-        return fetch(url + `golf/${id}`, {
+    UpdateProduct(id, body) {
+        return fetch(url + `motherproduct/${id}`, {
             method: "PATCH",
             headers: { "x-access-token": this.getToken(),"Content-Type":"application/json" },
             body: JSON.stringify(body),
@@ -62,12 +62,11 @@ export default class GolfService {
           });
     }
 
-    DeleteGolf(id) {
-        return fetch(url + `golf/${id}`, {
+    DeleteProduct(id) {
+        return fetch(url + `motherproduct/${id}`, {
             method: "DELETE",
             headers: { "x-access-token": this.getToken() }
           }).then(function(res) {
-            console.log(res);
             return res.json();
           });
     }

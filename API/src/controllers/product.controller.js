@@ -178,6 +178,21 @@ exports.findById = (req, res) => {
     }
 };
 
+// Get product by Id Mother
+exports.findByIdMother = (req, res) => {
+    if(!res.headersSent) {
+        Product.find({'idmotherproduct' : req.params.id})
+            .then(product => {
+                res.send(product);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred when finding products."
+                })
+            })
+    }
+};
+
 // Update product by Id
 exports.updateById = (req, res) => {
     console.log(res._headerSent)
