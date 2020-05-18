@@ -214,7 +214,7 @@ exports.deleteByID = (req, res) => {
         Product.findById(req.params.id)
             .then(products => {
 
-               if(products.idclient == req.body.client){
+               if(products.idclient == req.userId){
                 removeProductToClient(products.client, req.params.id)
                 Product.findByIdAndDelete(req.params.id)
                 .then(products => {
