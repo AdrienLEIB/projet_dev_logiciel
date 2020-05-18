@@ -57,7 +57,7 @@ exports.create = (req, res) => {
         console.log(req.body);
         const invoiceCreate = new Invoice(
             {
-                client: req.body.client,
+                client: req.userId,
                 issue_date: start,
                 paid: req.body.paid,
                 pay_date: req.body.pay_date,
