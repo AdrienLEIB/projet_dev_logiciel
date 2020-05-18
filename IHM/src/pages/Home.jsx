@@ -35,10 +35,10 @@ export class Home extends Component {
                     <Card.Text>
                         Description : {data.type}
                     </Card.Text>
-                    <Link to={"/product/" + data._id}><Button className="btn btn-info">Voir plus en détail</Button></Link>
+                    <Link to={"/product/" + data._id}><Button className="btn btn-info">Voir les différentes offres</Button></Link>
                     </Card.Body>
                     <Card.Footer>
-                    <small className="text-muted">Stock disponible : {data.products.length}</small>
+                    <small className="text-muted">Vendeur disponible : {data.products.length}</small>
                     </Card.Footer>
                     </Card>
                 </Col>
