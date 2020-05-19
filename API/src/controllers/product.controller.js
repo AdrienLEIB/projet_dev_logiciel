@@ -56,6 +56,9 @@ function removeProductToClient( idclient, idproduct){
                 break
             }
         }
+        client.products = client.products.filter(function (el) {
+            return el != null;
+        });
         //products.invoices.push(idinvoice);
 
         ClientProduct.findByIdAndUpdate( {_id:client._id}, {products:client.products})
@@ -83,6 +86,9 @@ function removeProductToMotherProduct( idmotherproduct, idproduct){
                 break
             }
         }
+        motherproduct.products = motherproduct.products.filter(function (el) {
+            return el != null;
+        });
         //products.invoices.push(idinvoice);
 
         MotherProduct.findByIdAndUpdate( {_id:motherproduct._id}, {products:motherproduct.products})

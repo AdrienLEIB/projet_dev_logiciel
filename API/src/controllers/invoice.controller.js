@@ -31,8 +31,11 @@ function removeInvoiceToProduct(idproduct, idinvoice){
 
             if(idinvoice == products.invoices[invoice]){
                 delete products.invoices[invoice]
+                break
+
             }
         }
+        products.invoices.filter(function(obj) { return obj });
         //products.invoices.push(idinvoice);
 
         Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices})
