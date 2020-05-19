@@ -3,6 +3,7 @@ import AuthService from '../services/auth.service';
 import ClientService from '../services/client.service';
 import ProduitSerivce from '../services/product.service';
 import MotherProduitSerivce from '../services/motherProduct.service';
+import FactureService from '../services/invoices.service';
 import {Table, Button} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
@@ -14,13 +15,15 @@ export class AdminPage extends Component {
             admin: false,
             motherProducts: [],
             products: [],
-            clients: []
+            clients: [],
+            factures: []
         }
 
         this.Auth = new AuthService();
         this.MotherProduct = new MotherProduitSerivce();
         this.Produit = new ProduitSerivce();
         this.Client = new ClientService();
+        this.Facture = new FactureService();
 
         const profil = this.Auth.getUserProfil();
         this.state.admin = profil.admin;
@@ -43,9 +46,17 @@ export class AdminPage extends Component {
 
         this.Client.ReadClient()
         .then(data => {
-            console.log(data);
+            //console.log(data);
             this.setState({
                 clients: data
+            })
+        })
+
+        this.Facture.ReadInvoice()
+        .then(data =>{
+            //console.log(data);
+            this.setState({
+                factures: data
             })
         })
 
@@ -59,8 +70,35 @@ export class AdminPage extends Component {
         window.location = "/signUp"
     }
 
+    CreateProduit() {
+        window.location = "/createProduit"
+    }
+
+    CreateMotherProduit() {
+        window.location = "/createMotherProduit"
+    }
+
+    CreateFacture() {
+        window.location = "/createInvoice"
+    }
+
     DeleteClient(id) {
         this.Client.DeleteClient(id);
+        window.location.reload();
+    }
+
+    DeleteInvoice(id) {
+        this.Facture.DeleteInvoice(id);
+        window.location.reload();
+    }
+
+    DeleteMotherProduit(id) {
+        this.MotherProduct.DeleteProduct(id);
+        window.location.reload();
+    }
+
+    DeleteProduit(id) {
+        this.Produit.DeleteProduct(id);
         window.location.reload();
     }
 
@@ -73,10 +111,11 @@ export class AdminPage extends Component {
                     <td>{data.name}</td>
                     <td>{data.type}</td>
                     <td>{data.products.length}</td>
-                    <td><Link to={"/editgolf/" + data._id}><Button className="btn btn-warning">Edit</Button></Link></td>
-                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteGolf(data._id)}> Delete </Button></td>
+                    <td><Link to={"/motherProduitUpdate/" + data._id}><Button className="btn btn-warning">Edit</Button></Link></td>
+                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteMotherProduit(data._id)}> Delete </Button></td>
                 </tr>
             ));
+
             const product = this.state.products.map((data, key) => (
                 <tr key={key}>
                     <td>{data._id}</td>
@@ -86,10 +125,11 @@ export class AdminPage extends Component {
                     <td>{data.price}</td>
                     <td>{data.stock}</td>
                     <td>{data.invoices.length}</td>
-                    <td><Link to={"/editgolf/" + data._id}><Button className="btn btn-warning">Edit</Button></Link></td>
-                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteGolf(data._id)}> Delete </Button></td>
+                    <td><Link to={"/produitUpdate/" + data._id}><Button className="btn btn-warning">Edit</Button></Link></td>
+                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteProduit(data._id)}> Delete </Button></td>
                 </tr>
             ));
+
             const client = this.state.clients.map((data, key) => (
                 <tr key={key}>
                     <td>{data._id}</td>
@@ -99,6 +139,19 @@ export class AdminPage extends Component {
                     <td>{data.admin.toString()}</td>
                     <td><Link to={"/clientUpdate/" + data._id}><Button className="btn btn-warning">Edit</Button></Link></td>
                     <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteClient(data._id)}> Delete </Button></td>
+                </tr>
+            ));
+
+            const facture = this.state.factures.map((data, key) => (
+                <tr key={key}>
+                    <td>{data._id}</td>
+                    <td>{data.client}</td>
+                    <td>{data.pay_date}</td>
+                    <td>{data.paid.toString()}</td>
+                    <td>{data.price}</td>
+                    <td>{data.products.toString()}</td>
+                    <td><Link to={"/invoiceUpdate/" + data._id}><Button className="btn btn-warning">Edit</Button></Link></td>
+                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteInvoice(data._id)}> Delete </Button></td>
                 </tr>
             ));
             return (
@@ -121,7 +174,7 @@ export class AdminPage extends Component {
                     </tbody>
                     </Table>
 
-                    <Button onClick={this.CreateGolf} className="btn  btn-success" type="submit">Crée Maman Produit</Button>
+                    <Button onClick={this.CreateMotherProduit} className="btn  btn-success" type="submit">Crée Maman Produit</Button>
 
                     <br/>
                     <br/>
@@ -153,7 +206,7 @@ export class AdminPage extends Component {
                     </tbody>
                     </Table>
 
-                    <Button onClick={this.CreateGolf} className="btn  btn-success" type="submit">Crée Produit</Button>
+                    <Button onClick={this.CreateProduit} className="btn  btn-success" type="submit">Crée Produit</Button>
 
                     <br/>
                     <br/>
@@ -184,6 +237,36 @@ export class AdminPage extends Component {
                     </Table>
 
                     <Button onClick={this.CreateClient} className="btn  btn-success" type="submit">Crée Client</Button>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <hr/>
+                    
+                    <br/>
+                    
+                    <h1>Facture</h1>
+                    <br/>
+
+                    <Table striped hover responsive variant="">
+                    <thead>
+                        <tr>
+                        <th>id</th>
+                        <th>Client</th>
+                        <th>Date de paiement</th>
+                        <th>Payé</th>
+                        <th>Prix</th>
+                        <th>Produits</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {facture}
+                    </tbody>
+                    </Table>
+
+                    <Button onClick={this.CreateFacture} className="btn  btn-success" type="submit">Crée Facture</Button>
 
                     <br/>
                     <br/>
