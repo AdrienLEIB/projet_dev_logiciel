@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Badge, Col, Nav, Navbar, Form, FormControl, Button} from 'react-bootstrap'
+// import { Badge, Col, Nav, Navbar, Form, FormControl, Button} from 'react-bootstrap'
 import "./css/Footer.css";
 
 export default class Footer extends Component {

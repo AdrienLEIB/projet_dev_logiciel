@@ -83,6 +83,23 @@ exports.login = (req, res) => {
     });
 };
 
+// get all client
+exports.findAll = (req, res) => {
+    if(!res.headersSent) {
+        Client.find()
+            .then(clients => {
+                res.send(clients);
+            })
+            .catch(err => {
+                //console.log("res", res);
+                res.status(500).send({
+                    message: err.message || "Some error occurred when finding products."
+                });
+            })
+    }
+};
+
+// get client by id
 exports.getClient = (req, res) => {
     if(!res.headersSent) {
         Client.findById(_id = req.params.id)
@@ -96,3 +113,49 @@ exports.getClient = (req, res) => {
             })
     }
 };
+
+// Update client by Id
+exports.updateClient = (req, res) => {
+    Client.findByIdAndUpdate(req.params.id, req.body)
+        .then(client => {
+            res.send(client);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred when finding and updating client."
+            })
+        })
+};
+
+// Update client by Id
+exports.updatePassword = (req, res) => {
+    req.body.password = bcrypt.hashSync(req.body.password, 8);
+    
+    Client.findByIdAndUpdate(req.params.id, req.body)
+        .then(client => {
+            res.send(client);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred when finding and updating client."
+            })
+        })
+};
+
+// Delete motherproducts by Id
+exports.deleteClientbyId = (req, res) => {
+    if(!res.headersSent) {
+        Client.findByIdAndDelete(req.params.id)
+            .then(clients => {
+                res.send(clients);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred when finding and deleting motherproducts."
+                })
+            })
+    }
+};
+
+
+

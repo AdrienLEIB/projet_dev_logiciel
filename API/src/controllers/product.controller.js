@@ -228,8 +228,7 @@ exports.updatePath = (req, res) => {
                 message: err.message || "Some error occurred when finding and updating product."
             })
         })
-}
-;
+};
 
 // Delete product by Id
 exports.deleteByID = (req, res) => {

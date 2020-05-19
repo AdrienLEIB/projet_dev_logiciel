@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from '../services/auth.service';
 import ClientService from '../services/client.service';
-import {Card, ListGroup, ListGroupItem, Col, Row, Container} from 'react-bootstrap'
+import {Card, Col, Row, Container} from 'react-bootstrap'
 
 export class Home extends Component {
 
@@ -21,8 +21,8 @@ export class Home extends Component {
         //console.log(profil);
         this.state.admin = profil.admin;
 
-        const token = this.Auth.getToken();
-        console.log(token);
+        //const token = this.Auth.getToken();
+        //console.log(token);
 
         this.Client.GetClientDetail(profil.id)
         .then(data => {
@@ -53,10 +53,12 @@ export class Home extends Component {
                                 <Card.Body>
                                     <Card.Title>{this.state.title}</Card.Title>
                                 <hr/>
+                                    <Card.Text>Adresse Email : {this.state.clientData.email}</Card.Text>
                                     <Card.Text>Nom : {this.state.clientData.lastname}</Card.Text>
                                     <Card.Text>Prénom : {this.state.clientData.firstname}</Card.Text>
-                                    <Card.Text>Adresse Email : {this.state.clientData.email}</Card.Text>
-                                    <Card.Link href="/clientUpdate">Modifier ses informations</Card.Link>
+                                    <Card.Link href={"/clientUpdate/" + this.state.clientData._id }>Modifier ses informations</Card.Link>
+                                    <br/>
+                                    <Card.Link href={"/clientPasswordUpdate/" + this.state.clientData._id }>Modifier son Mot de Passe</Card.Link>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -82,11 +84,14 @@ export class Home extends Component {
                                 <Card.Body>
                                     <Card.Title>{this.state.title}</Card.Title>
                                 <hr/>
+                                    <Card.Text>Adresse Email : {this.state.clientData.email}</Card.Text>
                                     <Card.Text>Nom : {this.state.clientData.lastname}</Card.Text>
                                     <Card.Text>Prénom : {this.state.clientData.firstname}</Card.Text>
-                                    <Card.Text>Adresse Email : {this.state.clientData.email}</Card.Text>
-                                    <Card.Link href="/clientUpdate">Modifier ses informations</Card.Link>
+                                    <Card.Link href={"/clientUpdate/" + this.state.clientData._id }> Modifier ses informations</Card.Link>
                                     <br/>
+                                    <Card.Link href={"/clientPasswordUpdate/" + this.state.clientData._id }>Modifier son Mot de Passe</Card.Link>
+                                    <br/>
+                                    <hr/>
                                     <Card.Link href="/adminPage">Admin Page</Card.Link>
                                 </Card.Body>
                             </Card>

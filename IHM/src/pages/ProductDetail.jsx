@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProductService from '../services/product.service';
 import { Button, Media, Container, Row, Col, Image, Form} from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 export class ProductDetail extends Component {
 

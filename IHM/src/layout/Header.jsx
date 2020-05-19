@@ -59,7 +59,7 @@ export default class Header extends Component {
                         <Nav>
                         <Form inline>
                             <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" />
-                            <Button variant="outline-dark"><img src="img/search.png" width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button>
+                            <Button variant="outline-dark"><img src="img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button>
                         </Form>
                         <Col >    
                         <Link to={"/panier"}>                  
@@ -110,7 +110,7 @@ export default class Header extends Component {
                     <Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" />
-                        <Button variant="outline-dark"><img src="img/search.png" width="20" height="20"></img></Button>
+                        <Button variant="outline-dark"><img src="img/search.png" alt='search' width="20" height="20"></img></Button>
                     </Form>
                     <Col >    
                     <Link to={"/account"}>                  

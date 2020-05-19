@@ -62,6 +62,17 @@ export default class clientService {
           });
     }
 
+    UpdatePasswordClient(id, body) {
+        return fetch(url + `clientPassword/${id}`, {
+            method: "PATCH",
+            headers: { "x-access-token": this.getToken(),"Content-Type":"application/json" },
+            body: JSON.stringify(body),
+          }).then(function(res) {
+            console.log(res);
+            return res.json();
+          });
+    }
+
     DeleteClient(id) {
         return fetch(url + `client/${id}`, {
             method: "DELETE",
