@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AuthService from '../services/auth.service'
 import { Badge, Col, Nav, Navbar, Form, FormControl, Button} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import "./css/Header.css";
 
 export default class Header extends Component {
 
@@ -43,7 +44,7 @@ export default class Header extends Component {
         if (this.Auth.getToken() !== null) {
             return (
                 <div>
-                    <Navbar sticky="top" bg='' style={{backgroundColor: `#fbe882` }}>
+                    <Navbar sticky="top" bg='' className="header" style={{backgroundColor: `#fbe882` }}>
                         <Navbar.Brand href="/">
                             <img
                             alt="logo"
@@ -94,12 +95,12 @@ export default class Header extends Component {
         } else {
             return (
                 <div>
-                <Navbar sticky="top" bg='' style={{backgroundColor: `#fbe882` }}>
+                <Navbar sticky="top" bg='' className="header" style={{backgroundColor: `#fbe882` }}>
                     <Navbar.Brand href="/">
                         <img
                         alt="logo"
-                        src="/img/icon.png"
-                        width="30"
+                        src="/img/logoo.png"
+                        width="50"
                         height="30"
                         className="d-inline-block align-top"/>{this.state.title}
                     </Navbar.Brand>

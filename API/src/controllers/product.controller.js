@@ -114,7 +114,6 @@ exports.create = (req, res) => {
         const startDate = Date.now();
         const productCreate = new Product(
             {
-                name: req.body.name,
                 stock: req.body.stock,
                 price: req.body.price,
                 create_date: startDate,
@@ -127,8 +126,10 @@ exports.create = (req, res) => {
             .then(data => {
                 MotherProduct.findById(_id = req.body.idmotherproduct)
                     .then(motherproducts => {
+                        productCreate.name = motherproduct.name;
                         productCreate.path =  motherproducts.path;
                         req.body.path =  motherproducts.path;
+                        req.body.name = motherproduct.name;
                         req.params.id = productCreate._id;
                         this.updatePath(req, res);
                         addProductToMother(req.body.idmotherproduct, productCreate._id);
