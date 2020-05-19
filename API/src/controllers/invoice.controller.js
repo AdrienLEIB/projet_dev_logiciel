@@ -1,19 +1,31 @@
 const Invoice = require('../models/invoice.model');
 const Product = require('../models/product.model');
+const Client = require('../models/client.model');
 const bcrypt = require('bcrypt');
 
 
 
-function addInvoiceToProducts(idproduct, idinvoice){
-    Product.findById(_id=idproduct).then(products => {
-        products.invoices.push(idinvoice);
-        products.stock = products.stock -1;
 
-        Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices, stock:products.stock})
-            .then(product =>{
-                // res.send(data);
-            })
-            .catch(err =>{
+
+
+
+
+
+
+async function getInvoiceToProduct(products, id) {
+   for await (var idproduct of products){
+        addInvoiceToProducts(idproduct, id);
+    };
+}
+function addInvoiceToClient(idclient, idinvoice ){
+
+    Client.findById(_id=idclient).then(client=>{
+        client.invoices.push(idinvoice);
+        Client.findByIdAndUpdate({_id:client._id}, {invoices:client.invoices})
+        .then(clients=>{
+
+        })
+        .catch(err =>{
                 res.status(500).send({
                     message:err.message || "Some error occured when finding manager."
             })
@@ -22,7 +34,38 @@ function addInvoiceToProducts(idproduct, idinvoice){
         res.status(500).send({
             message: err.message || "Some error occurred when finding products."
         })
-    })   
+    })  
+}
+
+function addInvoiceToProducts(idproduct, idinvoice){
+    
+    console.log(idproduct)
+    Product.findById(_id=idproduct[0]).then(products => {
+
+
+
+        for (p in idproduct){
+            products.invoices.push(idinvoice);
+            products.stock = products.stock -1;
+        }
+      
+        Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices, stock:products.stock})
+            .then(product =>{
+                console.log("UPDATE ")
+                // res.send(data);
+            })
+            .catch(err =>{
+                console.log(err)
+            //     res.status(500).send({
+            //         message:err.message || "Some error occured when finding manager."
+            // })
+        }) 
+    }).catch(err => {
+        console.log(err)
+        // res.status(500).send({
+        //     message: err.message || "Some error occurred when finding products."
+        // })
+    })  
 }
 
 function removeInvoiceToProduct(idproduct, idinvoice){
@@ -35,7 +78,9 @@ function removeInvoiceToProduct(idproduct, idinvoice){
 
             }
         }
-        products.invoices.filter(function(obj) { return obj });
+        products.invoices = products.invoices.filter(function (el) {
+            return el != null;
+        });
         //products.invoices.push(idinvoice);
 
         Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices})
@@ -56,7 +101,6 @@ function removeInvoiceToProduct(idproduct, idinvoice){
 
 exports.create = (req, res) => {
     if(!res._headerSent) {
-        var l = []
         const start = Date.now();
         console.log(req.body);
         const invoiceCreate = new Invoice(
@@ -72,13 +116,33 @@ exports.create = (req, res) => {
 
         //console.log(invoiceCreate.client);
 
+        //getInvoiceToProduct(req.body.products, invoiceCreate._id);
+
+        var orderProduct = []
+        var products = req.body.products
+        for(var product in products){
+            var order = []
+            order.push(products[product])
+            for(p in products){
+
+                if (products[product] == products[p] && p!=product){
+                    order.push(products[p])
+                    delete  products[p]
+                    continue
+                }
+
+            }
+            orderProduct.push(order)
+        }
         invoiceCreate.save()
             .then(data => {
-                for(var idproduct in req.body.products){
-                    console.log(req.body.products[idproduct]);
-                    addInvoiceToProducts(req.body.products[idproduct], invoiceCreate._id);
-
-                };
+                
+  
+                // for (var idproduct in req.body.products){
+                //     addInvoiceToProducts(req.body.products[idproduct], invoiceCreate._id);
+                // };
+                getInvoiceToProduct(orderProduct, invoiceCreate._id)
+                addInvoiceToClient(req.userId, invoiceCreate._id);
                 res.send(data)     
             })
             .catch(err => {
@@ -87,7 +151,7 @@ exports.create = (req, res) => {
                         message: err.message,
                     }
                 )
-            });
+            }); 
     }
 };
 
