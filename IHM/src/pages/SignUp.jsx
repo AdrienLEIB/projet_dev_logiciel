@@ -19,7 +19,7 @@ export class SignUp extends Component {
             {/* <h1> {this.state.title} </h1> */}
             <img
               alt="logo"
-              src="/img/logo.png"
+              src="/img/logoo.png"
               width="300"
               height="150"
               className="d-inline-block align-top"/>
