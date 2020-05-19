@@ -98,8 +98,8 @@ export default class Header extends Component {
                     <Navbar.Brand href="/">
                         <img
                         alt="logo"
-                        src="/img/icon.png"
-                        width="30"
+                        src="/img/logoo.png"
+                        width="50"
                         height="30"
                         className="d-inline-block align-top"/>{this.state.title}
                     </Navbar.Brand>
