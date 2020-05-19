@@ -23,11 +23,13 @@ Product
   "invoices":[]
 }
 {
-  "name":"Poire",
+  "name":"Pêche",
   "stock": 50,
   "price": 199,
-  "idmotherproduct":"5ec288133f89da2bec20d424"
+  "idmotherproduct":"5ec2b6194f85c619406e3c9f"
 }
+
+5ec2b6194f85c619406e3c9f
 
 
 Invoice
@@ -39,6 +41,8 @@ Invoice
   "products":["5eaae05b8a465626409884af", "5eaae0708a465626409884b0"],
   "price":199
 }
+
+5ec3c9e61030a606f4a2815c
 
 MotherProduct
 {
