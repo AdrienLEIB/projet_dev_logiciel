@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import AuthService from '../services/auth.service';
-import ManagerService from '../services/golf.service';
-import CreateManagerFrom from '../components/CreateManagerForm'
+import CreateMotherProductFrom from '../components/CreateMotherProductFrom'
 
 export class CreateMotherProduct extends Component {
 
     constructor() {
         super();
         this.state = {
-            admin: false,
-            golfUser: []
+            admin: false
         }
 
         this.Auth = new AuthService();
-        this.Manager = new ManagerService();
 
         const profil = this.Auth.getUserProfil();
         this.state.admin = profil.admin;
