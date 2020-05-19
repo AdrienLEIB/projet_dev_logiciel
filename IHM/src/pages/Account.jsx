@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from '../services/auth.service';
 import ClientService from '../services/client.service';
+import {Card, ListGroup, ListGroupItem, Col, Row, Container} from 'react-bootstrap'
 
 export class Home extends Component {
 
@@ -8,7 +9,7 @@ export class Home extends Component {
         super(props);
 
         this.state = {
-            title: 'Vos informations',
+            title: 'Profil',
             admin: false,
             clientData : []
         }
@@ -33,16 +34,66 @@ export class Home extends Component {
 
 
     render() {
-        if (this.profil !== "") {
+        if (this.profil !== "" && this.state.admin === false) {
             return (
-                <div>
+                <Container >
+                    <Row className="justify-content-md-center"> 
+                    <img
+                        alt="logo"
+                        src="/img/logo.png"
+                        width="300"
+                        height="150"
+                        className="d-inline-block align-top"/>
+                    </Row>
                     <br/>
-                    <h1> {this.state.title} </h1>
-                    <p>Nom : {this.state.clientData.lastname}</p>
-                    <p>Prenom : {this.state.clientData.firstname}</p>
-                    <p>Email : {this.state.clientData.email}</p>
-                    <p>Admin : {this.state.admin.toString()}</p>
-                </div>
+                    <br/>
+                    <Row className="justify-content-md-center"> 
+                        <Col md={4}>
+                            <Card style={{ width: 20 + 'em' ,margin: 0 + ' auto', float: "none", marginBottom: 3 + 'em'}}>
+                                <Card.Body>
+                                    <Card.Title>{this.state.title}</Card.Title>
+                                <hr/>
+                                    <Card.Text>Nom : {this.state.clientData.lastname}</Card.Text>
+                                    <Card.Text>Prénom : {this.state.clientData.firstname}</Card.Text>
+                                    <Card.Text>Adresse Email : {this.state.clientData.email}</Card.Text>
+                                    <Card.Link href="/clientUpdate">Modifier ses informations</Card.Link>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            );
+        } else if(this.profil !== "" && this.state.admin === true) {
+            return (
+                <Container >
+                    <Row className="justify-content-md-center"> 
+                    <img
+                        alt="logo"
+                        src="/img/logo.png"
+                        width="300"
+                        height="150"
+                        className="d-inline-block align-top"/>
+                    </Row>
+                    <br/>
+                    <br/>
+                    <Row className="justify-content-md-center"> 
+                        <Col md={4}>
+                            <Card style={{ width: 20 + 'em' ,margin: 0 + ' auto', float: "none", marginBottom: 3 + 'em'}}>
+                                <Card.Body>
+                                    <Card.Title>{this.state.title}</Card.Title>
+                                <hr/>
+                                    <Card.Text>Nom : {this.state.clientData.lastname}</Card.Text>
+                                    <Card.Text>Prénom : {this.state.clientData.firstname}</Card.Text>
+                                    <Card.Text>Adresse Email : {this.state.clientData.email}</Card.Text>
+                                    <Card.Link href="/clientUpdate">Modifier ses informations</Card.Link>
+                                    <br/>
+                                    <Card.Link href="/adminPage">Admin Page</Card.Link>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+                
             );
         } else {
             return (

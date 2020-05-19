@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from '../services/auth.service'
+import {Form, Row, Col, Button, Container} from 'react-bootstrap'
 
 export class LoginForm extends Component {
 
@@ -42,22 +43,28 @@ export class LoginForm extends Component {
 
   render() {
     return (
-      <div className="d-flex justify-content-center mt-5">
-        <form onSubmit={this.handleForm}>
-          <div className="form-group">
-            <label htmlFor="">Adresse email</label>
-            <input type="email" name="email" value={this.state.email} onChange={this.handleChange} className="form-control" placeholder="Enter email" />
-            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone
-                else.
-                        </small>
-          </div>
-          <div className="form-group">
-            <label htmlFor="">Mot de passe</label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} className="form-control" placeholder="Password" />
-          </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
-      </div>
+      <Container>
+        <Row className="justify-content-md-center">
+          <Col md="4"> 
+            <Form onSubmit={this.handleForm}>
+              <Form.Group controlId="formGroupEmail">
+                <Form.Label>Adresse Email :</Form.Label>
+                <Form.Control type="email" placeholder="Adresse Email" name="email" value={this.state.email} onChange={this.handleChange} />
+              </Form.Group>
+              <br/>
+              <Form.Group controlId="formGroupPassword">
+                <Form.Label>Mot de passe :</Form.Label>
+                <Form.Control type="password" placeholder="Mot de passe" name="password" value={this.state.password} onChange={this.handleChange}/>
+              </Form.Group>
+              <br/>
+              <br/>
+              <Button variant="info" type="submit">
+                Se Connecter
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

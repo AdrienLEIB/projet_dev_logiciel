@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from '../services/auth.service'
+import {Form, Row, Col, Button, Container} from 'react-bootstrap'
 
 export class SignUpForm extends Component {
 
@@ -39,40 +40,38 @@ export class SignUpForm extends Component {
 
     render() {
         return (
-            <div className="d-flex justify-content-center mt-5">
-                <form onSubmit={this.handleForm}>
-                    <div className="form-group">
-                        <label htmlFor="">Email address</label>
-                        <input type="email" name="email" onChange={this.handleChange} className="form-control" placeholder="Enter email" />
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone
-                        else.</small>
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="">Password</label>
-                        <input type="password" name="password" onChange={this.handleChange} className="form-control" placeholder="Password" />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="">firstname</label>
-                        <input type="text" name="firstname" onChange={this.handleChange} className="form-control" placeholder="firstname" />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="">lastname</label>
-                        <input type="test" name="lastname" onChange={this.handleChange} className="form-control" placeholder="lastname" />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="">admin</label>
-                        <small id="emailHelp" className="form-text text-muted">False by default</small>
-                        <input type="checkbox" name="admin" value={true} onChange={this.handleChange} className="form-control" placeholder="True" />
-                        
-                    </div>
-
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
-            </div>
+            <Container>
+                <Row className="justify-content-md-center">
+                <Col md="4"> 
+                    <Form onSubmit={this.handleForm}>
+                    <Form.Group controlId="formGroupEmail">
+                        <Form.Label>Adresse Email :</Form.Label>
+                        <Form.Control type="email" placeholder="Adresse Email" name="email" value={this.state.email} onChange={this.handleChange} />
+                    </Form.Group>
+                    <br/>
+                    <Form.Group controlId="formGroupPassword">
+                        <Form.Label>Mot de passe :</Form.Label>
+                        <Form.Control type="password" placeholder="Mot de passe" name="password" value={this.state.password} onChange={this.handleChange}/>
+                    </Form.Group>
+                    <br/>
+                    <Form.Group controlId="formGroupFirstname">
+                        <Form.Label>Prénom :</Form.Label>
+                        <Form.Control placeholder="Prénom" name="firstname" value={this.state.firstname} onChange={this.handleChange}/>
+                    </Form.Group>
+                    <br/>
+                    <Form.Group controlId="formGroupLastname">
+                        <Form.Label>Nom :</Form.Label>
+                        <Form.Control placeholder="Nom" name="lastname" value={this.state.lastname} onChange={this.handleChange}/>
+                    </Form.Group>
+                    <br/>
+                    <Button variant="info" type="submit">
+                        S'inscrire
+                    </Button>
+                    </Form>
+                </Col>
+                </Row>
+                <Row><Col></Col></Row>
+            </Container>
         );
     }
 }

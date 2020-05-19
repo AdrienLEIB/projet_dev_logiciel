@@ -7,8 +7,8 @@ export class Login extends Component {
     constructor() {
       super();
       this.state = {
-         title: 'Connectez-vous',
-         subtitle: 'Entrer votre mot de passe et identifiant',
+         title: 'Fnook',
+         subtitle: 'Entrer votre email et mot de passe',
       }
     }
     
@@ -16,10 +16,20 @@ export class Login extends Component {
     render() {
     return (
         <div> 
-            <h1> {this.state.title} </h1>
+            <br/>
+            {/* <h1> {this.state.title} </h1> */}
+            <img
+              alt="logo"
+              src="/img/logo.png"
+              width="300"
+              height="150"
+              className="d-inline-block align-top"/>
+            <br/>
+            <br/>
             <p> {this.state.subtitle} </p>
-
             <LoginForm/>
+            <br/>
+            <br/>
         </div>
     );
   }
