@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AuthService from '../services/auth.service'
 import ClientService from '../services/client.service'
 import {Form, Row, Col, Button, Container} from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 export class EditClientForm extends Component {
 
@@ -11,7 +12,10 @@ export class EditClientForm extends Component {
         this.state = {
             email: '',
             firstname: '',
-            lastname: ''
+            lastname: '',
+            admin: false,
+            adminUser: false,
+            switch1: false
         }
 
             this.handleChange = this.handleChange.bind(this);
@@ -19,24 +23,40 @@ export class EditClientForm extends Component {
             this.Auth = new AuthService();
             this.Client = new ClientService();
 
+            const profil = this.Auth.getUserProfil();
+            this.state.adminUser = profil.admin;
+
             this.Client.GetClientDetail(props.id)
                 .then(data => {
                     this.setState({
                         email: data.email,
                         firstname: data.firstname,
-                        lastname: data.lastname
+                        lastname: data.lastname,
+                        admin: data.admin,
+                        switch1: data.admin
                     })
+                    console.log(this.state);
                 })
           }
+          
         
           handleChange(event) {
             this.setState({
               [event.target.name]: event.target.value
             });
           }
+
+          handleSwitchChange = nr => () => {
+            let switchNumber = `switch${nr}`;
+            this.setState({
+              [switchNumber]: !this.state[switchNumber],
+              admin: !this.state.switch1
+            });
+          }
         
           handleForm(event) {
             event.preventDefault();
+            //console.log(this.state);
             this.Client.UpdateClient(this.props.id, this.state)
               .then(data => {
                 window.location = "../Account"
@@ -47,58 +67,89 @@ export class EditClientForm extends Component {
           }
 
     render() {
-        return (
-            // <div className="d-flex justify-content-center mt-5">
-            //     <form onSubmit={this.handleForm}>
-            //         <div className="form-group">
-            //             <label htmlFor="">email</label>
-            //             <input type="email" value={this.state.email} name="email" onChange={this.handleChange} className="form-control" placeholder="Enter email" />
-            //         </div>
-
-            //         <div className="form-group">
-            //             <label htmlFor="">Firstname</label>
-            //             <input type="text" value={this.state.firstname} name="firstname" onChange={this.handleChange} className="form-control" placeholder="firstname" />
-            //         </div>
-
-            //         <div className="form-group">
-            //             <label htmlFor="">Lastname</label>
-            //             <input type="text" value={this.state.lastname} name="lastname" onChange={this.handleChange} className="form-control" placeholder="lastname" />
-            //         </div>
-
-            //         <button type="submit" className="btn btn-warning">Update</button>
-            //     </form>
-            // </div>
-
-            <Container>
-                <Row className="justify-content-md-center">
-                    <Col md="4"> 
-                        <Form onSubmit={this.handleForm}>
-                        <Form.Group controlId="formGroupEmail">
-                            <Form.Label>Adresse Email :</Form.Label>
-                            <Form.Control type="email" placeholder="Adresse Email" name="email" value={this.state.email} onChange={this.handleChange} />
-                        </Form.Group>
-                        <br/>
-                        <Form.Group controlId="formGroupFirstname">
-                            <Form.Label>Prénom :</Form.Label>
-                            <Form.Control placeholder="Prénom" name="firstname" value={this.state.firstname} onChange={this.handleChange}/>
-                        </Form.Group>
-                        <br/>
-                        <Form.Group controlId="formGroupLastname">
-                            <Form.Label>Nom :</Form.Label>
-                            <Form.Control placeholder="Nom" name="lastname" value={this.state.lastname} onChange={this.handleChange}/>
-                        </Form.Group>
-                        <br/>
-                        <br/>
-                        <Button variant="info" type="submit">
-                            Modifier son profil
-                        </Button>
-                        <br/><br/>
-                        <br/><br/>
-                        </Form>
-                    </Col>
-                </Row>
-            </Container>
-        );
+        if(this.state.adminUser) {
+            return(
+                <Container>
+                    <Row className="justify-content-md-center">
+                        <Col md="4"> 
+                            <Form onSubmit={this.handleForm}>
+                            <Form.Group controlId="formGroupEmail">
+                                <Form.Label>Adresse Email :</Form.Label>
+                                <Form.Control type="email" placeholder="Adresse Email" name="email" value={this.state.email} onChange={this.handleChange} />
+                            </Form.Group>
+                            <br/>
+                            <Form.Group controlId="formGroupFirstname">
+                                <Form.Label>Prénom :</Form.Label>
+                                <Form.Control placeholder="Prénom" name="firstname" value={this.state.firstname} onChange={this.handleChange}/>
+                            </Form.Group>
+                            <br/>
+                            <Form.Group controlId="formGroupLastname">
+                                <Form.Label>Nom :</Form.Label>
+                                <Form.Control placeholder="Nom" name="lastname" value={this.state.lastname} onChange={this.handleChange}/>
+                            </Form.Group>
+                            <br/>
+                            <Form.Group controlId="formGroupLastname">
+                                <Form.Label>Admin :</Form.Label>
+                                <Form.Check  
+                                    type="switch"
+                                    id="custom-switch"
+                                    label="True ou False"
+                                    name="admin"
+                                    checked={this.state.switch1} 
+                                    onChange={this.handleSwitchChange(1)}
+                                />
+                            </Form.Group>
+                            <br/>
+                            <Form.Group controlId="formGroupPassword">
+                                <Form.Label>Password :</Form.Label>
+                                <Form.Label></Form.Label>
+                                <Link to={"/clientPasswordUpdate/" + this.props.id}><Button className="btn btn-danger">Changer mot de passe</Button></Link>
+                            </Form.Group>
+                            <br/>
+                            <br/>
+                            <Button variant="info" type="submit">
+                                Modifier son profil
+                            </Button>
+                            <br/><br/>
+                            <br/><br/>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
+            )
+        } else {
+            return (
+                <Container>
+                    <Row className="justify-content-md-center">
+                        <Col md="4"> 
+                            <Form onSubmit={this.handleForm}>
+                            <Form.Group controlId="formGroupEmail">
+                                <Form.Label>Adresse Email :</Form.Label>
+                                <Form.Control type="email" placeholder="Adresse Email" name="email" value={this.state.email} onChange={this.handleChange} />
+                            </Form.Group>
+                            <br/>
+                            <Form.Group controlId="formGroupFirstname">
+                                <Form.Label>Prénom :</Form.Label>
+                                <Form.Control placeholder="Prénom" name="firstname" value={this.state.firstname} onChange={this.handleChange}/>
+                            </Form.Group>
+                            <br/>
+                            <Form.Group controlId="formGroupLastname">
+                                <Form.Label>Nom :</Form.Label>
+                                <Form.Control placeholder="Nom" name="lastname" value={this.state.lastname} onChange={this.handleChange}/>
+                            </Form.Group>
+                            <br/>
+                            <br/>
+                            <Button variant="info" type="submit">
+                                Modifier son profil
+                            </Button>
+                            <br/><br/>
+                            <br/><br/>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
+            );
+        }
     }
 }
 

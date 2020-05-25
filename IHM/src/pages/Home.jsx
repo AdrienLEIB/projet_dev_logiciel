@@ -30,7 +30,6 @@ export class Home extends Component {
             const prod = this.state.products.map((data, key) => (
                 <Col key={key}>
                     <Card style={{ width: 20 + 'em' ,margin: 0 + ' auto', float: "none", marginBottom: 3 + 'em'}}>
-                    
                     <Card.Img variant="top" src={data.path} width="300" height="250"/>
                     <Card.Body>
                     <Card.Title>{data.name}</Card.Title>

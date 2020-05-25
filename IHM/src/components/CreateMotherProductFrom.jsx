@@ -3,6 +3,7 @@ import AuthService from '../services/auth.service'
 import MotherProductService from '../services/motherProduct.service'
 import {Form, Row, Col, Button, Container} from 'react-bootstrap'
 
+
 export class CreateMotherProductFrom extends Component {
 
     constructor() {
@@ -19,6 +20,7 @@ export class CreateMotherProductFrom extends Component {
             this.handleForm = this.handleForm.bind(this);
             this.Auth = new AuthService();
             this.Product = new MotherProductService();
+            
           }
         
           handleChange(event) {
@@ -26,23 +28,24 @@ export class CreateMotherProductFrom extends Component {
               [event.target.name]: event.target.value
             });
           }
-
-          handleChangeImg(event) {
-            this.setState({
-                [event.target.name] : event.target.value
-            })
-          }
         
           handleForm(event) {
             event.preventDefault();
-            //console.log(this.state);
-            this.Product.CreateProduct(this.state)
-              .then(data => {
-                window.location = "adminPage"
-              })
-              .catch(err => {
-                console.log(err);
-              })
+            //this.state.path = this.state.path.replace("C:\\fakepath\\", "C:\\Users\\hugo\\Pictures\\Newton\\");
+            console.log(this.state);
+            // this.Product.CreateProduct(this.state)
+            //   .then(data => {
+            //     window.location = "adminPage"
+            //   })
+            //   .catch(err => {
+            //     console.log(err);
+            //   })
+          }
+
+          onImageUpload = event => {
+            this.setState({
+                path: event.target.value
+            });
           }
 
     render() {
@@ -63,12 +66,13 @@ export class CreateMotherProductFrom extends Component {
                     <br/>
                     <Form.Group controlId="formGroupImg">
                         <Form.Label>Image du produit :</Form.Label>
-                        <Form.File 
+                        <Form.Control placeholder="Path du produit" name="path" onChange={this.handleChange} />
+                        {/* <Form.File 
                             name="path"
                             label="Choisir image produit"
                             custom
-                            onChange={this.handleChange}
-                        />
+                            onChange={this.onImageUpload}
+                        /> */}
                     </Form.Group>
                     <br/>
                     <Form.Group controlId="formGroupProducts">
