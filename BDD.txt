@@ -53,5 +53,16 @@ MotherProduct
 
 product/5ec2884d3f89da2bec20d427
 
+{
+  "paid":true,
+  "pay_date": "1999-01-31",
+  "products":["5ec3c9e61030a606f4a2815c", "5ec3c9e61030a606f4a2815c"],
+  "price":199
+}
 
+
+PANIER
+{
+  "product":"5ec2884d3f89da2bec20d427"
+}
 5ec3a965b98f0a34fcd33e1e
