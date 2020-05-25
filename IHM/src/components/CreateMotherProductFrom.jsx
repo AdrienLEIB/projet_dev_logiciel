@@ -28,13 +28,14 @@ export class CreateMotherProductFrom extends Component {
           }
 
           handleChangeImg(event) {
-              this.setState({
-                [event.target.name]: event.target.value.file
-              });
+            this.setState({
+                [event.target.name] : event.target.value
+            })
           }
         
           handleForm(event) {
             event.preventDefault();
+            //console.log(this.state);
             this.Product.CreateProduct(this.state)
               .then(data => {
                 window.location = "adminPage"
@@ -46,63 +47,33 @@ export class CreateMotherProductFrom extends Component {
 
     render() {
         return (
-            // <div className="d-flex justify-content-center mt-5">
-            //     <form onSubmit={this.handleForm}>
-            //         <div className="form-group">
-            //             <label htmlFor="">Title</label>
-            //             <input type="text" name="title" onChange={this.handleChange} className="form-control" placeholder="Enter title" />
-            //         </div>
-
-            //         <div className="form-group">
-            //             <label htmlFor="">Latitude</label>
-            //             <input type="float" name="latitude" onChange={this.handleChange} className="form-control" placeholder="latitude" />
-            //         </div>
-
-            //         <div className="form-group">
-            //             <label htmlFor="">Longitude</label>
-            //             <input type="float" name="longitude" onChange={this.handleChange} className="form-control" placeholder="longitude" />
-            //         </div>
-
-            //         <div className="form-group">
-            //             <label htmlFor="">Description</label>
-            //             <input type="text" name="description" onChange={this.handleChange} className="form-control" placeholder="description" />
-            //         </div>
-
-            //         <div className="form-group">
-            //             <label htmlFor="">id_manager</label>
-            //             <input type="text" name="id_manager" onChange={this.handleChange} className="form-control" placeholder="id_manager" />
-            //         </div>
-
-            //         <button type="submit" className="btn btn-primary">Create</button>
-            //     </form>
-            // </div>
             <Container>
                 <Row className="justify-content-md-center">
                 <Col md="4"> 
                     <Form onSubmit={this.handleForm}>
                     <Form.Group controlId="formGroupName">
                         <Form.Label>Nom du produit :</Form.Label>
-                        <Form.Control placeholder="Nom du prodruit" name="produit" onChange={this.handleChange} />
+                        <Form.Control placeholder="Nom du prodruit" name="name" onChange={this.handleChange} />
                     </Form.Group>
                     <br/>
-                    <Form.Group controlId="formGroupPassword">
+                    <Form.Group controlId="formGroupType">
                         <Form.Label>Type du produit</Form.Label>
-                        <Form.Control placeholder="Type du Produit" name="password" onChange={this.handleChange}/>
+                        <Form.Control placeholder="Type du Produit" name="type" onChange={this.handleChange}/>
                     </Form.Group>
                     <br/>
                     <Form.Group controlId="formGroupImg">
                         <Form.Label>Image du produit :</Form.Label>
                         <Form.File 
-                            id="custom-file"
-                            label="Custom file input"
+                            name="path"
+                            label="Choisir image produit"
                             custom
-                            onChange={this.handleChangeImg}
+                            onChange={this.handleChange}
                         />
                     </Form.Group>
                     <br/>
-                    <Form.Group controlId="formGroupPassword">
+                    <Form.Group controlId="formGroupProducts">
                         <Form.Label>Tableau des produits liés :</Form.Label>
-                        <Form.Control  placeholder="id des Produits" name="password" onChange={this.handleChange}/>
+                        <Form.Control  placeholder="id des Produits" name="products" onChange={this.handleChange}/>
                     </Form.Group>
                     <br/>
                     <br/>

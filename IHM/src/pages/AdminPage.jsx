@@ -3,7 +3,7 @@ import AuthService from '../services/auth.service';
 import ClientService from '../services/client.service';
 import ProduitSerivce from '../services/product.service';
 import MotherProduitSerivce from '../services/motherProduct.service';
-import FactureService from '../services/invoices.service';
+import InvoiceService from '../services/invoices.service';
 import {Table, Button} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ export class AdminPage extends Component {
         this.MotherProduct = new MotherProduitSerivce();
         this.Produit = new ProduitSerivce();
         this.Client = new ClientService();
-        this.Facture = new FactureService();
+        this.Facture = new InvoiceService();
 
         const profil = this.Auth.getUserProfil();
         this.state.admin = profil.admin;
@@ -141,7 +141,7 @@ export class AdminPage extends Component {
                     <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteClient(data._id)}> Delete </Button></td>
                 </tr>
             ));
-
+            
             const facture = this.state.factures.map((data, key) => (
                 <tr key={key}>
                     <td>{data._id}</td>
@@ -154,6 +154,7 @@ export class AdminPage extends Component {
                     <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteInvoice(data._id)}> Delete </Button></td>
                 </tr>
             ));
+
             return (
                 <div>
                     <h1>MAMAN PRODUIT</h1>
