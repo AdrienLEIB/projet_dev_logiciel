@@ -119,9 +119,9 @@ export class AdminPage extends Component {
             const product = this.state.products.map((data, key) => (
                 <tr key={key}>
                     <td>{data._id}</td>
+                    <td>{data.name}</td>
                     <td>{data.idmotherproduct}</td>
                     <td>{data.idclient}</td>
-                    <td>{data.name}</td>
                     <td>{data.price}</td>
                     <td>{data.stock}</td>
                     <td>{data.invoices.length}</td>
@@ -175,7 +175,7 @@ export class AdminPage extends Component {
                     </tbody>
                     </Table>
 
-                    <Button onClick={this.CreateMotherProduit} className="btn  btn-success" type="submit">Crée Maman Produit</Button>
+                    <Button onClick={this.CreateMotherProduit} className="btn  btn-success" type="submit">Créer Maman Produit</Button>
 
                     <br/>
                     <br/>
@@ -207,7 +207,7 @@ export class AdminPage extends Component {
                     </tbody>
                     </Table>
 
-                    <Button onClick={this.CreateProduit} className="btn  btn-success" type="submit">Crée Produit</Button>
+                    <Button onClick={this.CreateProduit} className="btn  btn-success" type="submit">Créer Produit</Button>
 
                     <br/>
                     <br/>
@@ -237,7 +237,7 @@ export class AdminPage extends Component {
                     </tbody>
                     </Table>
 
-                    <Button onClick={this.CreateClient} className="btn  btn-success" type="submit">Crée Client</Button>
+                    <Button onClick={this.CreateClient} className="btn  btn-success" type="submit">Créer Client</Button>
 
                     <br/>
                     <br/>
@@ -267,7 +267,7 @@ export class AdminPage extends Component {
                     </tbody>
                     </Table>
 
-                    <Button onClick={this.CreateFacture} className="btn  btn-success" type="submit">Crée Facture</Button>
+                    <Button onClick={this.CreateFacture} className="btn  btn-success" type="submit">Créer Facture</Button>
 
                     <br/>
                     <br/>
