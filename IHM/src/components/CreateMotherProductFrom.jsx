@@ -32,14 +32,14 @@ export class CreateMotherProductFrom extends Component {
           handleForm(event) {
             event.preventDefault();
             //this.state.path = this.state.path.replace("C:\\fakepath\\", "C:\\Users\\hugo\\Pictures\\Newton\\");
-            console.log(this.state);
-            // this.Product.CreateProduct(this.state)
-            //   .then(data => {
-            //     window.location = "adminPage"
-            //   })
-            //   .catch(err => {
-            //     console.log(err);
-            //   })
+            //console.log(this.state);
+            this.Product.CreateProduct(this.state)
+              .then(data => {
+                window.location = "adminPage"
+              })
+              .catch(err => {
+                console.log(err);
+              })
           }
 
           onImageUpload = event => {
@@ -82,7 +82,7 @@ export class CreateMotherProductFrom extends Component {
                     <br/>
                     <br/>
                     <Button variant="info" type="submit">
-                        Créer Produirt mère
+                        Créer Produit mère
                     </Button>
                     <br/><br/>
                     <br/><br/>
