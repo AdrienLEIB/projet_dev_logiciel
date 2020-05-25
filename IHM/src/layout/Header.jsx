@@ -95,7 +95,7 @@ export default class Header extends Component {
         } else {
             return (
                 <div>
-                <Navbar sticky="top" bg='' className="header" style={{backgroundColor: `#fbe882` }}>
+                <Navbar sticky="top" bg=''  className="header" style={{backgroundColor: `#fbe882` }}>
                     <Navbar.Brand href="/">
                         <img
                         alt="logo"
@@ -135,7 +135,9 @@ export default class Header extends Component {
                     </Col>
                     </Nav>
                     </Navbar.Collapse>
+
                 </Navbar>
+
             </div>
             );
         }
