@@ -10,12 +10,9 @@ import ClientUpdate from './pages/ClientUpdate.jsx';
 import ClientPasswordUpdate from './pages/ClientPassWordUpdate';
 import AdminPage from './pages/AdminPage';
 import CreateMotherProduct from './pages/CreateMotherProduct'
-<<<<<<< HEAD
-import Panier from './pages/Panier'
-=======
+//import Panier from './pages/Panier'
 import ProduitUpdate from './pages/ProduitUpdate';
 import MotherProduitUpdate from './pages/MotherProductUpdate';
->>>>>>> b0b7f488082ca274abc85db79f0be87221b85bf9
 // import Manager from './pages/Manager';
 // import CreateManager from './pages/CreateManager';
 // import Golf from './pages/Golf';
@@ -37,7 +34,7 @@ export class Routes extends Component {
                 <Route exact path='/ClientPasswordUpdate/:id' component={ClientPasswordUpdate}/>
                 <Route exact path='/AdminPage' component={AdminPage}/>
                 <Route exact path='/createMotherProduit' component={CreateMotherProduct}/>
-                <Route exact path='/panier' component={Panier}/>
+                {/* <Route exact path='/panier' component={Panier}/> */}
 
                 <Route exact path='/produitUpdate/:id' component={ProduitUpdate}/>
                 <Route exact path='/motherProduitUpdate/:id' component={MotherProduitUpdate}/>
