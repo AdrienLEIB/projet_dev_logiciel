@@ -44,14 +44,9 @@ export class ProductDetail extends Component {
                                     <Row className="justify-content-md-center">
                                         <Col xs={3}>
                                             <Form.Group controlId="exampleForm.ControlSelect1">
-                                                <Form.Label>Example select</Form.Label>
-                                                <Form.Control as="select">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                                </Form.Control>
+                                                <Form.Label>Nombre de produit</Form.Label>
+                                                <Form.Control type="number" step={1} min={0} max={this.state.products.stock} placeholder="nombre" name="stock"/>
+                                                
                                             </Form.Group>
                                         </Col>
                                         <Col xs={3}>

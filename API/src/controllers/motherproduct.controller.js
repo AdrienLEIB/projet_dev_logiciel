@@ -19,7 +19,7 @@ exports.create = (req, res) => {
         motherproductCreate.save()
         .then(data => {
             var img = motherproductCreate._id + ".png";
-            var destination = '..\\IHM\\public\\IMG\\products\\' + img;
+            var destination = '../IHM/public/IMG/products/' + img;
 
             //var path_acces = req.body.path;
 
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
                 }
                 });
 
-            req.body.path = "\\IMG\\products\\" + img;
+            req.body.path = "/IMG/products/" + img;
             motherproductCreate.path =  req.body.path;
             req.params.id = motherproductCreate._id ;
             this.updateById(req, res);

@@ -31,8 +31,9 @@ export class CreateMotherProductFrom extends Component {
         
           handleForm(event) {
             event.preventDefault();
-            //this.state.path = this.state.path.replace("C:\\fakepath\\", "C:\\Users\\hugo\\Pictures\\Newton\\");
-            //console.log(this.state);
+            // eslint-disable-next-line
+            this.state.path = this.state.path.replace("C:\\fakepath\\", "/Users/hugo/Pictures/Newton/");
+            console.log(this.state);
             this.Product.CreateProduct(this.state)
               .then(data => {
                 window.location = "adminPage"
@@ -45,6 +46,12 @@ export class CreateMotherProductFrom extends Component {
           onImageUpload = event => {
             this.setState({
                 path: event.target.value
+            });
+          }
+
+          handleChangeArray = event => {
+            this.setState({
+                products: event.target.value.split(",")
             });
           }
 
@@ -66,18 +73,18 @@ export class CreateMotherProductFrom extends Component {
                     <br/>
                     <Form.Group controlId="formGroupImg">
                         <Form.Label>Image du produit :</Form.Label>
-                        <Form.Control placeholder="Path du produit" name="path" onChange={this.handleChange} />
-                        {/* <Form.File 
+                        {/* <Form.Control placeholder="Path du produit" name="path" onChange={this.handleChange} /> */}
+                        <Form.File 
                             name="path"
                             label="Choisir image produit"
                             custom
                             onChange={this.onImageUpload}
-                        /> */}
+                        />
                     </Form.Group>
                     <br/>
                     <Form.Group controlId="formGroupProducts">
                         <Form.Label>Tableau des produits liés :</Form.Label>
-                        <Form.Control  placeholder="id des Produits" name="products" onChange={this.handleChange}/>
+                        <Form.Control  placeholder="id des Produits" name="products" onChange={this.handleChangeArray}/>
                     </Form.Group>
                     <br/>
                     <br/>
