@@ -10,7 +10,7 @@ import ClientUpdate from './pages/ClientUpdate.jsx';
 import ClientPasswordUpdate from './pages/ClientPassWordUpdate';
 import AdminPage from './pages/AdminPage';
 import CreateMotherProduct from './pages/CreateMotherProduct'
-//import Panier from './pages/Panier'
+import Panier from './pages/Panier'
 import ProduitUpdate from './pages/ProduitUpdate';
 import MotherProduitUpdate from './pages/MotherProductUpdate';
 // import Manager from './pages/Manager';
@@ -34,6 +34,7 @@ export class Routes extends Component {
                 <Route exact path='/ClientPasswordUpdate/:id' component={ClientPasswordUpdate}/>
                 <Route exact path='/AdminPage' component={AdminPage}/>
                 <Route exact path='/createMotherProduit' component={CreateMotherProduct}/>
+                <Route exact path='/panier' component={Panier}/>
                 {/* <Route exact path='/panier' component={Panier}/> */}
 
                 <Route exact path='/produitUpdate/:id' component={ProduitUpdate}/>

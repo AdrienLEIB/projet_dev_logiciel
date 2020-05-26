@@ -62,6 +62,7 @@ export default class MotherProductService {
           });
     }
 
+
     DeleteProduct(id) {
         return fetch(url + `motherproduct/${id}`, {
             method: "DELETE",

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from '../services/auth.service'
+import PanierService from '../services/panier.service'
 import { Badge, Col, Nav, Navbar, Form, FormControl, Button} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import "./css/Header.css";
@@ -17,6 +18,13 @@ export default class Header extends Component {
 
         this.disconnect = this.disconnect.bind(this);
         this.Auth = new AuthService();
+        this.PanierService = new PanierService();
+        var products = this.PanierService.getLengthOnPanier();
+        console.log(products);
+
+        this.setState({
+            numberOfProduct: products
+        })
 
         if (this.Auth.getToken() !== null) {
             const profil = this.Auth.getUserProfil();
