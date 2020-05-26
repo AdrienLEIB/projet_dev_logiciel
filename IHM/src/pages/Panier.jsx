@@ -22,16 +22,19 @@ export class Panier extends Component {
 
         //this.PanierService.deletePanier("5ec3ca49ad9d0d060c17fec9")
 
-        this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9");
+        //this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9");
 
         var products = this.PanierService.getProductsOnPanier();
         for(var index in products){
             this.PanierService.GetProductDetail(products[index])
             .then(data => {
                 console.log(data);
+                //data["numberTemp"] = 1;
             	this.state.products.push(data)
+
                 this.setState({
-                    products: this.state.products
+                    products: this.state.products,
+                    numberTemp: this.state.numberTemp
                 })
             })
         }
@@ -39,6 +42,7 @@ export class Panier extends Component {
     }
 
     handleChangeStock(event) {
+    	//console.log(data._id)
         this.setState({
           numberTemp: event.target.value
         });
@@ -56,7 +60,7 @@ export class Panier extends Component {
 					<td><img width={50} height={50} className="mr-3" src={data.path} alt="Img product" /></td>
                     <td>{data.name}</td>
                     <td>In stock</td>
-                    <td><Form.Control type="number" min={0} max={data.stock} name="stock" value={this.numberTemp} onChange={this.handleChangeStock}/></td>
+                    <td><Form.Control type="number" min={1} max={data.stock} name="stock" value={this.numberTemp} onChange={this.handleChangeStock}/></td>
                     <td>{data.price} €</td>
                     <td><Button className="btn btn-sm btn-danger" onClick={(e) => this.deletePanier(data._id)}>X</Button></td>
                 </tr>
