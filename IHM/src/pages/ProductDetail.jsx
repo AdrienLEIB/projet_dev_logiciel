@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PanierService from '../services/panier.service';
 import ProductService from '../services/product.service';
 import { Button, Media, Container, Row, Col, Image, Form} from 'react-bootstrap'
 // import { Link } from 'react-router-dom';
@@ -13,6 +14,7 @@ export class ProductDetail extends Component {
         }
 
         this.ProductService = new ProductService();
+        this.PanierService = new PanierService();
 
         this.ProductService.GetProductDetail(this.state.id)
         .then(data => {
@@ -22,6 +24,13 @@ export class ProductDetail extends Component {
             })
         })
         
+    }
+
+    addPanier(id) {
+        //this.PanierService.ResetPanier();
+        //this.PanierService.deletePanier("5ec3ca49ad9d0d060c17fec9")
+        this.PanierService.AddPanier(id);
+        window.location.reload();
     }
 
     render() {
@@ -37,7 +46,7 @@ export class ProductDetail extends Component {
                                 <Media.Body>
                                     <h5>{this.state.products.name}</h5>
                                     <p>Prix : {this.state.products.price} €</p>
-
+                                    <p>Stock : {this.state.products.stock}</p>
                                     <br/>
                                     <br/>
 
@@ -50,7 +59,7 @@ export class ProductDetail extends Component {
                                             </Form.Group>
                                         </Col>
                                         <Col xs={3}>
-                                        <Button className="btn btn-info">Ajouter Au Panier</Button>
+                                        <Button className="btn btn-info" onClick={(e) => this.addPanier(this.state.id)}>Ajouter Au Panier</Button>
                                         </Col>
                                     </Row>
                                     
@@ -59,7 +68,8 @@ export class ProductDetail extends Component {
                         </Col>
                     </Row>
                     </Container>
-
+                <br/>
+                <br/>
             </div>
         );
     }
