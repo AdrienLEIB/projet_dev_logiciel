@@ -22,7 +22,7 @@ export class Panier extends Component {
 
         //this.PanierService.deletePanier("5ec3ca49ad9d0d060c17fec9")
 
-        //this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9");
+        this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9");
 
         var products = this.PanierService.getProductsOnPanier();
         for(var index in products){
@@ -63,10 +63,8 @@ export class Panier extends Component {
             ));
         const priceTotal = this.state.products.reduce((priceTotal, product) => priceTotal + product.price, 0);
             return (
-
                 <Container>
                     <Row>
-                        
                             <Table striped hover responsive variant="">
                                 <thead>
                                     <tr>
@@ -83,12 +81,9 @@ export class Panier extends Component {
                                     {prod}
                                 </tbody>
                             </Table>
-                            
                             <Col sm={{span: 2, offset: 10}}>
                                 <p>Total : {priceTotal} €</p>
                             </Col>
-
-                        
                         <Col sm={6}>
                             <Link to={"/"}><Button className="btn  btn-success">Continue Shopping</Button></Link> 
                         </Col>
