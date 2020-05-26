@@ -10,21 +10,17 @@ export default class Header extends Component {
     constructor(props) {
         super(props);
 
+        this.PanierService = new PanierService();
+
         this.state = {
             title: '',
             clientData : [],
-            numberOfProduct : 0
+            numberOfProduct : this.PanierService.getLengthOnPanier()
         }
 
         this.disconnect = this.disconnect.bind(this);
         this.Auth = new AuthService();
-        this.PanierService = new PanierService();
-        var products = this.PanierService.getLengthOnPanier();
-        console.log(products);
-
-        this.setState({
-            numberOfProduct: products
-        })
+        
 
         if (this.Auth.getToken() !== null) {
             const profil = this.Auth.getUserProfil();

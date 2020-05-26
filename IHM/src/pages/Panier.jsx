@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import MotherProductService from '../services/motherProduct.service';
 import PanierService from '../services/panier.service';
-import { Button, Card, Container, Row, Col} from 'react-bootstrap'
+import { Button, Container, Row, Col, Table, Form} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
 export class Panier extends Component {
@@ -9,12 +8,12 @@ export class Panier extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: 'Fnook',
-            subtitle: 'Bienvenue sur Fnook',
-            text: 'Liste des produits',
-            products: []
+            products: [],
+            numberTemp: 0
         }
 
+
+        this.handleChangeStock = this.handleChangeStock.bind(this);
 
         //this.MotherProductService = new MotherProductService();
 
@@ -25,21 +24,27 @@ export class Panier extends Component {
 
         //this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9");
 
-
         var products = this.PanierService.getProductsOnPanier();
         for(var index in products){
-        	this.PanierService.GetProductDetail(products[index])
+            this.PanierService.GetProductDetail(products[index])
             .then(data => {
+                console.log(data);
             	this.state.products.push(data)
                 this.setState({
                     products: this.state.products
                 })
             })
         }
-
-
        
     }
+
+    handleChangeStock(event) {
+        this.setState({
+          numberTemp: event.target.value
+        });
+        console.log(this.state.numberTemp);
+      }
+
     deletePanier(id){
     	this.PanierService.deletePanier(id);
     	window.location.reload();
@@ -48,59 +53,53 @@ export class Panier extends Component {
     render() {
         const prod = this.state.products.map((data, key) => (
                 <tr key={key}>
-					<td><img src={data.path} width="50" height="50"/> </td>
+					<td><img width={50} height={50} className="mr-3" src={data.path} alt="Img product" /></td>
                     <td>{data.name}</td>
                     <td>In stock</td>
-                    <td><input class="form-control" type="text" value="1" /></td>
-                    <td class="text-right">{data.price}</td>
-                    <td class="text-right"><button class="btn btn-sm btn-danger" onClick={(e) => this.deletePanier(data._id)}><i class="fa fa-trash"> X </i> </button> </td>
-    
+                    <td><Form.Control type="number" min={0} max={data.stock} name="stock" value={this.numberTemp} onChange={this.handleChangeStock}/></td>
+                    <td>{data.price} €</td>
+                    <td><Button className="btn btn-sm btn-danger" onClick={(e) => this.deletePanier(data._id)}>X</Button></td>
                 </tr>
             ));
         const priceTotal = this.state.products.reduce((priceTotal, product) => priceTotal + product.price, 0);
             return (
 
-			<div class="container mb-4">
-			    <div class="row">
-			        <div class="col-12">
-			            <div class="table-responsive">
-			                <table class="table table-striped">
-			                    <thead>
-			                        <tr>
-			                            <th scope="col"> </th>
-			                            <th scope="col">Product</th>
-			                            <th scope="col">Available</th>
-			                            <th scope="col" class="text-center">Quantity</th>
-			                            <th scope="col" class="text-right">Price</th>
-			                            <th> </th>
-			                        </tr>
-			                    </thead>
-			                    <tbody>
-										{prod}
-			                        <tr>
-			                            <td></td>
-			                            <td></td>
-			                            <td></td>
-			                            <td></td>
-			                            <td><strong>Total</strong></td>
-			                            <td class="text-right"><strong> {priceTotal}</strong></td>
-			                        </tr>
-			                    </tbody>
-			                </table>
-			            </div>
-			        </div>
-        <div class="col mb-2">
-            <div class="row">
-                <div class="col-sm-12  col-md-6">
-                    <Link to={"/"}> <button class="btn btn-block btn-light">Continue Shopping</button></Link> 
-                </div>
-                <div class="col-sm-12 col-md-6 text-right">
-                    <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                <Container>
+                    <Row>
+                        
+                            <Table striped hover responsive variant="">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Product</th>
+                                        <th>Available</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {prod}
+                                </tbody>
+                            </Table>
+                            
+                            <Col sm={{span: 2, offset: 10}}>
+                                <p>Total : {priceTotal} €</p>
+                            </Col>
+
+                        
+                        <Col sm={6}>
+                            <Link to={"/"}><Button className="btn  btn-success">Continue Shopping</Button></Link> 
+                        </Col>
+                        <Col sm={{ span: 1, offset: 2 }}>
+                            <Button className="btn  btn-success">Checkout</Button>
+                        </Col>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </Row>
+                </Container>
         );
     }
 }

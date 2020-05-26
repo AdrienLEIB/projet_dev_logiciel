@@ -24,15 +24,6 @@ export class LoginForm extends Component {
   }
 
   handleForm(event) {
-    
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    setValidated(true);
-
     event.preventDefault();
     this.Auth.login(this.state)
       .then(data => {
@@ -51,13 +42,11 @@ export class LoginForm extends Component {
   }
 
   render() {
-
-
     return (
       <Container>
         <Row className="justify-content-md-center">
           <Col md="4"> 
-            <Form noValidate validated={validated} onSubmit={this.handleForm}>
+            <Form onSubmit={this.handleForm}>
               <Form.Group controlId="formGroupEmail">
                 <Form.Label>Adresse Email :</Form.Label>
                 <Form.Control required type="email" placeholder="Adresse Email" name="email" value={this.state.email} onChange={this.handleChange} />
