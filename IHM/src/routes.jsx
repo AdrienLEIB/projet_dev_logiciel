@@ -13,6 +13,7 @@ import CreateMotherProduct from './pages/CreateMotherProduct'
 //import Panier from './pages/Panier'
 import ProduitUpdate from './pages/ProduitUpdate';
 import MotherProduitUpdate from './pages/MotherProductUpdate';
+import CreateProduct from './pages/CreateProduct';
 // import Manager from './pages/Manager';
 // import CreateManager from './pages/CreateManager';
 // import Golf from './pages/Golf';
@@ -35,7 +36,7 @@ export class Routes extends Component {
                 <Route exact path='/AdminPage' component={AdminPage}/>
                 <Route exact path='/createMotherProduit' component={CreateMotherProduct}/>
                 {/* <Route exact path='/panier' component={Panier}/> */}
-
+                <Route exact path='/createProduit' component={CreateProduct}/>
                 <Route exact path='/produitUpdate/:id' component={ProduitUpdate}/>
                 <Route exact path='/motherProduitUpdate/:id' component={MotherProduitUpdate}/>
 
