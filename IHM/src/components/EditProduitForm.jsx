@@ -54,11 +54,9 @@ export class EditProduitForm extends Component {
             event.preventDefault();
             console.log(this.state.invoices);
             if(this.state.invoices[0] === "" && this.state.invoices.length === 1) {
-                console.log('oui');
                 this.state.invoices.splice(0,1);
             }
-            console.log(this.state.invoices);
-            //console.log(this.state);
+
             this.Product.UpdateProduct(this.props.id, this.state)
               .then(data => {
                 window.location = "../adminPage"
@@ -81,42 +79,42 @@ export class EditProduitForm extends Component {
                     <Row className="justify-content-md-center">
                         <Col md="4"> 
                             <Form onSubmit={this.handleForm}>
-                            <Form.Group controlId="formGroupNom">
+                            <Form.Group>
                                 <Form.Label>Nom :</Form.Label>
                                 <Form.Control placeholder="Nom" name="name" value={this.state.name} onChange={this.handleChange} />
                             </Form.Group>
                             <br/>
-                            <Form.Group controlId="formGroupStock">
+                            <Form.Group>
                                 <Form.Label>Stock :</Form.Label>
                                 <Form.Control type="number" placeholder="stock" name="stock" value={this.state.stock} onChange={this.handleChange}/>
                             </Form.Group>
                             <br/>
-                            <Form.Group controlId="formGroupPath">
+                            <Form.Group>
                                 <Form.Label>Path :</Form.Label>
                                 <Form.Control placeholder="path" name="path" value={this.state.path} onChange={this.handleChange}/>
                             </Form.Group>
                             <br/>
-                            <Form.Group controlId="formGroupPrice">
+                            <Form.Group>
                                 <Form.Label>Prix :</Form.Label>
                                 <Form.Control type="number" placeholder="prix" name="price" value={this.state.price} onChange={this.handleChange}/>
                             </Form.Group>
                             <br/>
-                            <Form.Group controlId="formGroupDate">
+                            <Form.Group>
                                 <Form.Label>Date Creation :</Form.Label>
                                 <Form.Control placeholder="Date Creation" name="create_date" value={this.state.create_date} onChange={this.handleChange}/>
                             </Form.Group>
                             <br/>
-                            <Form.Group controlId="formGroupInvoices">
+                            <Form.Group>
                                 <Form.Label>Facture(s) :</Form.Label>
                                 <Form.Control placeholder="Facture(s)" name="invoices" value={this.state.invoices} onChange={this.handleChangeArray}/>
                             </Form.Group>
                             <br/>
-                            <Form.Group controlId="formGroupIdmotherproduct">
+                            <Form.Group>
                                 <Form.Label>idmotherproduct :</Form.Label>
                                 <Form.Control placeholder="idmotherproduct" name="idmotherproduct" value={this.state.idmotherproduct} onChange={this.handleChange}/>
                             </Form.Group>
                             <br/>
-                            <Form.Group controlId="formGroupIdclient">
+                            <Form.Group>
                                 <Form.Label>idclient :</Form.Label>
                                 <Form.Control placeholder="idclient" name="idclient" value={this.state.idclient} onChange={this.handleChange}/>
                             </Form.Group>
