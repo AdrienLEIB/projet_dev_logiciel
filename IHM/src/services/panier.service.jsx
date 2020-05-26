@@ -27,7 +27,7 @@ export default class Panier {
     getProductsOnPanier(){
         let products = this.getPanier();
         if(products){
-            products = products.split(",")
+            products = products.split(",");
         }
         //var productsDetail = []
         // for(const [index, value] of products.entries()){ 
@@ -35,6 +35,19 @@ export default class Panier {
         //     productsDetail.push(detail);
         // }
         return products;
+    }
+
+    getQuantity(){
+        return localStorage.getItem("quantity");
+    }
+
+
+    getQuantityProductOnPanier(){
+        let quantity = this.getQuantity();
+        if(quantity){
+            quantity   = quantity.split(",");
+        }
+        return quantity;
     }
 
     getLengthOnPanier(){

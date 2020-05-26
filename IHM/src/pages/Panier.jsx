@@ -9,7 +9,7 @@ export class Panier extends Component {
         super(props);
         this.state = {
             products: [],
-            numberTemp: 0
+            numberTemp: []
         }
 
 
@@ -24,12 +24,14 @@ export class Panier extends Component {
 
         //this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9");
 
+        var quantity = this.PanierService.getQuantityProductOnPanier();
         var products = this.PanierService.getProductsOnPanier();
         for(var index in products){
             this.PanierService.GetProductDetail(products[index])
             .then(data => {
                 console.log(data);
                 //data["numberTemp"] = 1;
+                //console.log(data);
             	this.state.products.push(data)
 
                 this.setState({
@@ -62,6 +64,7 @@ export class Panier extends Component {
                     <td>In stock</td>
                     <td><Form.Control type="number" min={1} max={data.stock} name="stock" value={this.numberTemp} onChange={this.handleChangeStock}/></td>
                     <td>{data.price} €</td>
+                    <td><Link to={"/productDetail/" + data._id}><Button className="btn btn-info">Voir produit</Button></Link></td>
                     <td><Button className="btn btn-sm btn-danger" onClick={(e) => this.deletePanier(data._id)}>X</Button></td>
                 </tr>
             ));
@@ -77,6 +80,7 @@ export class Panier extends Component {
                                         <th>Available</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
+                                        <th></th>
                                         <th></th>
                                     </tr>
                                 </thead>
