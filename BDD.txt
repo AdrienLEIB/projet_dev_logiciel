@@ -23,13 +23,15 @@ Product
   "invoices":[]
 }
 {
-  "name":"Pêche",
   "stock": 50,
   "price": 199,
   "idmotherproduct":"5ec2b6194f85c619406e3c9f"
 }
 
 5ec2b6194f85c619406e3c9f
+
+
+5ec2b6874f85c619406e3ca3
 
 
 Invoice

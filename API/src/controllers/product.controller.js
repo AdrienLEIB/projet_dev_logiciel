@@ -126,10 +126,10 @@ exports.create = (req, res) => {
             .then(data => {
                 MotherProduct.findById(_id = req.body.idmotherproduct)
                     .then(motherproducts => {
-                        productCreate.name = motherproduct.name;
+                        productCreate.name = motherproducts.name;
                         productCreate.path =  motherproducts.path;
                         req.body.path =  motherproducts.path;
-                        req.body.name = motherproduct.name;
+                        req.body.name = motherproducts.name;
                         req.params.id = productCreate._id;
                         this.updatePath(req, res);
                         addProductToMother(req.body.idmotherproduct, productCreate._id);
