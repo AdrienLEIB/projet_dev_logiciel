@@ -17,13 +17,6 @@ export class Panier extends Component {
             qty : this.PanierService.getQuantityProductOnPanier(),
             prdts : this.PanierService.getProductsOnPanier()
         }
-        
-        //this.MotherProductService = new MotherProductService(); 
-        //this.PanierService.ResetPanier();
-        //this.PanierService.deletePanier("5ec3ca49ad9d0d060c17fec9")
-        //this.PanierService.deleteALL();
-        //this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9", 2);
-        //this.adrienNommeCetteFonction(qty, prdts);
 
     }
 
@@ -70,6 +63,7 @@ export class Panier extends Component {
       }
 
     deletePanier(index){
+        
     	this.PanierService.deleteindexPanier(index);
     	window.location.reload();
     }

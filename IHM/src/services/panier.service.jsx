@@ -81,7 +81,7 @@ export default class Panier {
 
     AddPanier(id, q){
         let products = this.getPanier();
-        if(products==null){
+        if(products===null){
             products = this.setPanier(id);
 
         }
@@ -92,7 +92,7 @@ export default class Panier {
 
         }
         let productquantity = this.getQuantity();
-        if(productquantity==null){
+        if(productquantity===null){
             productquantity = this.setQuantity(q);
 
         }
@@ -114,12 +114,23 @@ export default class Panier {
     deleteindexPanier(index){
         let products = this.getPanier();
         products = products.split(",");
-        products.splice(index, index);
+
+        if(index===0){
+            products.splice(0, 1);
+        }
+        else{
+            products.splice(index,index);
+        }
 
         let listquantity = this.getQuantity();
         listquantity = listquantity.split(",");
-        listquantity.splice(index, index);
 
+        if(index===0){
+            listquantity.splice(0,1);
+        }
+        else{
+            listquantity.splice(index,index);
+        }
         localStorage.setItem("panier", products);
         localStorage.setItem("quantity", listquantity);
 
