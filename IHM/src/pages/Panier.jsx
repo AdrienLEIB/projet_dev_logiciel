@@ -40,9 +40,10 @@ export class Panier extends Component {
         this.adrienNommeCetteFonction(qty, prdts); 
     }
 
-    adrienNommeCetteFonction(quantity, products) {
+    async adrienNommeCetteFonction(quantity, products) {
         for(var index in products){
-            this.PanierService.GetProductDetail(products[index])
+            console.log(products[index]);
+            await this.PanierService.GetProductDetail(products[index])
             .then(data => {
             	this.state.products.push(data)
 
@@ -51,11 +52,12 @@ export class Panier extends Component {
                 })
             })
         }
+        console.log(this.state.products);
 
         for(var i in quantity){
             var value = parseInt(quantity[i])
             this.state.numberTemp.push(value)
-            this.setState({
+            await this.setState({
                 numberTemp: this.state.numberTemp
             })
         }
@@ -63,8 +65,7 @@ export class Panier extends Component {
 
 
     handleChangeStock(key, event) {
-    	//console.log(data._id)
-        console.log(key);
+
         this.state.numberTemp[key] = event.target.value
 
         this.PanierService.updateQuantity(key,event.target.value);
