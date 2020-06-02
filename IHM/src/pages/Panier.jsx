@@ -21,9 +21,9 @@ export class Panier extends Component {
         //this.PanierService.ResetPanier();
 
         //this.PanierService.deletePanier("5ec3ca49ad9d0d060c17fec9")
-        this.PanierService.deleteALL();
+        //this.PanierService.deleteALL();
 
-        this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9", 2);
+        //this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9", 2);
 
         var quantity = this.PanierService.getQuantityProductOnPanier();
 
@@ -56,8 +56,9 @@ export class Panier extends Component {
 
     handleChangeStock(event) {
     	//console.log(data._id)
+        this.state.numberTemp[0] = event.target.value
         this.setState({
-          numberTemp: event.target.value
+          numberTemp: this.state.numberTemp
         });
         console.log(this.state.numberTemp);
       }
