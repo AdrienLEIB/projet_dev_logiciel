@@ -10,16 +10,13 @@ export class ProductDetail extends Component {
         super(props);
         this.state = {
             id: props.match.params.id,
-            products: [],
-            stock:1,
-        }
+            products: []        }
 
         this.ProductService = new ProductService();
         this.PanierService = new PanierService();
 
         this.ProductService.GetProductDetail(this.state.id)
         .then(data => {
-            console.log(data);
             this.setState({
                 products: data
             })
