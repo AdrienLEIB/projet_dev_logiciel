@@ -70,12 +70,18 @@ export default class Panier {
     }
 
     ResetPanier(){
-        localStorage.removeItem("panier");
+        localStorage.removeItem("quantity");
     }
 
-    AddPanier(id){
+
+    setQuantity(quantity){
+        localStorage.setItem("quantity", quantity);
+        return localStorage.getItem("quantity");
+    }
+
+    AddPanier(id, q){
         let products = this.getPanier();
-        if(!products){
+        if(products==null){
             products = this.setPanier(id);
 
         }
@@ -85,7 +91,19 @@ export default class Panier {
             localStorage.setItem("panier", products);
 
         }
+        let productquantity = this.getQuantity();
+        if(productquantity==null){
+            productquantity = this.setQuantity(q);
+
+        }
+        else{
+            productquantity = productquantity.split(",");
+            productquantity.push(q);
+            localStorage.setItem("quantity", productquantity);
+        }
+
         //console.log(products);
+        console.log(productquantity);
         
     
 
@@ -102,6 +120,10 @@ export default class Panier {
         }
         localStorage.setItem("panier", products);
 
+    }
+    deleteALL(){
+        localStorage.removeItem("quantity")
+        localStorage.removeItem("panier")
     }
 
 

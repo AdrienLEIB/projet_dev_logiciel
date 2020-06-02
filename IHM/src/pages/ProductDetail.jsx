@@ -10,7 +10,8 @@ export class ProductDetail extends Component {
         super(props);
         this.state = {
             id: props.match.params.id,
-            products: []
+            products: [],
+            stock:1,
         }
 
         this.ProductService = new ProductService();
@@ -29,8 +30,17 @@ export class ProductDetail extends Component {
     addPanier(id) {
         //this.PanierService.ResetPanier();
         //this.PanierService.deletePanier("5ec3ca49ad9d0d060c17fec9")
-        this.PanierService.AddPanier(id);
-        window.location.reload();
+        
+        console.log(this.state.stock);
+        this.PanierService.AddPanier(id, this.state.stock);
+        //window.location.reload();
+    }
+
+    handleStockUseChange(event) {
+        console.log(event.target.value);
+        this.setState({
+          stock: event.target.value
+        });
     }
 
     render() {
@@ -54,7 +64,7 @@ export class ProductDetail extends Component {
                                         <Col xs={3}>
                                             <Form.Group controlId="exampleForm.ControlSelect1">
                                                 <Form.Label>Nombre de produit</Form.Label>
-                                                <Form.Control type="number" step={1} min={0} max={this.state.products.stock} placeholder="nombre" name="stock"/>
+                                                <Form.Control type="number" step={1} min={1} max={this.state.products.stock} placeholder="nombre" name="stock" value={this.state.stock} onChange={this.handleStockUseChange.bind(this)}/>
                                                 
                                             </Form.Group>
                                         </Col>

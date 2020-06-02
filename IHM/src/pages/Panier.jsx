@@ -21,26 +21,37 @@ export class Panier extends Component {
         //this.PanierService.ResetPanier();
 
         //this.PanierService.deletePanier("5ec3ca49ad9d0d060c17fec9")
+        this.PanierService.deleteALL();
 
-        //this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9");
+        this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9", 2);
 
         var quantity = this.PanierService.getQuantityProductOnPanier();
+
         var products = this.PanierService.getProductsOnPanier();
+
+
         for(var index in products){
             this.PanierService.GetProductDetail(products[index])
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 //data["numberTemp"] = 1;
                 //console.log(data);
             	this.state.products.push(data)
 
                 this.setState({
-                    products: this.state.products,
-                    numberTemp: this.state.numberTemp
+                    products: this.state.products
                 })
             })
         }
-       
+
+        for(var i in quantity){
+            var value = parseInt(quantity[i])
+            this.state.numberTemp.push(value)
+            this.setState({
+                numberTemp: this.state.numberTemp
+            })
+        }
+       console.log(this.state.numberTemp[0])
     }
 
     handleChangeStock(event) {
@@ -59,10 +70,11 @@ export class Panier extends Component {
     render() {
         const prod = this.state.products.map((data, key) => (
                 <tr key={key}>
+                <td> {key} </td>
 					<td><img width={50} height={50} className="mr-3" src={data.path} alt="Img product" /></td>
                     <td>{data.name}</td>
                     <td>In stock</td>
-                    <td><Form.Control type="number" min={1} max={data.stock} name="stock" value={this.numberTemp} onChange={this.handleChangeStock}/></td>
+                    <td><Form.Control type="number" min={1} max={data.stock} name="stock" value={this.state.numberTemp[key]} onChange={this.handleChangeStock}/></td>
                     <td>{data.price} €</td>
                     <td><Link to={"/productDetail/" + data._id}><Button className="btn btn-info">Voir produit</Button></Link></td>
                     <td><Button className="btn btn-sm btn-danger" onClick={(e) => this.deletePanier(data._id)}>X</Button></td>
