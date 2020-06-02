@@ -8,63 +8,59 @@ export class Panier extends Component {
     constructor(props) {
         super(props);
 
-        
+        this.PanierService = new PanierService();
+        this.handleChangeStock = this.handleChangeStock.bind(this);
 
         this.state = {
             products: [],
-            numberTemp: []
+            numberTemp: [],
+            qty : this.PanierService.getQuantityProductOnPanier(),
+            prdts : this.PanierService.getProductsOnPanier()
         }
-
-        this.handleChangeStock = this.handleChangeStock.bind(this);
-        //this.MotherProductService = new MotherProductService();
-
-        this.PanierService = new PanierService();
-
+        
+        //this.MotherProductService = new MotherProductService(); 
         //this.PanierService.ResetPanier();
-
         //this.PanierService.deletePanier("5ec3ca49ad9d0d060c17fec9")
         //this.PanierService.deleteALL();
-
         //this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9", 2);
-
-        
-
         //this.adrienNommeCetteFonction(qty, prdts);
 
     }
 
     componentDidMount() { 
-        var qty = this.PanierService.getQuantityProductOnPanier();
-        var prdts = this.PanierService.getProductsOnPanier();
-        
-        this.adrienNommeCetteFonction(qty, prdts); 
+        this.adrienNommeCetteFonction(this.state.qty, this.state.prdts); 
     }
 
     adrienNommeCetteFonction(quantity, products) {
-        for(var index in products){
-            this.PanierService.GetProductDetail(products[index])
-            .then(data => {
-            	this.state.products.push(data)
 
-                this.setState({
-                    products: this.state.products
+        if(products != null) {
+            for (let index = 0; index < products.length; index++) {
+
+                this.PanierService.GetProductDetail(products[index])
+                .then(data => {
+                    this.state.products.push(data)
+    
+                    this.setState({
+                        products: this.state.products
+                    })
                 })
-            })
+    
+                var value = parseInt(quantity[index])
+                this.state.numberTemp.push(value)
+                this.setState({
+                    numberTemp: this.state.numberTemp
+                })
+                
+            }
         }
 
-        for(var i in quantity){
-            var value = parseInt(quantity[i])
-            this.state.numberTemp.push(value)
-            this.setState({
-                numberTemp: this.state.numberTemp
-            })
-        }
     }
 
 
     handleChangeStock(key, event) {
     	//console.log(data._id)
         console.log(key);
+        // eslint-disable-next-line
         this.state.numberTemp[key] = event.target.value
 
         this.PanierService.updateQuantity(key,event.target.value);
@@ -84,7 +80,7 @@ export class Panier extends Component {
 					<td><img width={50} height={50} className="mr-3" src={data.path} alt="Img product" /></td>
                     <td>{data.name}</td>
                     <td>In stock</td>
-                    <td><Form.Control type="number" step={1} min={1} max={data.stock} name="stock" value={this.state.numberTemp[key]} onChange={(e) => this.handleChangeStock(key, e)}/></td>
+                    <td>{key}<Form.Control type="number" step={1} min={1} max={data.stock} name="stock" value={this.state.numberTemp[key]} onChange={(e) => this.handleChangeStock(key, e)}/></td>
                     <td>{data.price} €</td>
                     <td><Link to={"/productDetail/" + data._id}><Button className="btn btn-info">Voir produit</Button></Link></td>
                     <td><Button className="btn btn-sm btn-danger" onClick={(e) => this.deletePanier(key)}>X</Button></td>

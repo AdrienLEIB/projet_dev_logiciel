@@ -30,7 +30,7 @@ export class ProductDetail extends Component {
         
         console.log(this.state.stock);
         this.PanierService.AddPanier(id, this.state.stock);
-        //window.location.reload();
+        window.location.reload();
     }
 
     handleStockUseChange(event) {

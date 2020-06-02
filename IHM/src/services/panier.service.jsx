@@ -45,7 +45,7 @@ export default class Panier {
     getQuantityProductOnPanier(){
         let quantity = this.getQuantity();
         if(quantity){
-            quantity   = quantity.split(",");
+            quantity = quantity.split(",");
         }
         return quantity;
     }
