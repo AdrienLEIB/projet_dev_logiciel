@@ -7,29 +7,39 @@ export class Panier extends Component {
 
     constructor(props) {
         super(props);
+
+        
+
         this.state = {
             products: [],
             numberTemp: []
         }
 
-
         this.handleChangeStock = this.handleChangeStock.bind(this);
-
         //this.MotherProductService = new MotherProductService();
 
         this.PanierService = new PanierService();
         //this.PanierService.ResetPanier();
 
         //this.PanierService.deletePanier("5ec3ca49ad9d0d060c17fec9")
-        this.PanierService.deleteALL();
+        //this.PanierService.deleteALL();
 
-        this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9", 2);
+        //this.PanierService.AddPanier("5ec3ca49ad9d0d060c17fec9", 2);
 
-        var quantity = this.PanierService.getQuantityProductOnPanier();
+        
 
-        var products = this.PanierService.getProductsOnPanier();
+        //this.adrienNommeCetteFonction(qty, prdts);
 
+    }
 
+    componentDidMount() { 
+        var qty = this.PanierService.getQuantityProductOnPanier();
+        var prdts = this.PanierService.getProductsOnPanier();
+        
+        this.adrienNommeCetteFonction(qty, prdts); 
+    }
+
+    adrienNommeCetteFonction(quantity, products) {
         for(var index in products){
             this.PanierService.GetProductDetail(products[index])
             .then(data => {
@@ -53,6 +63,7 @@ export class Panier extends Component {
         }
        console.log(this.state.numberTemp[0])
     }
+
 
     handleChangeStock(event) {
     	//console.log(data._id)
