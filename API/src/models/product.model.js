@@ -18,9 +18,7 @@ const ProductSchema = new Schema (
         create_date:{
             type: Date
         },
-        invoices:{
-            type:[String]
-        },
+        invoices: [{ _id: String, qty: Number, price:Number}],
         idmotherproduct:{
             type: String
         },
