@@ -9,42 +9,21 @@ Client
 
 Product
 {
-  "name":"Pomme",
-  "stock": 50,
-  "path":"c://image.png",
-  "price": 199,
-  "invoices":[]
-}
-{
-  "name":"Poire",
-  "stock": 50,
-  "path":"c://Users//terra//Documents//Ingesup//b2//YDAYS//Oral//kcus_pub_banniere/pub.png",
-  "price": 199,
-  "invoices":[]
-}
-{
   "stock": 50,
   "price": 199,
   "idmotherproduct":"5ec2b6194f85c619406e3c9f"
 }
 
-5ec2b6194f85c619406e3c9f
-
-
-5ec2b6874f85c619406e3ca3
 
 
 Invoice
 {
-  "client":"Adien",
-  "stock": 50,
   "paid":true,
-  "pay_date": "1999-01-31",
-  "products":["5eaae05b8a465626409884af", "5eaae0708a465626409884b0"],
+  "products":[{"id": "5eaae05b8a465626409884af", "price": 5, "qty": 5}],
   "price":199
 }
 
-5ec3c9e61030a606f4a2815c
+
 
 MotherProduct
 {
@@ -52,19 +31,3 @@ MotherProduct
   "path":"c://Users//terra//Desktop//ProjetIng//Poire.png",
   "type":"fruit"
 }
-
-product/5ec2884d3f89da2bec20d427
-
-{
-  "paid":true,
-  "pay_date": "1999-01-31",
-  "products":["5ec3c9e61030a606f4a2815c", "5ec3c9e61030a606f4a2815c"],
-  "price":199
-}
-
-
-PANIER
-{
-  "product":"5ec2884d3f89da2bec20d427"
-}
-5ec3a965b98f0a34fcd33e1e

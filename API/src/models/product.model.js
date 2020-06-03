@@ -19,6 +19,7 @@ const ProductSchema = new Schema (
             type: Date
         },
         invoices: [{ _id: String, qty: Number, price:Number}],
+        
         idmotherproduct:{
             type: String
         },

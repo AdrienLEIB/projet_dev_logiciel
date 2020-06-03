@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PanierService from '../services/panier.service';
+import InvoiceService from '../services/invoices.service';
 import { Button, Container, Row, Col, Table, Form} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
@@ -9,6 +10,7 @@ export class Panier extends Component {
         super(props);
 
         this.PanierService = new PanierService();
+        this.InvoiceService = new InvoiceService();
         this.handleChangeStock = this.handleChangeStock.bind(this);
 
         this.state = {
@@ -67,6 +69,10 @@ export class Panier extends Component {
     	window.location.reload();
     }
 
+    createInvoice(){
+
+    }
+    
     render() {
         const prod = this.state.products.map((data, key) => (
                 <tr key={key}>
