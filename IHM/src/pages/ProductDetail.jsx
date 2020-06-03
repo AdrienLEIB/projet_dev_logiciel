@@ -40,7 +40,7 @@ export class ProductDetail extends Component {
       }
 
     render() {
-            if(this.state.products.stock === 0) {
+            if(this.state.products.stock <= 0) {
                 return (
                     <div>
                         <Container fluid>
