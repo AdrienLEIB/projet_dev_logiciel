@@ -7,65 +7,52 @@ export class MCDjson extends Component {
         super();
 
         this.state = {
-            jsonfile : {
-                "Client": {
-                    "_id" : "1",
-                    "name":"Leib",
-                    "firstname":"Adrien",
-                    "email":"Adrien3@test.fr",
-                    "password":"hugoleplusbo",
-                    "admin":true
-                  },
-            
-                "Product" : [
-                    {
-                        "_id" : "01",
-                        "name":"Pomme",
-                        "stock": 50,
-                        "path":"c://image.png",
-                        "price": 199,
-                        "idMotherProduct": "001",
-                        "idClient": "1",
-                        "invoices":[]
-                    },
-                    {
-                        "_id" : "02",
-                        "name":"Poire",
-                        "stock": 50,
-                        "path":"c://Users//terra//Documents//Ingesup//b2//YDAYS//Oral//kcus_pub_banniere/pub.png",
-                        "price": 199,
-                        "idMotherProduct": "001",
-                        "idClient": "1",
-                        "invoices":[]
-                  }
-                ],
-            
-                "Invoice" : {
-                    "_id" : "0001",
-                    "idclient":"1",
-                    "stock": 50,
-                    "paid":true,
-                    "pay_date": "1999-01-31",
-                    "products":["01", "02"],
-                    "price":199
-                },
-            
-                "MotherProduct" : {
-                    "_id" : "001",
-                    "name":"poire",
-                    "path":"c://Users//terra//Desktop//ProjetIng//Poire.png",
-                    "type":"fruit"
-                }
-            }
-         }
+            title1 : "Client",
+            description1: {
+                "name":"Leib",
+                "firstname":"Adrien",
+                "email":"Adrien3@test.fr",
+                "password":"hugoleplusbo",
+                "admin":true
+              },
+            title2 : "Produit",
+            description2 : {
+              "stock": 50,
+              "price": 199,
+              "idmotherproduct":"5ec2b6194f85c619406e3c9f"
+            },
+            title3: "Facture",
+            description3: {
+                "paid":true,
+                "products":[{"id": "5eaae05b8a465626409884af", "price": 5, "qty": 5}],
+                "price":199
+              },
+            title4 : "MotherProduit",
+            description4 : {
+                "name":"poire",
+                "path":"c://Users//terra//Desktop//ProjetIng//Poire.png",
+                "type":"fruit"
+              }
 
-        
       }
+    }
 
     render() {
-        const data = this.state.jsonfile;
     return (
-        <div><pre>{JSON.stringify(data, null, 100) }</pre></div>
+        <div>
+            <h2>{this.state.title1}</h2>
+            <pre>{JSON.stringify(this.state.description1, null, 1) }</pre>
+
+            <h2>{this.state.title2}</h2>
+            <pre>{JSON.stringify(this.state.description2, null, 1) }</pre>
+
+            <h2>{this.state.title3}</h2>
+            <pre>{JSON.stringify(this.state.description3, null, 1) }</pre>
+
+            <h2>{this.state.title4}</h2>
+            <pre>{JSON.stringify(this.state.description4, null, 1) }</pre>
+            <br/>
+        </div>
     );
   }
 }
