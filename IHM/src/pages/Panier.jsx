@@ -73,6 +73,7 @@ export class Panier extends Component {
         var products = [];
         for(var i in this.state.prdts){
             if (this.state.numberTemp[i] > this.state.products[i].stock) {
+                // eslint-disable-next-line
                 this.state.numberTemp[i] = this.state.products[i].stock;
             }
             var product = {"_id":this.state.prdts[i], "qty":this.state.numberTemp[i], "price":this.state.numberTemp[i]*this.state.products[i].price}
