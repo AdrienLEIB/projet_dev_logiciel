@@ -11,6 +11,6 @@ router.get('/invoice', verifications, invoice.findAll);
 router.get('/invoice/:id', verifications, invoice.findById);
 router.patch('/invoice/:id', verifications, invoice.updateById);
 router.delete('/invoice/:id', verifications, invoice.deleteByID);
-router.delete('/invoice/delete', verifications, invoice.deleteAllInvoices);
+router.delete('/invoice/delete/all', verifications, invoice.deleteAllInvoices);
 
 module.exports = router;

@@ -15,7 +15,8 @@ export default class Header extends Component {
         this.state = {
             title: '',
             clientData : [],
-            numberOfProduct : this.PanierService.getLengthOnPanier()
+            numberOfProduct : this.PanierService.getLengthOnPanier(),
+            name: ''
         }
 
         this.disconnect = this.disconnect.bind(this);
@@ -38,7 +39,11 @@ export default class Header extends Component {
 
         
     }
-
+    handleChangeStock(event) {
+        this.setState({
+          name: event.target.value
+        });
+      }    
     disconnect() {
         this.Auth.disconnectUser()
         window.location = "/login"
@@ -63,8 +68,8 @@ export default class Header extends Component {
 
                         <Nav>
                         <Form inline>
-                            <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" />
-                            <Button variant="outline-dark"><img src="img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button>
+                            <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" onChange={(e) => this.handleChangeStock(e)}/>
+                            <Link to={"/search/" + this.state.name}><Button variant="outline-dark"><img src="img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button></Link>
                         </Form>
                         <Col >    
                         <Link to={"/shopCart"}>                  
@@ -114,8 +119,8 @@ export default class Header extends Component {
 
                     <Nav>
                     <Form inline>
-                        <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" />
-                        <Button variant="outline-dark"><img src="img/search.png" alt='search' width="20" height="20"></img></Button>
+                        <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" onChange={(e) => this.handleChangeStock(e)}/>
+                        <Link to={"/search/" + this.state.name}><Button variant="outline-dark"><img src="img/search.png" alt='search' width="20" height="20"></img></Button></Link>
                     </Form>
                     <Col>    
                         <Link to={"/shopCart"}>                  

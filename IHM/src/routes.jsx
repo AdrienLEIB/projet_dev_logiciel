@@ -17,6 +17,7 @@ import CreateProduct from './pages/CreateProduct';
 import MCDjson from './pages/MCDjson';
 import My404Component from './pages/My404Component';
 import My418Component from './pages/My418Component';
+import Search from './pages/Search';
 
 export class Routes extends Component {
     render() {
@@ -36,6 +37,7 @@ export class Routes extends Component {
                     <Route exact path='/createProduit' component={CreateProduct}/>
                     <Route exact path='/produitUpdate/:id' component={ProduitUpdate}/>
                     <Route exact path='/motherProduitUpdate/:id' component={MotherProduitUpdate}/>
+                    <Route exact path='/Search/:name' component={Search}/>
 
                     {/* CMD */}
                     <Route exact path='/model' component={MCDjson}/>

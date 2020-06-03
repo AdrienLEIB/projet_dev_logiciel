@@ -14,14 +14,10 @@ function addProductToMother( idmotherproduct, idproduct){
                 // res.send(data);
             })
             .catch(err =>{
-                res.status(500).send({
-                    message:err.message || "Some error occured when finding manager."
-            })
+                console.log(err);
         })
     }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred when finding products."
-        })
+        console.log(err);
     })   
 }
 
@@ -35,14 +31,10 @@ function addProductToClient(idclient, idproduct){
 
         })
         .catch(err =>{
-                res.status(500).send({
-                    message:err.message || "Some error occured when finding manager."
-            })
+                console.log(err);
         })
     }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred when finding products."
-        })
+        console.log(err);
     })  
 }
 
@@ -287,7 +279,7 @@ exports.deleteAllproducts = (req, res) => {
 
 exports.findByName = (req, res) => {
     if(!res.headersSent) {
-        Product.find({'name' : req.params.name})
+        Product.find({'name' :{ $regex: req.params.name }})
             .then(product => {
                 res.send(product);
             })

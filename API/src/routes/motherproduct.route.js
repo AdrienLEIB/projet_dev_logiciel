@@ -11,6 +11,6 @@ router.get('/motherproduct', motherproduct.findAll);
 router.get('/motherproduct/:id', motherproduct.findById);
 router.patch('/motherproduct/:id', verifications, motherproduct.updateById);
 router.delete('/motherproduct/:id', verifications, motherproduct.deleteByID);
-router.delete('/motherproduct/delete', verifications, motherproduct.deleteAllproducts);
+router.delete('/motherproduct/delete/all', verifications, motherproduct.deleteAllproducts);
 
 module.exports = router;
