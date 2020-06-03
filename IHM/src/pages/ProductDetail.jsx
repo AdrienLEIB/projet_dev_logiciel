@@ -10,7 +10,8 @@ export class ProductDetail extends Component {
         super(props);
         this.state = {
             id: props.match.params.id,
-            products: []        }
+            products: [],
+            stock: 1    }
 
         this.ProductService = new ProductService();
         this.PanierService = new PanierService();
