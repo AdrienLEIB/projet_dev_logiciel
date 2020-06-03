@@ -5,13 +5,6 @@ const bcrypt = require('bcrypt');
 
 
 
-
-
-
-
-
-
-
 function getInvoiceToProduct(products, id) {
    for (var product of products){
         addInvoiceToProducts(product, id);
