@@ -283,3 +283,18 @@ exports.deleteAllproducts = (req, res) => {
             })
     }
 };
+
+
+exports.findByName = (req, res) => {
+    if(!res.headersSent) {
+        Product.find({'name' : req.params.name})
+            .then(product => {
+                res.send(product);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred when finding products."
+                })
+            })
+    }
+};

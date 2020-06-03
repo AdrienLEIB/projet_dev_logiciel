@@ -51,6 +51,16 @@ export default class ProductService {
             })
     }
 
+    getProductByName(name){
+        return fetch(url + `search/${name}`, {
+                method: 'GET', 
+                headers: {'x-access-token': this.getToken()}
+            })
+            .then(res => {
+                return res.json();
+            })
+    }
+
     GetProductMotherDetail(id) {
         return fetch(url + `productOfMother/${id}`, {
                 method: 'GET', 
