@@ -60,36 +60,6 @@ function addInvoiceToProducts(product, idinvoice){
     })  
 }
 
-function removeInvoiceToProduct(idproduct, idinvoice){
-    Product.findById(_id=idproduct).then(products => {
-        for(var invoice in products.invoices){
-
-            if(idinvoice == products.invoices[invoice]){
-                delete products.invoices[invoice]
-                break
-
-            }
-        }
-        products.invoices = products.invoices.filter(function (el) {
-            return el != null;
-        });
-        //products.invoices.push(idinvoice);
-
-        Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices})
-            .then(product =>{
-
-            })
-            .catch(err =>{
-                res.status(500).send({
-                    message:err.message || "Some error occured when finding manager."
-            })
-        })
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred when finding products."
-        })
-    }) 
-}
 
 exports.create = (req, res) => {
     if(!res._headerSent) {
@@ -156,25 +126,6 @@ exports.findById = (req, res) => {
 // Update User by Id
 exports.updateById = (req, res) => {
     if(!res._headerSent) { 
-
-        for(idremove in req.body.removeProducts){
-            removeInvoiceToProduct(req.body.removeProducts[idremove], req.params.id)
-            for(idproduct in req.body.products){
-                if(req.body.products[idproduct]==req.body.removeProducts[idremove]){
-                    delete req.body.products[idproduct];
-                    break
-                }
-            }
-        }
-        for(idadd in req.body.addProducts){
-            addInvoiceToProducts(req.body.addProducts[idadd], req.params.id)
-            req.body.products.push(req.body.addProducts[idadd])
-        }
-        //req.body.removeProducts
-        //req.body.addProducts
-
-        //(verif quantity)
-
         Invoice.findByIdAndUpdate(req.params.id, req.body)
             .then(invoice => {
                 res.send(invoice);
