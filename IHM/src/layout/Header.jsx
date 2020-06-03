@@ -67,7 +67,7 @@ export default class Header extends Component {
                             <Button variant="outline-dark"><img src="img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button>
                         </Form>
                         <Col >    
-                        <Link to={"/panier"}>                  
+                        <Link to={"/shopCart"}>                  
                                 <img
                                 src="/img/shop.png"
                                 width="30"
@@ -117,8 +117,8 @@ export default class Header extends Component {
                         <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" />
                         <Button variant="outline-dark"><img src="img/search.png" alt='search' width="20" height="20"></img></Button>
                     </Form>
-                    <Col >    
-                    <Link to={"/panier"}>                  
+                    <Col>    
+                        <Link to={"/shopCart"}>                  
                             <img
                             src="/img/shop.png"
                             width="30"

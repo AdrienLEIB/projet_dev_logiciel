@@ -85,7 +85,8 @@ export default class Panier {
         console.log(products);
         let productquantity = this.getQuantity();
         var idinproducts = false;
-        if(products===""){
+
+        if(products==="" || products === null){
             products = this.setPanier(id);
             productquantity = this.setQuantity(q);
 
