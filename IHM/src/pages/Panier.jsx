@@ -73,13 +73,13 @@ export class Panier extends Component {
 					<td><img width={50} height={50} className="mr-3" src={data.path} alt="Img product" /></td>
                     <td>{data.name}</td>
                     <td>In stock</td>
-                    <td>{key}<Form.Control type="number" step={1} min={1} max={data.stock} name="stock" value={this.state.numberTemp[key] || ''} onChange={(e) => this.handleChangeStock(key, e)}/></td>
-                    <td>{data.price} €</td>
+                    <td><Form.Control type="number" step={1} min={1} max={data.stock} name="qty" value={this.state.numberTemp[key]} onChange={(e) => this.handleChangeStock(key, e)}/></td>
+                    <td>{data.price*this.state.numberTemp[key]} €</td>
                     <td><Link to={"/productDetail/" + data._id}><Button className="btn btn-info">Voir produit</Button></Link></td>
                     <td><Button className="btn btn-sm btn-danger" onClick={(e) => this.deletePanier(key)}>X</Button></td>
                 </tr>
             ));
-        const priceTotal = this.state.products.reduce((priceTotal, product) => priceTotal + product.price, 0);
+        const priceTotal = this.state.products.reduce((priceTotal, product, index) => priceTotal + product.price*this.state.numberTemp[index], 0);
             return (
                 <Container>
                     <Row>

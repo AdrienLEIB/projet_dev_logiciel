@@ -82,7 +82,7 @@ export default class Panier {
     AddPanier(id, q){
         let products = this.getPanier();
         let productquantity = this.getQuantity();
-
+        var idinproducts = false;
         if(products===null && productquantity === null){
             products = this.setPanier(id);
             productquantity = this.setQuantity(q);
@@ -92,11 +92,25 @@ export default class Panier {
             products = products.split(",");
             products.push(id);
             localStorage.setItem("panier", products);
-
             productquantity = productquantity.split(",");
-            productquantity.push(q);
+            for(var i in products){
+                if (products[i]===id){
+                    idinproducts = true;
+                    productquantity[i] = parseInt(productquantity[i]) + q;
+                    break
+                }
+            }
+
+            if(idinproducts===false){
+                products.push(id);
+                productquantity.push(q);
+            }
+            
+            localStorage.setItem("panier", products); 
             localStorage.setItem("quantity", productquantity);
+
         }   
+
     }
 
     updateQuantity(index, value ){
