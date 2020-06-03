@@ -29,7 +29,7 @@ export class ProductDetail extends Component {
     }
 
     addPanier(id) {
-        this.PanierService.AddPanier(id, this.state.qty);
+        this.PanierService.AddPanier(id, this.state.qty, this.state.products.stock);
         window.location.reload();
     }
 
