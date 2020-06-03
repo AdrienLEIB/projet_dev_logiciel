@@ -81,17 +81,17 @@ export default class Panier {
 
     AddPanier(id, q){
         let products = this.getPanier();
+        console.log(typeof(products));
+        console.log(products);
         let productquantity = this.getQuantity();
         var idinproducts = false;
-        if(products===null && productquantity === null){
+        if(products===""){
             products = this.setPanier(id);
             productquantity = this.setQuantity(q);
 
         }
         else{
             products = products.split(",");
-            products.push(id);
-            localStorage.setItem("panier", products);
             productquantity = productquantity.split(",");
             for(var i in products){
                 if (products[i]===id){
