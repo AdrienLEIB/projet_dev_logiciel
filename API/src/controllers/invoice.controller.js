@@ -12,11 +12,12 @@ const bcrypt = require('bcrypt');
 
 
 
-async function getInvoiceToProduct(products, id) {
-   for await (var idproduct of products){
-        addInvoiceToProducts(idproduct, id);
+function getInvoiceToProduct(products, id) {
+   for (var product of products){
+        addInvoiceToProducts(product, id);
     };
 }
+
 function addInvoiceToClient(idclient, idinvoice ){
 
     Client.findById(_id=idclient).then(client=>{
@@ -37,34 +38,25 @@ function addInvoiceToClient(idclient, idinvoice ){
     })  
 }
 
-function addInvoiceToProducts(idproduct, idinvoice){
+function addInvoiceToProducts(product, idinvoice){
     
-    console.log(idproduct)
-    Product.findById(_id=idproduct[0]).then(products => {
+   // console.log(product)
+    Product.findById(_id=product._id).then(products => {
+        invoice = {"_id":idinvoice, "qty":product.qty, "price":product.price};
+        //console.log(products);
 
-
-
-        for (p in idproduct){
-            products.invoices.push(idinvoice);
-            products.stock = products.stock -1;
-        }
+        products.invoices.push(invoice);
+        products.stock = products.stock - product.qty;
       
         Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices, stock:products.stock})
             .then(product =>{
                 console.log("UPDATE ")
-                // res.send(data);
             })
             .catch(err =>{
                 console.log(err)
-            //     res.status(500).send({
-            //         message:err.message || "Some error occured when finding manager."
-            // })
         }) 
     }).catch(err => {
         console.log(err)
-        // res.status(500).send({
-        //     message: err.message || "Some error occurred when finding products."
-        // })
     })  
 }
 
@@ -85,7 +77,7 @@ function removeInvoiceToProduct(idproduct, idinvoice){
 
         Product.findByIdAndUpdate( {_id:products._id}, {invoices:products.invoices})
             .then(product =>{
-                // res.send(data);
+
             })
             .catch(err =>{
                 res.status(500).send({
@@ -102,46 +94,20 @@ function removeInvoiceToProduct(idproduct, idinvoice){
 exports.create = (req, res) => {
     if(!res._headerSent) {
         const start = Date.now();
-        console.log(req.body);
+
         const invoiceCreate = new Invoice(
             {
                 client: req.userId,
                 issue_date: start,
                 paid: req.body.paid,
-                pay_date: req.body.pay_date,
+                pay_date: start,
                 price: req.body.price,
                 products:  req.body.products
             }
         );
-
-        //console.log(invoiceCreate.client);
-
-        //getInvoiceToProduct(req.body.products, invoiceCreate._id);
-
-        var orderProduct = []
-        var products = req.body.products
-        for(var product in products){
-            var order = []
-            order.push(products[product])
-            for(p in products){
-
-                if (products[product] == products[p] && p!=product){
-                    order.push(products[p])
-                    delete  products[p]
-                    continue
-                }
-
-            }
-            orderProduct.push(order)
-        }
         invoiceCreate.save()
             .then(data => {
-                
-  
-                // for (var idproduct in req.body.products){
-                //     addInvoiceToProducts(req.body.products[idproduct], invoiceCreate._id);
-                // };
-                getInvoiceToProduct(orderProduct, invoiceCreate._id)
+                getInvoiceToProduct(req.body.products, invoiceCreate._id)
                 addInvoiceToClient(req.userId, invoiceCreate._id);
                 res.send(data)     
             })

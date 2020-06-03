@@ -18,9 +18,7 @@ const InvoiceSchema = new Schema (
         price:{
             type: Number
         },
-        products:{
-            type:[String]
-        }
+        products:[{ _id: String, qty: Number, price:Number }]
     },
 );
 
