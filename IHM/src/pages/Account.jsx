@@ -93,6 +93,8 @@ export class Home extends Component {
                                     <br/>
                                     <hr/>
                                     <Card.Link href="/adminPage">Admin Page</Card.Link>
+                                    <br/>
+                                    <Card.Link href={"/model"}>Voir MCD</Card.Link>
                                 </Card.Body>
                             </Card>
                         </Col>
