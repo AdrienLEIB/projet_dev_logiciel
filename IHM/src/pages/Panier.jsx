@@ -32,6 +32,7 @@ export class Panier extends Component {
 
                 await this.PanierService.GetProductDetail(products[index])
                 .then(data => {
+                    console.log(data);
                     this.state.products.push(data)
     
                     this.setState({
@@ -51,8 +52,6 @@ export class Panier extends Component {
 
 
     handleChangeStock(key, event) {
-    	//console.log(data._id)
-        console.log(key);
         // eslint-disable-next-line
         this.state.numberTemp[key] = event.target.value
 
@@ -74,7 +73,7 @@ export class Panier extends Component {
 					<td><img width={50} height={50} className="mr-3" src={data.path} alt="Img product" /></td>
                     <td>{data.name}</td>
                     <td>In stock</td>
-                    <td>{key}<Form.Control type="number" step={1} min={1} max={data.stock} name="stock" value={this.state.numberTemp[key]} onChange={(e) => this.handleChangeStock(key, e)}/></td>
+                    <td>{key}<Form.Control type="number" step={1} min={1} max={data.stock} name="stock" value={this.state.numberTemp[key] || ''} onChange={(e) => this.handleChangeStock(key, e)}/></td>
                     <td>{data.price} €</td>
                     <td><Link to={"/productDetail/" + data._id}><Button className="btn btn-info">Voir produit</Button></Link></td>
                     <td><Button className="btn btn-sm btn-danger" onClick={(e) => this.deletePanier(key)}>X</Button></td>

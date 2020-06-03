@@ -11,7 +11,7 @@ export default class Panier {
 
     setPanier(id){
         localStorage.setItem("panier", id);
-        return localStorage.getItem("panier");
+        // return localStorage.getItem("panier");
     }
 
     getPanier(){
@@ -76,13 +76,16 @@ export default class Panier {
 
     setQuantity(quantity){
         localStorage.setItem("quantity", quantity);
-        return localStorage.getItem("quantity");
+        // return localStorage.getItem("quantity");
     }
 
     AddPanier(id, q){
         let products = this.getPanier();
-        if(products===null){
+        let productquantity = this.getQuantity();
+
+        if(products===null && productquantity === null){
             products = this.setPanier(id);
+            productquantity = this.setQuantity(q);
 
         }
         else{
@@ -90,18 +93,10 @@ export default class Panier {
             products.push(id);
             localStorage.setItem("panier", products);
 
-        }
-        let productquantity = this.getQuantity();
-        if(productquantity===null){
-            productquantity = this.setQuantity(q);
-
-        }
-        else{
             productquantity = productquantity.split(",");
             productquantity.push(q);
             localStorage.setItem("quantity", productquantity);
-        }
-            
+        }   
     }
 
     updateQuantity(index, value ){
