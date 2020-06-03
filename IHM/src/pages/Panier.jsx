@@ -69,7 +69,16 @@ export class Panier extends Component {
     	window.location.reload();
     }
 
-    createInvoice(){
+    createInvoice(price, event) {
+        var products = [];
+        for(var i in this.state.prdts){
+            var product = {"_id":this.state.prdts[i], "qty":this.state.numberTemp[i], "price":this.state.numberTemp[i]*this.state.products[i].price}
+            products.push(product);
+        }
+        var body = {"paid":true,"products":products, "price": price}
+        this.InvoiceService.CreateInvoice(body);
+        this.PanierService.deleteALL();
+        window.location.reload();
 
     }
     
@@ -113,7 +122,7 @@ export class Panier extends Component {
                             <Link to={"/"}><Button className="btn  btn-success">Continue Shopping</Button></Link> 
                         </Col>
                         <Col sm={{ span: 1, offset: 2 }}>
-                            <Button className="btn  btn-success">Checkout</Button>
+                            <Button className="btn  btn-success" onClick={(e) => this.createInvoice(priceTotal)}>Checkout</Button>
                         </Col>
                         <br/>
                         <br/>
