@@ -79,7 +79,7 @@ export default class Header extends Component {
                             </Link>  
                         </Col>
                         <Navbar.Text>
-                        Signed in as: <a href="/account">{this.state.clientData.firstname}</a>
+                        Connecté en tant que : <a href="/account">{this.state.clientData.firstname}</a>
                         </Navbar.Text>
                         <Col style={{paddingTop: 4 + 'px' }}>
                         <Button 
