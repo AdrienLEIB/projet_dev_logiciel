@@ -4,13 +4,16 @@ import './App.css';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import Routes from './routes';
+import {BrowserRouter} from 'react-router-dom';
 
 function App() {
   return (
     <div className="App" style={{backgroundColor: `#83caa3` }}>
-      <Header/>
-      <Routes/>
-      <Footer/>
+      <BrowserRouter>
+        <Header/>
+          <Routes/>
+        <Footer/>
+      </BrowserRouter>
     </div>
   );
 }
