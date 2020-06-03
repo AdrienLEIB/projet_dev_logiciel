@@ -79,7 +79,7 @@ export default class Panier {
         // return localStorage.getItem("quantity");
     }
 
-    AddPanier(id, q){
+    AddPanier(id, q, stockmax){
         let products = this.getPanier();
         console.log(typeof(products));
         console.log(products);
@@ -96,7 +96,12 @@ export default class Panier {
             for(var i in products){
                 if (products[i]===id){
                     idinproducts = true;
-                    productquantity[i] = parseInt(productquantity[i]) + q;
+                    while(q>0) {
+                        if (productquantity[i] < stockmax) {
+                            productquantity[i] = parseInt(productquantity[i]) + 1;
+                        }
+                        q = q -1;
+                    }
                     break
                 }
             }
@@ -153,17 +158,3 @@ export default class Panier {
 
 
 }
-
-
-// function createItem() {
-//   sessionStorage.setItem("test1", ["Lorem ipsum", "toto"]);
-// }
-
-// function readValue() {
-//   var x = sessionStorage.getItem("test1");
-//   x = x.split(",");
-//   for(xx in x){
-//    document.getElementById("demo").innerHTML = x[xx];
-//   }
-//   //document.getElementById("demo").innerHTML = x;
-// }
