@@ -111,8 +111,8 @@ export class AdminPage extends Component {
                     <td>{data.name}</td>
                     <td>{data.type}</td>
                     <td>{data.products.length}</td>
-                    <td><Link to={"/motherProduitUpdate/" + data._id}><Button className="btn btn-warning">Edit</Button></Link></td>
-                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteMotherProduit(data._id)}> Delete </Button></td>
+                    <td><Link to={"/motherProduitUpdate/" + data._id}><Button className="btn btn-warning">Modifier</Button></Link></td>
+                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteMotherProduit(data._id)}> Supprimer </Button></td>
                 </tr>
             ));
 
@@ -125,8 +125,8 @@ export class AdminPage extends Component {
                     <td>{data.price}</td>
                     <td>{data.stock}</td>
                     <td>{data.invoices.length}</td>
-                    <td><Link to={"/produitUpdate/" + data._id}><Button className="btn btn-warning">Edit</Button></Link></td>
-                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteProduit(data._id)}> Delete </Button></td>
+                    <td><Link to={"/produitUpdate/" + data._id}><Button className="btn btn-warning">Modifier</Button></Link></td>
+                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteProduit(data._id)}> Supprimer </Button></td>
                 </tr>
             ));
 
@@ -137,8 +137,8 @@ export class AdminPage extends Component {
                     <td>{data.lastname}</td>
                     <td>{data.firstname}</td>
                     <td>{data.admin.toString()}</td>
-                    <td><Link to={"/clientUpdate/" + data._id}><Button className="btn btn-warning">Edit</Button></Link></td>
-                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteClient(data._id)}> Delete </Button></td>
+                    <td><Link to={"/clientUpdate/" + data._id}><Button className="btn btn-warning">Modifier</Button></Link></td>
+                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteClient(data._id)}> Supprimer </Button></td>
                 </tr>
             ));
             
@@ -150,8 +150,8 @@ export class AdminPage extends Component {
                     <td>{data.paid.toString()}</td>
                     <td>{data.price}</td>
                     <td>{data.products.toString()}</td>
-                    <td><Link to={"/invoiceUpdate/" + data._id}><Button className="btn btn-warning">Edit</Button></Link></td>
-                    <td><Button className="btn  btn-danger" onClick={(e) => this.DeleteInvoice(data._id)}> Delete </Button></td>
+                    <td><Link to={"/invoiceUpdate/" + data._id}><Button className="btn btn-warning" disabled>Modifier</Button></Link></td>
+                    <td><Button className="btn  btn-danger" disabled> Supprimer </Button></td>
                 </tr>
             ));
 
@@ -166,8 +166,8 @@ export class AdminPage extends Component {
                         <th>name</th>
                         <th>type</th>
                         <th>Nbre de Vendeur</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Modification</th>
+                        <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -198,8 +198,8 @@ export class AdminPage extends Component {
                         <th>prix</th>
                         <th>Stock</th>
                         <th>Facture</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Modification</th>
+                        <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -228,8 +228,8 @@ export class AdminPage extends Component {
                         <th>Nom</th>
                         <th>Prenom</th>
                         <th>Admin</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Modification</th>
+                        <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -258,14 +258,15 @@ export class AdminPage extends Component {
                         <th>Payé</th>
                         <th>Prix</th>
                         <th>Produits</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Modification</th>
+                        <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
                         {facture}
                     </tbody>
                     </Table>
+                    <p>La modification et la suppression de facture existe dans le back API mais n'est pas utiliser dans le front.</p>
 
                     <Button onClick={this.CreateFacture} className="btn  btn-success" type="submit">Créer Facture</Button>
 
