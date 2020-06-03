@@ -40,44 +40,85 @@ export class ProductDetail extends Component {
       }
 
     render() {
-            return (
-                <div>
-                    <Container fluid>
-                    <Row>
-                        <Col xs={5}>
-                             <Image variant="right" src={this.state.products.path}/>
-                        </Col>
-                        <Col xs={6}>
-                            <Media>
-                                <Media.Body>
-                                    <h5>{this.state.products.name}</h5>
-                                    <p>Prix : {this.state.products.price} €</p>
-                                    <p>Stock : {this.state.products.stock}</p>
-                                    <br/>
-                                    <br/>
-
-                                    <Row className="justify-content-md-center">
-                                        <Col xs={3}>
-                                            <Form.Group controlId="exampleForm.ControlSelect1">
-                                                <Form.Label>Nombre de produit</Form.Label>
-                                                <Form.Control type="number" step={1} min={1} max={this.state.products.stock} name="qty" value={this.state.qty} onChange={this.handleChange}/>
-                                                
-                                            </Form.Group>
-                                        </Col>
-                                        <Col xs={3}>
-                                        <Button className="btn btn-info" onClick={(e) => this.addPanier(this.state.id)}>Ajouter Au Panier</Button>
-                                        </Col>
-                                    </Row>
-                                    
-                                </Media.Body>
-                            </Media>
-                        </Col>
-                    </Row>
-                    </Container>
-                <br/>
-                <br/>
-            </div>
-        );
+            if(this.state.products.stock === 0) {
+                return (
+                    <div>
+                        <Container fluid>
+                        <Row>
+                            <Col xs={5}>
+                                 <Image variant="right" src={this.state.products.path}/>
+                            </Col>
+                            <Col xs={6}>
+                                <Media>
+                                    <Media.Body>
+                                        <h5>{this.state.products.name}</h5>
+                                        <p>Prix : {this.state.products.price} €</p>
+                                        <p>Stock : {this.state.products.stock}</p>
+                                        <br/>
+                                        <br/>
+    
+                                        <Row className="justify-content-md-center">
+                                            <Col xs={3}>
+                                                <Form.Group controlId="exampleForm.ControlSelect1">
+                                                    <Form.Label>Nombre de produit</Form.Label>
+                                                    <Form.Control type="number" step={1} min={1} max={this.state.products.stock} name="qty" value={this.state.qty} onChange={this.handleChange}/>
+                                                    
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={3}>
+                                            <Button disabled className="btn btn-info" onClick={(e) => this.addPanier(this.state.id)}>Ajouter Au Panier</Button>
+                                            </Col>
+                                        </Row>
+                                        
+                                    </Media.Body>
+                                </Media>
+                            </Col>
+                        </Row>
+                        </Container>
+                    <br/>
+                    <br/>
+                </div>
+            );
+            } else {
+                return (
+                    <div>
+                        <Container fluid>
+                        <Row>
+                            <Col xs={5}>
+                                 <Image variant="right" src={this.state.products.path}/>
+                            </Col>
+                            <Col xs={6}>
+                                <Media>
+                                    <Media.Body>
+                                        <h5>{this.state.products.name}</h5>
+                                        <p>Prix : {this.state.products.price} €</p>
+                                        <p>Stock : {this.state.products.stock}</p>
+                                        <br/>
+                                        <br/>
+    
+                                        <Row className="justify-content-md-center">
+                                            <Col xs={3}>
+                                                <Form.Group controlId="exampleForm.ControlSelect1">
+                                                    <Form.Label>Nombre de produit</Form.Label>
+                                                    <Form.Control type="number" step={1} min={1} max={this.state.products.stock} name="qty" value={this.state.qty} onChange={this.handleChange}/>
+                                                    
+                                                </Form.Group>
+                                            </Col>
+                                            <Col xs={3}>
+                                            <Button className="btn btn-info" onClick={(e) => this.addPanier(this.state.id)}>Ajouter Au Panier</Button>
+                                            </Col>
+                                        </Row>
+                                        
+                                    </Media.Body>
+                                </Media>
+                            </Col>
+                        </Row>
+                        </Container>
+                    <br/>
+                    <br/>
+                </div>
+            );
+            }
     }
 }
 
