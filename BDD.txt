@@ -11,7 +11,7 @@ Product
 {
   "stock": 50,
   "price": 9999,
-  "idmotherproduct":"5ed7ead4a5c36131e88fa645"
+  "idmotherproduct":"5ed7dd6b056c2e2cbcd42126"
 }
    
 
@@ -19,7 +19,7 @@ Product
 Invoice
 {
   "paid":true,
-  "products":[{"id": "5eaae05b8a465626409884af", "price": 5, "qty": 5}],
+  "products":[{"id": "5ed7dfa7056c2e2cbcd4212d", "price": 5, "qty": 5}],
   "price":199
 }
 
