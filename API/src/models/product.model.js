@@ -23,7 +23,7 @@ const ProductSchema = new Schema (
         idmotherproduct:{
             type: String
         },
-        idclient:{
+        idvendeur:{
             type: String
         }
     },

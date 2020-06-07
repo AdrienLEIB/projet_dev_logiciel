@@ -10,10 +10,10 @@ Client
 Product
 {
   "stock": 50,
-  "price": 199,
-  "idmotherproduct":"5ec2b6194f85c619406e3c9f"
+  "price": 9999,
+  "idmotherproduct":"5ed7ead4a5c36131e88fa645"
 }
-
+   
 
 
 Invoice

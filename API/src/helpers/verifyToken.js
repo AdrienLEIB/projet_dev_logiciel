@@ -19,6 +19,7 @@ function verifyToken(req, res, next) {
             })
         }
         req.userId = decoded.id;
+        req.admin = decoded.admin;
     });
     // Third step: next step --------> WASS LA MENACE
     next();

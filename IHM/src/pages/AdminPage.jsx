@@ -121,7 +121,7 @@ export class AdminPage extends Component {
                     <td>{data._id}</td>
                     <td>{data.name}</td>
                     <td>{data.idmotherproduct}</td>
-                    <td>{data.idclient}</td>
+                    <td>{data.idvendeur}</td>
                     <td>{data.price}</td>
                     <td>{data.stock}</td>
                     <td>{data.invoices.length}</td>
@@ -194,7 +194,7 @@ export class AdminPage extends Component {
                         <th>id</th>
                         <th>name</th>
                         <th>id Maman Produit</th>
-                        <th>id Client</th>
+                        <th>id Vendeur</th>
                         <th>prix</th>
                         <th>Stock</th>
                         <th>Facture</th>

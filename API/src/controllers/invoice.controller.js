@@ -118,16 +118,27 @@ exports.findById = (req, res) => {
 
 // Update User by Id
 exports.updateById = (req, res) => {
-    if(!res._headerSent) { 
-        Invoice.findByIdAndUpdate(req.params.id, req.body)
-            .then(invoice => {
-                res.send(invoice);
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: err.message || "Some error occurred when finding and updating invoice."
+    if(!res._headerSent) {
+         Invoice.findById(req.params.id)
+            .then(invoices => {
+    
+           if((invoices.client == req.userId) || (req.admin==true)){
+            Invoice.findByIdAndUpdate(req.params.id, req.body)
+                .then(invoice => {
+                    res.send(invoice);
                 })
+                .catch(err => {
+                    res.status(500).send({
+                        message: err.message || "Some error occurred when finding and updating invoice."
+                    })
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "No acces forbideen."
             })
+        })            
     }
 };
 
@@ -156,6 +167,20 @@ exports.deleteAllInvoices = (req, res) => {
             .catch(err => {
                 res.status(500).send({
                     message: err.message || "Some error occurred when finding and deleting all invoice."
+                })
+            })
+    }
+};
+
+exports.getInvoicesofclient = (req, res) => {
+    if(!res.headersSent) {
+        Invoice.find({'client' :{ $regex: req.params.id }})
+            .then(invoices => {
+                res.send(invoices);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred when finding products."
                 })
             })
     }

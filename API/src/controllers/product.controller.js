@@ -110,7 +110,7 @@ exports.create = (req, res) => {
                 price: req.body.price,
                 create_date: startDate,
                 idmotherproduct: req.body.idmotherproduct,
-                idclient: req.userId      
+                idvendeur: req.userId      
             });
         //res.send(productCreate)
         
@@ -198,15 +198,26 @@ exports.findByIdMother = (req, res) => {
 exports.updateById = (req, res) => {
     console.log(res._headerSent)
     if(!res._headerSent) {
-        Product.findByIdAndUpdate(req.params.id, req.body)
+        Product.findById(req.params.id)
             .then(products => {
-                res.send(products);
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: err.message || "Some error occurred when finding and updating product."
+    
+           if((products.idvendeur == req.userId) || (req.admin==true)){
+            Product.findByIdAndUpdate(req.params.id, req.body)
+                .then(products => {
+                    res.send(products);
                 })
+                .catch(err => {
+                    res.status(500).send({
+                        message: err.message || "Some error occurred when finding and updating product."
+                    })
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "No acces forbideen."
             })
+        })
     }
 };
 
@@ -229,7 +240,7 @@ exports.deleteByID = (req, res) => {
         Product.findById(req.params.id)
             .then(products => {
            
-               if(products.idclient == req.userId){
+               if(products.idvendeur == req.userId){
                 removeProductToClient(req.userId, req.params.id)
                 removeProductToMotherProduct(products.idmotherproduct, req.params.id)
                 Product.findByIdAndDelete(req.params.id)
@@ -280,6 +291,20 @@ exports.deleteAllproducts = (req, res) => {
 exports.findByName = (req, res) => {
     if(!res.headersSent) {
         Product.find({'name' :{ $regex: req.params.name }})
+            .then(product => {
+                res.send(product);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred when finding products."
+                })
+            })
+    }
+};
+
+exports.getproductsofseller = (req, res) => {
+    if(!res.headersSent) {
+        Product.find({'idvendeur' :{ $regex: req.params.id }})
             .then(product => {
                 res.send(product);
             })

@@ -1,3 +1,4 @@
+
 const jwt = require('jsonwebtoken');
 const configs = require('../configs/jwt.config');
 
@@ -19,6 +20,8 @@ function verifyAdmin(req, res, next) {
                     message: 'access forbidden'
                 })
             }
+            req.userId = decoded.id;
+            req.admin = decoded.admin;
         }
     });
 

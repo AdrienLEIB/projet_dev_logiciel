@@ -7,10 +7,11 @@ const verifications = [ verifyToken, verifyAdmin ];
 
 // Create a new post
 router.post('/invoice', verifications, invoice.create);
-router.get('/invoice', verifications, invoice.findAll);
+router.get('/invoice', verifyAdmin, invoice.findAll);
 router.get('/invoice/:id', verifications, invoice.findById);
-router.patch('/invoice/:id', verifications, invoice.updateById);
-router.delete('/invoice/:id', verifications, invoice.deleteByID);
+router.get('/invoiceofclient/:id', invoice.getInvoicesofclient)
+router.patch('/invoice/:id', verifyToken, invoice.updateById);
+router.delete('/invoice/:id', verifyAdmin, invoice.deleteByID);
 router.delete('/invoice/delete/all', verifications, invoice.deleteAllInvoices);
 
 module.exports = router;
