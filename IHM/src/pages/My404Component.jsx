@@ -7,7 +7,7 @@ export class My404Component extends Component {
         super();
 
         this.state = {
-            title : "404. Ton ile introuvable",
+            title : "404. Ton est île introuvable",
             description: "En informatique, l’erreur 404 est un code du protocole de communication HTTP sur le réseau Internet pour signaler un incident. Ce code est renvoyé par un serveur HTTP pour indiquer qu’aucune ressource, généralement une page web, n’a été trouvée à l’adresse demandée. L’erreur 404 est l’une des erreurs les plus reconnaissables et des plus fréquentes rencontrées sur le World Wide Web.",
             msgLove: "Bisous Matthias <3"
             }

@@ -19,6 +19,8 @@ export default class Header extends Component {
             name: ''
         }
 
+        this.handleChange = this.handleChange.bind(this);
+        this.handleForm = this.handleForm.bind(this);
         this.disconnect = this.disconnect.bind(this);
         this.Auth = new AuthService();
         
@@ -36,14 +38,20 @@ export default class Header extends Component {
             })
         
         }
-
-        
     }
-    handleChangeStock(event) {
+    handleForm(event) {
+        event.preventDefault();
+        //console.log(this.state.name);
+        window.location = "../search/" + this.state.name;
+
+      }
+
+    handleChange(event) {
         this.setState({
-          name: event.target.value
+          [event.target.name]: event.target.value
         });
-      }    
+    }
+
     disconnect() {
         this.Auth.disconnectUser()
         window.location = "/login"
@@ -67,9 +75,9 @@ export default class Header extends Component {
                         
 
                         <Nav>
-                        <Form inline>
-                            <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" onChange={(e) => this.handleChangeStock(e)}/>
-                            <Link to={"/search/" + this.state.name}><Button variant="outline-dark"><img src="img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button></Link>
+                        <Form onSubmit={this.handleForm} inline>
+                            <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" name="name" onChange={this.handleChange}/>
+                            <Button variant="outline-dark" type="submit"><img src="img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button>
                         </Form>
                         <Col >    
                         <Link to={"/shopCart"}>                  
@@ -118,9 +126,9 @@ export default class Header extends Component {
                     
 
                     <Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" onChange={(e) => this.handleChangeStock(e)}/>
-                        <Link to={"/search/" + this.state.name}><Button variant="outline-dark"><img src="img/search.png" alt='search' width="20" height="20"></img></Button></Link>
+                    <Form onSubmit={this.handleForm} inline>
+                        <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" name="name" onChange={this.handleChange}/>
+                        <Button variant="outline-dark" type="submit"><img src="img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button>
                     </Form>
                     <Col>    
                         <Link to={"/shopCart"}>                  
