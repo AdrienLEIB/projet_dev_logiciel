@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import AuthService from '../services/auth.service';
 import ClientService from '../services/client.service';
-import {Card, Col, Row, Container} from 'react-bootstrap'
+import {Card, Col, Row, Container, Button} from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 export class Home extends Component {
 
@@ -61,6 +62,9 @@ export class Home extends Component {
                                     <Card.Link href={"/clientPasswordUpdate/" + this.state.clientData._id }>Modifier son Mot de Passe</Card.Link>
                                 </Card.Body>
                             </Card>
+                            <Link to={"/hihi/"} style={{paddingRight: 20 + 'px' }}><Button className="btn btn-info">Vendre un produit</Button></Link>
+                            <Link to={"/huhu/"}><Button className="btn btn-info">Voir ses factures</Button></Link>
+                            <br/><br/>
                         </Col>
                     </Row>
                 </Container>
@@ -97,6 +101,9 @@ export class Home extends Component {
                                     <Card.Link href={"/model"}>Voir MCD</Card.Link>
                                 </Card.Body>
                             </Card>
+                            <Link to={"/hihi/"} style={{paddingRight: 20 + 'px' }}><Button className="btn btn-info">Vendre un produit</Button></Link>
+                            <Link to={"/huhu/"}><Button className="btn btn-info">Voir ses factures</Button></Link>
+                            <br/><br/>
                         </Col>
                     </Row>
                 </Container>
