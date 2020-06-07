@@ -54,7 +54,7 @@ export class AdminPage extends Component {
 
         this.Facture.ReadInvoice()
         .then(data =>{
-            //console.log(data);
+            console.log(data);
             this.setState({
                 factures: data
             })
@@ -149,7 +149,7 @@ export class AdminPage extends Component {
                     <td>{data.pay_date}</td>
                     <td>{data.paid.toString()}</td>
                     <td>{data.price}</td>
-                    <td>{data.products.toString()}</td>
+                    <td>{data.products.map(array => <div> id :{array._id} | quantité : {array.qty} | prix : {array.price}</div>)}</td>
                     <td><Link to={"/invoiceUpdate/" + data._id}><Button className="btn btn-warning" disabled>Modifier</Button></Link></td>
                     <td><Button className="btn  btn-danger" disabled> Supprimer </Button></td>
                 </tr>
@@ -266,9 +266,9 @@ export class AdminPage extends Component {
                         {facture}
                     </tbody>
                     </Table>
-                    <p>La modification et la suppression de facture existe dans le back API mais n'est pas utiliser dans le front.</p>
+                    <p>La création, modification et la suppression de facture existe dans le back API mais n'est pas utiliser dans le front pour respecter une cohérence.</p>
 
-                    <Button onClick={this.CreateFacture} className="btn  btn-success" type="submit">Créer Facture</Button>
+                    <Button disabled onClick={this.CreateFacture} className="btn  btn-success" type="submit">Créer Facture</Button>
 
                     <br/>
                     <br/>
