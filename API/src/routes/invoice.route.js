@@ -8,7 +8,7 @@ const verifications = [ verifyToken, verifyAdmin ];
 // Create a new post
 router.post('/invoice', verifications, invoice.create);
 router.get('/invoice', verifyAdmin, invoice.findAll);
-router.get('/invoice/:id', verifyAdmin, invoice.findById);
+router.get('/invoice/:id', verifications, invoice.findById);
 router.get('/invoiceofclient/:id', invoice.getInvoicesofclient)
 router.patch('/invoice/:id', verifyToken, invoice.updateById);
 router.delete('/invoice/:id', verifyAdmin, invoice.deleteByID);
