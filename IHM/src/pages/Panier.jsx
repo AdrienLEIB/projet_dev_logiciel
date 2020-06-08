@@ -195,8 +195,8 @@ export class Panier extends Component {
                                 <img
                                 alt="nook"
                                 src="/img/nook2.png"
-                                width="989"
-                                height="1021"
+                                width="450"
+                                height="450"
                                 className="d-inline-block align-top"/>
                                 <br/><br/><br/>
                             </Col>
