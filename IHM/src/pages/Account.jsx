@@ -49,7 +49,7 @@ export class Home extends Component {
                     <br/>
                     <br/>
                     <Row className="justify-content-md-center"> 
-                        <Col md={4}>
+                        <Col md={6}>
                             <Card style={{ width: 20 + 'em' ,margin: 0 + ' auto', float: "none", marginBottom: 3 + 'em'}}>
                                 <Card.Body>
                                     <Card.Title>{this.state.title}</Card.Title>
@@ -62,6 +62,7 @@ export class Home extends Component {
                                     <Card.Link href={"/clientPasswordUpdate/" + this.state.clientData._id }>Modifier son Mot de Passe</Card.Link>
                                 </Card.Body>
                             </Card>
+                            <Link to={"/voirProduitClient/" + this.state.clientData._id} style={{paddingRight: 20 + 'px' }}><Button className="btn btn-info">Vos produits à vendre</Button></Link>
                             <Link to={"/createProduitClient"} style={{paddingRight: 20 + 'px' }}><Button className="btn btn-info">Vendre un produit</Button></Link>
                             <Link to={"/invoice/" + this.state.clientData._id}><Button className="btn btn-info">Voir ses factures</Button></Link>
                             <br/><br/>
@@ -83,7 +84,7 @@ export class Home extends Component {
                     <br/>
                     <br/>
                     <Row className="justify-content-md-center"> 
-                        <Col md={4}>
+                        <Col md={6}>
                             <Card style={{ width: 20 + 'em' ,margin: 0 + ' auto', float: "none", marginBottom: 3 + 'em'}}>
                                 <Card.Body>
                                     <Card.Title>{this.state.title}</Card.Title>
@@ -101,6 +102,7 @@ export class Home extends Component {
                                     <Card.Link href={"/model"}>Voir MCD</Card.Link>
                                 </Card.Body>
                             </Card>
+                            <Link to={"/voirProduitClient/" + this.state.clientData._id} style={{paddingRight: 20 + 'px' }}><Button className="btn btn-info">Vos produits à vendre</Button></Link>
                             <Link to={"/createProduitClient"} style={{paddingRight: 20 + 'px' }}><Button className="btn btn-info">Vendre un produit</Button></Link>
                             <Link to={"/invoice/" + this.state.clientData._id}><Button className="btn btn-info">Voir ses factures</Button></Link>
                             <br/><br/>

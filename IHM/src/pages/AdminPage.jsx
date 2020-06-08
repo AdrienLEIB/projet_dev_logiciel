@@ -122,7 +122,7 @@ export class AdminPage extends Component {
                     <td>{data.name}</td>
                     <td>{data.idmotherproduct}</td>
                     <td>{data.idvendeur}</td>
-                    <td>{data.price}</td>
+                    <td>{data.price} €</td>
                     <td>{data.stock}</td>
                     <td>{data.invoices.length}</td>
                     <td><Link to={"/produitUpdate/" + data._id}><Button className="btn btn-warning">Modifier</Button></Link></td>
@@ -148,8 +148,8 @@ export class AdminPage extends Component {
                     <td>{data.client}</td>
                     <td>{data.pay_date}</td>
                     <td>{data.paid.toString()}</td>
-                    <td>{data.price}</td>
-                    <td>{data.products.map(array => <div> id :{array._id} | quantité : {array.qty} | prix : {array.price}</div>)}</td>
+                    <td>{data.price} €</td>
+                    <td>{data.products.map(array => <div> id :{array._id} | quantité : {array.qty} | prix : {array.price} €</div>)}</td>
                     <td><Link to={"/invoiceUpdate/" + data._id}><Button className="btn btn-warning" disabled>Modifier</Button></Link></td>
                     <td><Button className="btn  btn-danger" disabled> Supprimer </Button></td>
                 </tr>

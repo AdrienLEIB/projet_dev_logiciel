@@ -20,6 +20,7 @@ import My404Component from './pages/My404Component';
 import My418Component from './pages/My418Component';
 import Search from './pages/Search';
 import InvoiceClient from './pages/InvoiceClient';
+import ProduitClientAVendre from './pages/ProduitClientAVendre';
 
 export class Routes extends Component {
     render() {
@@ -42,6 +43,7 @@ export class Routes extends Component {
                     <Route exact path='/motherProduitUpdate/:id' component={MotherProduitUpdate}/>
                     <Route exact path='/Search/:name' component={Search}/>
                     <Route exact path='/invoice/:id' component={InvoiceClient}/>
+                    <Route exact path='/voirProduitClient/:id' component={ProduitClientAVendre}/>
                     
 
                     {/* CMD */}
