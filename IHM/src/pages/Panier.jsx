@@ -195,7 +195,6 @@ export class Panier extends Component {
                                     <Button className="btn  btn-success" onClick={(e) => this.createInvoice(priceTotal)} disabled>Checkout</Button>
                                 </Col>
                             <br/><br/><br/><br/>
-                            <br/><br/><br/><br/>
                             <Col sm={12}>
                                 <img
                                 alt="teapot"
