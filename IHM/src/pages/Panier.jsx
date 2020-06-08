@@ -89,7 +89,8 @@ export class Panier extends Component {
     }
     
     render() {
-        if(this.Auth.getToken() === null) {
+        
+        if(this.Auth.getToken() === null && this.state.products.length !== 0) {
             const prod = this.state.products.map((data, key) => (
                 
                 <tr key={key} >
@@ -105,6 +106,9 @@ export class Panier extends Component {
                 return (
                     <Container>
                         <Row>
+                        <br/>
+                            <h1>Panier</h1>
+                            <br/><br/><br/>
                                 <Table striped hover responsive variant="" style={{backgroundImage: `url(/img/nook2.png)`, backgroundPosition: 'center', backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }}>
                                     <thead>
                                         <tr>
@@ -129,9 +133,20 @@ export class Panier extends Component {
                             <Col sm={{ span: 1, offset: 2 }}>
                                 <Button className="btn  btn-success" onClick={(e) => this.createInvoice(priceTotal)} disabled>Checkout</Button>
                             </Col>
-                            <br/>
-                            <br/>
-                            <br/>
+                            <br/><br/><br/><br/>
+                            <br/><br/><br/><br/>
+                            <Col sm={12}>
+                                <img
+                                alt="teapot"
+                                src="/img/logoo.png"
+                                width="300"
+                                height="150"
+                                className="d-inline-block align-center"/>
+                                <br/><br/><br/><br/>
+                                <p>Votre panier est là pour vous servir. Donnez-lui un but : remplissez-le de Pommes, de Pêche, de Switch, de Lit, d'équipements électroniques et plus encore.</p>
+                                <br/>
+                                <p>Le prix et la disponibilité des articles sur Fnook sont sujets à changement. Le panier est un lieu temporaire où est stockée une liste de vos articles et où se reflète le prix le plus récent de chaque article.</p>
+                            </Col>
                             
                         </Row>
                     </Container>
@@ -152,6 +167,9 @@ export class Panier extends Component {
                     return (
                         <Container>
                             <Row>
+                            <br/>
+                            <h1>Panier</h1>
+                            <br/><br/><br/>
                                     <Table striped hover responsive variant="">
                                         <thead>
                                             <tr>
@@ -176,9 +194,20 @@ export class Panier extends Component {
                                 <Col sm={{ span: 1, offset: 2 }}>
                                     <Button className="btn  btn-success" onClick={(e) => this.createInvoice(priceTotal)} disabled>Checkout</Button>
                                 </Col>
+                            <br/><br/><br/><br/>
+                            <br/><br/><br/><br/>
+                            <Col sm={12}>
+                                <img
+                                alt="teapot"
+                                src="/img/logoo.png"
+                                width="300"
+                                height="150"
+                                className="d-inline-block align-center"/>
+                                <br/><br/><br/><br/>
+                                <p>Votre panier est là pour vous servir. Donnez-lui un but : remplissez-le de Pommes, de Pêche, de Switch, de Lit, d'équipements électroniques et plus encore.</p>
                                 <br/>
-                                <br/>
-                                <br/>
+                                <p>Le prix et la disponibilité des articles sur Fnook sont sujets à changement. Le panier est un lieu temporaire où est stockée une liste de vos articles et où se reflète le prix le plus récent de chaque article.</p>
+                            </Col>
                                 
                             </Row>
                         </Container>
@@ -199,6 +228,9 @@ export class Panier extends Component {
                 return (
                     <Container>
                         <Row>
+                            <br/>
+                            <h1>Panier</h1>
+                            <br/><br/><br/>
                                 <Table striped hover responsive variant="" style={{backgroundImage: `url(/img/nook2.png)`, backgroundPosition: 'center', backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }}>
                                     <thead>
                                         <tr>
@@ -222,11 +254,20 @@ export class Panier extends Component {
                             </Col>
                             <Col sm={{ span: 1, offset: 2 }}>
                                 <Button className="btn  btn-success" onClick={(e) => this.createInvoice(priceTotal)}>Checkout</Button>
+                            </Col >
+                            <br/><br/><br/><br/>
+                            <Col sm={12}>
+                                <img
+                                alt="teapot"
+                                src="/img/logoo.png"
+                                width="300"
+                                height="150"
+                                className="d-inline-block align-center"/>
+                                <br/><br/><br/><br/>
+                                <p>Votre panier est là pour vous servir. Donnez-lui un but : remplissez-le de Pommes, de Pêche, de Switch, de Lit, d'équipements électroniques et plus encore.</p>
+                                <br/>
+                                <p>Le prix et la disponibilité des articles sur Fnook sont sujets à changement. Le panier est un lieu temporaire où est stockée une liste de vos articles et où se reflète le prix le plus récent de chaque article.</p>
                             </Col>
-                            <br/>
-                            <br/>
-                            <br/>
-                            
                         </Row>
                     </Container>
             );
