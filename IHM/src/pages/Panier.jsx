@@ -136,6 +136,53 @@ export class Panier extends Component {
                         </Row>
                     </Container>
                 );
+        } else if (this.state.products.length === 0){
+                const prod = this.state.products.map((data, key) => (
+                    
+                    <tr key={key} >
+                        <td><Link to={"/productDetail/" + data._id}><img width={50} height={50} className="mr-3" src={data.path} alt="Img product" /></Link> </td>
+                        <td>{data.name}</td>
+                        <td>{data.price*this.state.numberTemp[key] || data.price} €</td>
+                        <td><Form.Control type="number" step={1} min={1} max={data.stock} name="qty" value={this.state.numberTemp[key]} onChange={(e) => this.handleChangeStock(key, e)}/></td>
+                        <td><Button className="btn btn-sm btn-danger" onClick={(e) => this.deletePanier(key)}>X</Button></td>
+                    </tr>
+                   
+                ));
+                const priceTotal = this.state.products.reduce((priceTotal, product, index) => priceTotal + product.price*this.state.numberTemp[index], 0) || this.state.products.reduce((priceTotal, product, index) => priceTotal + product.price, 0);
+                    return (
+                        <Container>
+                            <Row>
+                                    <Table striped hover responsive variant="">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+    
+                                        <tbody>
+                                            {prod}
+                                        </tbody>
+                                    </Table>
+                                    <Col sm={{span: 2, offset: 10}}>
+                                        <p>Total : {priceTotal} €</p>
+                                    </Col>
+                                <Col sm={6}>
+                                    <Link to={"/"}><Button className="btn  btn-success">Continue Shopping</Button></Link> 
+                                </Col>
+                                <Col sm={{ span: 1, offset: 2 }}>
+                                    <Button className="btn  btn-success" onClick={(e) => this.createInvoice(priceTotal)} disabled>Checkout</Button>
+                                </Col>
+                                <br/>
+                                <br/>
+                                <br/>
+                                
+                            </Row>
+                        </Container>
+                    );
         } else {
             const prod = this.state.products.map((data, key) => (
                 
