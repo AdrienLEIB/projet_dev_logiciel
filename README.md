@@ -2,12 +2,16 @@
 
 Groupe : EGU Hugo-Jean | LEIB Adrien
 
-## API : 
+Il est nécessaire d'avoir nodejs, npm d'installer.
+
+Voici les commandes pour lancer le projet :
+
+### API : 
 > cd API
 >> npm install
 >>> npm run start
 
-## IHM :
+### IHM :
 > cd IHM
 >> npm install
 >>> npm start
