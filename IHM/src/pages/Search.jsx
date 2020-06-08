@@ -9,14 +9,15 @@ export class Product extends Component {
         super(props);
         this.state = {
             name: props.match.params.name,
-            products: []
+            products: [],
+            description : "Votre recherche n'a pas pu aboutir :/ Très la tristesse ! Néanmoins soyez sur de trouver votre bonheur sur notre ile"
         }
 
         this.ProductService = new ProductService();
 
         this.ProductService.GetProductByName(this.state.name)
         .then(data => {
-            console.log(data);
+            //console.log(data);
             this.setState({
                 products: data
             })
@@ -25,6 +26,7 @@ export class Product extends Component {
     }
 
     render() {
+        if(this.state.products.length !== 0) {
             const prod = this.state.products.map((data, key) => (
                 <Col key={key}>
                     <Card style={{ width: 25 + 'em' ,margin: 1 + 'em'}}>
@@ -44,14 +46,49 @@ export class Product extends Component {
             ));
             return (
                 <div>
-
                     <Container fluid>
                         <Row>
                             {prod}
                         </Row>
                     </Container>
-            </div>
-        );
+                </div>
+            );
+        } else {
+            return (
+                <Container>
+                    <Row>
+                        <Col>
+                            <br/><br/><br/>
+                            <img
+                            alt="nook"
+                            src="/img/logoo.png"
+                            width="300"
+                            height="150"
+                            className="d-inline-block align-top"/>
+                            <br/><br/><br/><br/>
+                            <p>{this.state.description}</p>
+                        </Col>
+
+                        <Col>
+                        <br/><br/><br/>
+                        <img
+                            alt="nook"
+                            src="/img/nook1.png"
+                            width="635"
+                            height="947"
+                            className="d-inline-block align-top"/>
+                        <br/><br/><br/>
+                        </Col>
+                        
+                        <Col sm={12}>
+                            <br/><br/><br/>
+                            <p>{this.state.msgLove}</p>
+                        </Col>
+                    
+                    </Row>
+                </Container>
+            )
+        }
     }
 }
 

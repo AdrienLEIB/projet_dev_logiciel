@@ -43,6 +43,7 @@ export class ProductDetail extends Component {
             if(this.state.products.stock <= 0) {
                 return (
                     <div>
+                        <br/><br/><br/>
                         <Container fluid>
                         <Row>
                             <Col xs={5}>
@@ -75,13 +76,14 @@ export class ProductDetail extends Component {
                             </Col>
                         </Row>
                         </Container>
-                    <br/>
-                    <br/>
+                    <br/><br/><br/><br/><br/><br/>
+                    <br/><br/><br/><br/><br/><br/>
                 </div>
             );
             } else {
                 return (
                     <div>
+                        <br/><br/><br/>
                         <Container fluid>
                         <Row>
                             <Col xs={5}>
@@ -114,8 +116,8 @@ export class ProductDetail extends Component {
                             </Col>
                         </Row>
                         </Container>
-                    <br/>
-                    <br/>
+                    <br/><br/><br/><br/><br/><br/>
+                    <br/><br/><br/><br/><br/><br/>
                 </div>
             );
             }

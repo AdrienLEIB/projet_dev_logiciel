@@ -41,9 +41,9 @@ export default class Header extends Component {
     }
     handleForm(event) {
         event.preventDefault();
-        //console.log(this.state.name);
-        window.location = "../search/" + this.state.name;
-
+        if(this.state.name !== '') {
+            window.location = "../search/" + this.state.name;
+        } 
       }
 
     handleChange(event) {
@@ -77,7 +77,7 @@ export default class Header extends Component {
                         <Nav>
                         <Form onSubmit={this.handleForm} inline>
                             <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" name="name" onChange={this.handleChange}/>
-                            <Button variant="outline-dark" type="submit"><img src="img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button>
+                            <Button variant="outline-dark" type="submit"><img src="/img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button>
                         </Form>
                         <Col >    
                         <Link to={"/shopCart"}>                  
@@ -128,7 +128,7 @@ export default class Header extends Component {
                     <Nav>
                     <Form onSubmit={this.handleForm} inline>
                         <FormControl type="text" placeholder="Rechercher" className="mr-sm-2" name="name" onChange={this.handleChange}/>
-                        <Button variant="outline-dark" type="submit"><img src="img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button>
+                        <Button variant="outline-dark" type="submit"><img src="/img/search.png" alt='Search' width="20" height="20" style={{paddingBottom: 1 + 'px' }}></img></Button>
                     </Form>
                     <Col>    
                         <Link to={"/shopCart"}>                  
