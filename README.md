@@ -4,8 +4,10 @@ Groupe : EGU Hugo-Jean | LEIB Adrien
 
 ## API : 
 > cd API
->> npm run start
+>> npm install
+>>> npm run start
 
 ## IHM :
 > cd IHM
->> npm start
+>> npm install
+>>> npm start
