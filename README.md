@@ -3,6 +3,7 @@
 Groupe : EGU Hugo-Jean | LEIB Adrien
 
 Il est nécessaire d'avoir nodejs, npm d'installer.
+https://nodejs.org/en/
 
 Voici les commandes pour lancer le projet :
 
