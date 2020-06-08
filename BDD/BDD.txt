@@ -10,16 +10,16 @@ Client
 Product
 {
   "stock": 50,
-  "price": 199,
-  "idmotherproduct":"5ec2b6194f85c619406e3c9f"
+  "price": 9999,
+  "idmotherproduct":"5ed7dd6b056c2e2cbcd42126"
 }
-
+   
 
 
 Invoice
 {
   "paid":true,
-  "products":[{"id": "5eaae05b8a465626409884af", "price": 5, "qty": 5}],
+  "products":[{"id": "5ed7dfa7056c2e2cbcd4212d", "price": 5, "qty": 5}],
   "price":199
 }
 
