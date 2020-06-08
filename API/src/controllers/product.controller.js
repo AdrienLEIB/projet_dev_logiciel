@@ -290,7 +290,7 @@ exports.deleteAllproducts = (req, res) => {
 
 exports.findByName = (req, res) => {
     if(!res.headersSent) {
-        Product.find({'name' :{ $regex: req.params.name }})
+        Product.find({'name' :{ $regex: new RegExp(req.params.name, "i") }})
             .then(product => {
                 res.send(product);
             })
