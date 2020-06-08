@@ -102,6 +102,15 @@ export class AdminPage extends Component {
         window.location.reload();
     }
 
+    getName(id) {
+        for (let index = 0; index < this.state.products.length; index++) {
+            const element = this.state.products[index]._id;
+            if (id === element) {
+                return this.state.products[index].name;
+            }
+        }
+    }
+
 
     render() {
         if (this.state.admin) {
@@ -149,7 +158,7 @@ export class AdminPage extends Component {
                     <td>{data.pay_date}</td>
                     <td>{data.paid.toString()}</td>
                     <td>{data.price} €</td>
-                    <td>{data.products.map(array => <div> id :{array._id} | quantité : {array.qty} | prix : {array.price} €</div>)}</td>
+                    <td>{data.products.map(array => <div> id :{array._id} | name : {this.getName(array._id)} | quantité : {array.qty} | prix : {array.price} €</div>)}</td>
                     <td><Link to={"/invoiceUpdate/" + data._id}><Button className="btn btn-warning" disabled>Modifier</Button></Link></td>
                     <td><Button className="btn  btn-danger" disabled> Supprimer </Button></td>
                 </tr>

@@ -154,7 +154,8 @@ export default class Header extends Component {
                     </Navbar.Collapse>
 
                 </Navbar>
-
+                <br/>
+                <br/>
             </div>
             );
         }
