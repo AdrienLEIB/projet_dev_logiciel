@@ -41,6 +41,18 @@ export default class InvoiceService {
         })
     }
 
+    ReadInvoiceOfClient(id) {
+        return fetch(url + `invoiceofclient/${id}`, {
+                method: 'GET', 
+                headers: {'x-access-token': this.getToken()}
+            })
+            .then(res => {
+                return res.json();
+            })
+    }
+
+   
+
     GetInvoiceDetail(id) {
         return fetch(url + `invoice/${id}`, {
                 method: 'GET', 

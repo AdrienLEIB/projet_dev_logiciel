@@ -14,10 +14,12 @@ import Panier from './pages/Panier'
 import ProduitUpdate from './pages/ProduitUpdate';
 import MotherProduitUpdate from './pages/MotherProductUpdate';
 import CreateProduct from './pages/CreateProduct';
+import CreateProductClient from './pages/CreateProduitClient';
 import MCDjson from './pages/MCDjson';
 import My404Component from './pages/My404Component';
 import My418Component from './pages/My418Component';
 import Search from './pages/Search';
+import InvoiceClient from './pages/InvoiceClient';
 
 export class Routes extends Component {
     render() {
@@ -35,9 +37,12 @@ export class Routes extends Component {
                     <Route exact path='/AdminPage' component={AdminPage}/>
                     <Route exact path='/createMotherProduit' component={CreateMotherProduct}/>
                     <Route exact path='/createProduit' component={CreateProduct}/>
+                    <Route exact path='/createProduitClient' component={CreateProductClient}/>
                     <Route exact path='/produitUpdate/:id' component={ProduitUpdate}/>
                     <Route exact path='/motherProduitUpdate/:id' component={MotherProduitUpdate}/>
                     <Route exact path='/Search/:name' component={Search}/>
+                    <Route exact path='/invoice/:id' component={InvoiceClient}/>
+                    
 
                     {/* CMD */}
                     <Route exact path='/model' component={MCDjson}/>

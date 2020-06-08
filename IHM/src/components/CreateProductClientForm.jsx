@@ -93,6 +93,10 @@ export class CreateProductFrom extends Component {
                             <Form.Control type="number" min={0} placeholder="Prix du Produit" name="price" onChange={this.handleChange}/>
                         </Form.Group>
                         <br/>
+                        {/* <Form.Group controlId="formGroupidmotherproduct">
+                            <Form.Label>Idmotherproduct du produit :</Form.Label>
+                            <Form.Control placeholder="Idmotherproduct du Produit" name="idmotherproduct" onChange={this.handleChange}/>
+                        </Form.Group> */}
                         <Form.Group controlId="exampleForm.ControlSelect1">
                             <Form.Label>Produit</Form.Label>
                             <Form.Control as="select" name="idmotherproduct" onChange={this.handleChangeSelect}>

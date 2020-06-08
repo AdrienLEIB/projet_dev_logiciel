@@ -62,8 +62,8 @@ export class Home extends Component {
                                     <Card.Link href={"/clientPasswordUpdate/" + this.state.clientData._id }>Modifier son Mot de Passe</Card.Link>
                                 </Card.Body>
                             </Card>
-                            <Link to={"/hihi/"} style={{paddingRight: 20 + 'px' }}><Button className="btn btn-info">Vendre un produit</Button></Link>
-                            <Link to={"/huhu/"}><Button className="btn btn-info">Voir ses factures</Button></Link>
+                            <Link to={"/createProduitClient"} style={{paddingRight: 20 + 'px' }}><Button className="btn btn-info">Vendre un produit</Button></Link>
+                            <Link to={"/invoice/" + this.state.clientData._id}><Button className="btn btn-info">Voir ses factures</Button></Link>
                             <br/><br/>
                         </Col>
                     </Row>
@@ -101,8 +101,8 @@ export class Home extends Component {
                                     <Card.Link href={"/model"}>Voir MCD</Card.Link>
                                 </Card.Body>
                             </Card>
-                            <Link to={"/hihi/"} style={{paddingRight: 20 + 'px' }}><Button className="btn btn-info">Vendre un produit</Button></Link>
-                            <Link to={"/huhu/"}><Button className="btn btn-info">Voir ses factures</Button></Link>
+                            <Link to={"/createProduitClient"} style={{paddingRight: 20 + 'px' }}><Button className="btn btn-info">Vendre un produit</Button></Link>
+                            <Link to={"/invoice/" + this.state.clientData._id}><Button className="btn btn-info">Voir ses factures</Button></Link>
                             <br/><br/>
                         </Col>
                     </Row>

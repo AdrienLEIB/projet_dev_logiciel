@@ -54,7 +54,7 @@ export class AdminPage extends Component {
 
         this.Facture.ReadInvoice()
         .then(data =>{
-            console.log(data);
+            //console.log(data);
             this.setState({
                 factures: data
             })
