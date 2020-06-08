@@ -6,7 +6,7 @@ const verifyAdmin = require('../helpers/verifyAdmin');
 const verifications = [ verifyToken, verifyAdmin ];
 
 // Create a new post
-router.post('/invoice', verifications, invoice.create);
+router.post('/invoice', verifyToken, invoice.create);
 router.get('/invoice', verifyAdmin, invoice.findAll);
 router.get('/invoice/:id', verifications, invoice.findById);
 router.get('/invoiceofclient/:id', invoice.getInvoicesofclient)
