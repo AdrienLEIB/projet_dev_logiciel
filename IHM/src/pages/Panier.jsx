@@ -148,29 +148,27 @@ export class Panier extends Component {
                 );
         } else {
             const prod = this.state.products.map((data, key) => (
-                <tr key={key}>
-                    <td><img width={50} height={50} className="mr-3" src={data.path} alt="Img product" /></td>
+                
+                <tr key={key} >
+                    <td><Link to={"/productDetail/" + data._id}><img width={50} height={50} className="mr-3" src={data.path} alt="Img product" /></Link> </td>
                     <td>{data.name}</td>
-                    <td>In stock</td>
-                    <td><Form.Control type="number" step={1} min={1} max={data.stock} name="qty" value={this.state.numberTemp[key]} onChange={(e) => this.handleChangeStock(key, e)}/></td>
                     <td>{data.price*this.state.numberTemp[key] || data.price} €</td>
-                    <td><Link to={"/productDetail/" + data._id}><Button className="btn btn-info">Voir produit</Button></Link></td>
+                    <td><Form.Control type="number" step={1} min={1} max={data.stock} name="qty" value={this.state.numberTemp[key]} onChange={(e) => this.handleChangeStock(key, e)}/></td>
                     <td><Button className="btn btn-sm btn-danger" onClick={(e) => this.deletePanier(key)}>X</Button></td>
                 </tr>
+               
             ));
             const priceTotal = this.state.products.reduce((priceTotal, product, index) => priceTotal + product.price*this.state.numberTemp[index], 0) || this.state.products.reduce((priceTotal, product, index) => priceTotal + product.price, 0);
                 return (
                     <Container>
                         <Row>
-                                <Table striped hover responsive variant="">
+                                <Table striped hover responsive variant="" style={{backgroundImage: `url(/img/nook2.png)`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }}>
                                     <thead>
                                         <tr>
                                             <th></th>
                                             <th>Product</th>
-                                            <th>Available</th>
-                                            <th>Quantity</th>
                                             <th>Price</th>
-                                            <th></th>
+                                            <th>Quantity</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -191,15 +189,6 @@ export class Panier extends Component {
                             <br/>
                             <br/>
                             <br/>
-                            <Col>
-                                <img
-                                alt="nook"
-                                src="/img/nook2.png"
-                                width="450"
-                                height="450"
-                                className="d-inline-block align-top"/>
-                                <br/><br/><br/>
-                            </Col>
                             
                         </Row>
                     </Container>

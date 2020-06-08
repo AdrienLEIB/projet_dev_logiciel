@@ -60,7 +60,7 @@ export class Product extends Component {
                         <Col>
                             <br/><br/><br/>
                             <img
-                            alt="nook"
+                            alt="logo"
                             src="/img/logoo.png"
                             width="300"
                             height="150"
