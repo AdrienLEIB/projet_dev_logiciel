@@ -134,6 +134,15 @@ export class Panier extends Component {
                                 <br/>
                                 <br/>
                                 <br/>
+                                <Col>
+                                    <img
+                                    alt="nook"
+                                    src="/img/nook2.png"
+                                    width="989"
+                                    height="1021"
+                                    className="d-inline-block align-top"/>
+                                    <br/><br/><br/>
+                                </Col>
                             </Row>
                         </Container>
                 );
@@ -182,6 +191,16 @@ export class Panier extends Component {
                             <br/>
                             <br/>
                             <br/>
+                            <Col>
+                                <img
+                                alt="nook"
+                                src="/img/nook2.png"
+                                width="989"
+                                height="1021"
+                                className="d-inline-block align-top"/>
+                                <br/><br/><br/>
+                            </Col>
+                            
                         </Row>
                     </Container>
             );
