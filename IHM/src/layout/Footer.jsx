@@ -7,16 +7,14 @@ export default class Footer extends Component {
     render() {
         return (
 
-            <footer className="footer" style={{backgroundColor: `#a1d9e5` }}>
- 
+                <footer className="footer" style={{backgroundColor: `#a1d9e5` }}>
+                    <img src="/img/footer.png"  width="100%" height="auto" style={{backgroundColor:'#83caa3'}}></img>
+                    
+                    <p className="ez" style={{backgroundColor: `#a1d9e5` }}>Copyright © - 2020-2021</p>
 
-                
-                <p>Copyright © - 2020-2021</p>
+                </footer>
 
-            </footer>
-            // <Navbar bg="" fixed="bottom" style={{backgroundColor: `#a1d9e5` }}>
-            //     <Navbar.Text >Brand link</Navbar.Text>
-            // </Navbar>
+            
         )
     }
 }

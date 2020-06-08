@@ -12,8 +12,7 @@ function App() {
       <BrowserRouter>
         <Header/>
           <Routes/>
-          <img src="/img/footer.png"  width="100%" height="auto" style={{backgroundColor:'#83caa3'}}></img>
-        <Footer/>
+        <Footer style={{backgroundColor: `#a1d9e5` }}/>
       </BrowserRouter>
     </div>
   );

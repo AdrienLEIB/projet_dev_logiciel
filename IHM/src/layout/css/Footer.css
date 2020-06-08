@@ -5,3 +5,9 @@
     height: 200px;
     clear:both;
 } 
+
+.ez {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}
